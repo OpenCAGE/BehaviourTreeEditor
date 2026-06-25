@@ -40,7 +40,7 @@ namespace LegendPlugin.Nodes
 
         protected ThresholdQualifier _cond;
         protected SenseType _cond2;
-        protected TimeThreshold _ShouldAim;
+        protected TIME_THRESHOLD _ShouldAim;
 
         [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
@@ -57,7 +57,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Time threshold", "TimeThreshold", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public TimeThreshold TimeThreshold
+        public TIME_THRESHOLD TimeThreshold
         {
             get { return _ShouldAim; }
             set { _ShouldAim = value; }

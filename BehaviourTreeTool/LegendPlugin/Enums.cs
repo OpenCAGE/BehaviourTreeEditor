@@ -42,9 +42,9 @@ namespace LegendPlugin
     //   These indexes are WRONG, but we don't need to worry about them - all enums are matched as string.
     //   Worth noting that not all enum values here may be supported in the shipped game, hence the incorrect indexes.
 
-    public enum BEHAVIOR_TREE_BRANCH_TYPE
+    public enum BranchType
     {
-        NONE,
+        NONE_BRANCH,
         CINEMATIC_BRANCH,
         ATTACK_BRANCH,
         AIM_BRANCH,
@@ -82,7 +82,6 @@ namespace LegendPlugin
         AGRESSIVE_BRANCH,
         ALERT_BRANCH,
         SHOOTING_BRANCH,
-        GRAPPLE_BREAK_BRANCH,
         REACT_TO_WEAPON_FIRE_BRANCH,
         IN_COVER_BRANCH,
         SUSPICIOUS_ITEM_BRANCH_HIGH,
@@ -97,7 +96,9 @@ namespace LegendPlugin
         ATTACK_CORE_BRANCH,
         CORPSE_TRAP_BRANCH,
         OBSERVE_TARGET_BRANCH,
+        PANIC_BRANCH,
         TARGET_IN_CRAWLSPACE_BRANCH,
+        KILLTRAP_BRANCH,
         MB_SUSPICIOUS_ITEM_ATLEAST_MOVE_CLOSE_TO,
         MB_THREAT_AWARE_ATTACK_TARGET_WITHIN_CLOSE_RANGE,
         MB_THREAT_AWARE_ATTACK_TARGET_WITHIN_VERY_CLOSE_RANGE,
@@ -107,27 +108,24 @@ namespace LegendPlugin
         MB_THREAT_AWARE_MOVE_TO_BEFORE_ANIM,
         MB_THREAT_AWARE_MOVE_TO_AFTER_ANIM,
         MB_THREAT_AWARE_MOVE_TO_FLANKED_VENT,
-        KILLTRAP_BRANCH,
-        PANIC_BRANCH,
         BACKSTAGE_ALIEN_RESPONSE_BRANCH,
         NPC_VS_ALIEN_BRANCH,
         USE_COVER_VS_ALIEN_BRANCH,
         IN_COVER_VS_ALIEN_BRANCH,
         REPEATED_PATHFIND_FAILS_BRANCH,
-        ALL_SEARCH_VARIANTS_BRANCH
+        ALL_SEARCH_VARIANTS_BRANCH,
     }
 
     public enum ALERTNESS_STATE
     {
         IGNORE_PLAYER,
         ALERT,
-        AGGRESSIVE
+        AGGRESSIVE,
     }
 
     public enum LOGIC_CHARACTER_TIMER_TYPE
     {
         SUSPECT_TARGET_RESPONSE_DELAY_TIMER,
-        FIRST_LOGIC_CHARACTER_TIMER,
         THREAT_AWARE_TIMEOUT_TIMER,
         THREAT_AWARE_DURATION_TIMER,
         SEARCH_TIMEOUT_TIMER,
@@ -136,12 +134,12 @@ namespace LegendPlugin
         ATTACK_BAN_TIMER,
         MELEE_ATTACK_BAN_TIMER,
         VENT_BAN_TIMER,
-        NPC_STAY_IN_COVER_SHOOT_TIMER,
         NPC_JUST_LEFT_COMBAT_TIMER,
+        ASSAULT_TERMINATION_TIMER,
+        ASSAULT_ASSAULTING_TIMEOUT_AND_ATTACK_TIMER,
         ATTACK_KEEP_CHASING_TIMER,
         DELAY_RETURN_TO_SPAWN_POINT_TIMER,
         TARGET_IN_CRAWLSPACE_TIMER,
-        DURATION_SINCE_SEARCH_TIMER,
         HEIGHTENED_SENSES_TIMER,
         BACKSTAGE_STALK_PICK_KILLTRAP_TIMER,
         FLANKED_VENT_ATTACK_TIMER,
@@ -151,62 +149,45 @@ namespace LegendPlugin
         SEEN_PLAYER_AIM_WEAPON_TIMER,
         SEARCH_BAN_TIMER,
         OBSERVE_TARGET_TIMER,
-        REPEATED_PATHFIND_FAILUREST_TIMER
+        REPEATED_PATHFIND_FAILUREST_TIMER,
     }
 
-    public enum LOGIC_CHARACTER_FLAGS
+    public enum LOGIC_CHARACTER_FLAG_TYPE
     {
         DONE_BREAKOUT,
         SHOULD_RESET,
         DO_ASSAULT_ATTACK_CHECKS,
-        IS_IN_VENT,
-        BANNED_FROM_VENT,
-        HAS_DONE_GRAPPLE_BREAK,
-        HAS_RECEIVED_DOT,
-        IS_SITTING,
         DONE_ESCALATION_JOB,
         SHOULD_BREAKOUT,
         SHOULD_ATTACK,
         SHOULD_HIT_AND_RUN,
-        DONE_HIT_AND_RUN,
+        DONE_HIT_AND_RUN, 
         PLAYER_HIDING,
         ATTACK_HIDING_PLAYER,
         ALIEN_ALWAYS_KNOWS_WHEN_IN_VENT,
-        IS_CORPSE_TRAP_ON_START,
         SHOULD_DESPAWN,
         ATTACK_HAS_GOT_WITHIN_ROUTING_THRESHOLD,
         LOCK_BACKSTAGE_STALK,
-        TOTALLY_BLIND_IN_DARK,
-        PLAYER_WON_HIDING_QTE,
-        ANDROID_IS_INERT,
-        ANDROID_IS_SHOWROOM_DUMMY,
-        SHOULD_AMBUSH,
-        NEVER_AGGRESSIVE,
-        MUTE_DYNAMIC_DIALOGUE,
         DOING_THREAT_AWARE_ANIM,
         DONE_THREAT_AWARE,
-        BLOCK_AMBUSH_AND_KILLTRAPS,
+        SHOULD_AMBUSH,
         PREVENT_GRAPPLES,
         PREVENT_ALL_ATTACKS,
         ALLOW_FLANKED_VENT_ATTACK,
-        IGNORE_PLAYER_IN_VENT_BEHAVIOUR,
-        USE_AIMED_STANCE_FOR_IDLE_JOBS,
-        USE_AIMED_LOW_STANCE_FOR_IDLE_JOBS,
         CLOSE_TO_BACKSTAGE_ALIEN,
         IS_IN_EXPLOITABLE_AREA,
-        IS_ON_LADDER,
-        HAS_REPEATED_PATHFIND_FAILURES
+        HAS_REPEATED_PATHFIND_FAILURES,
     }
 
-    public enum LOCOMOTION_TARGET_SPEED
+    public enum MovementSpeedType
     {
-        SLOWEST,
-        SLOW,
-        FAST,
-        FASTEST
+        Slowest,
+        Slow,
+        Fast,
+        Fastest
     }
 
-    public enum FRAME_FLAGS
+    public enum FRAME_FLAG
     {
         SUSPICIOUS_ITEM_LOW_PRIORITY,
         SUSPICIOUS_ITEM_MEDIUM_PRIORITY,
@@ -214,7 +195,7 @@ namespace LegendPlugin
         COULD_SEARCH,
         COULD_RESPOND_TO_HIDING_PLAYER,
         COULD_DO_SUSPICIOUS_ITEM_HIGH_PRIORITY,
-        COULD_DO_SUSPECT_TARGET_RESPONSE_MOVE_TO
+        COULD_DO_SUSPECT_TARGET_RESPONSE_MOVE_TO,
     }
 
     public enum EVENT_OCCURED_TYPE
@@ -222,75 +203,74 @@ namespace LegendPlugin
         SENSED_TARGET,
         SENSED_SUSPICIOUS_ITEM,
         TARGET_HIDEING,
-        SUSPECT_TARGET_RESPONSE
+        SUSPECT_TARGET_RESPONSE,
     }
 
-    public enum SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY
+    public enum SuspiciousItemStageBehaviourTreePriority
     {
         LOW,
         MEDIUM,
-        HIGH
+        HIGH,
     }
 
-    public enum ALIEN_DEVELOPMENT_MANAGER_ABILITIES
+    public enum ALIEN_STAGE
     {
-        NONE,
-        THREAT_AWARE,
-        LIKES_TO_CLOSE_VIA_BACKSTAGE,
-        WILL_KILLTRAP,
-        WILL_FLANK,
-        WILL_FLANK_FROM_THREAT_AWARE,
-        WILL_AMBUSH,
+        NAIVE, 
+        THREAT_AWARE, 
+        LIKES_TO_CLOSE_VIA_BACKSTAGE, 
+        WILL_KILLTRAP, 
+        WILL_FLANK, 
+        WILL_FLANK_FROM_THREAT_AWARE, 
+        WILL_AMBUSH, 
         SEARCH_LOCKERS,
-        SEARCH_UNDER_STUFF
+        SEARCH_UNDER_STUFF,
     }
 
     public enum VENT_LOCK_REASON
     {
         FLANKED_VENT_ATTACK_FROM_ATTACK,
-        FLANKED_VENT_ATTACK_FROM_THREAT_AWARE
+        FLANKED_VENT_ATTACK_FROM_THREAT_AWARE,
     }
 
-    public enum LOGIC_CHARACTER_GAUGE_TYPE
+    public enum GaugeType
     {
         RETREAT_GAUGE,
-        STUN_DAMAGE_GAUGE
+        MELEE_DEFENSE_GAUGE,
+        STUN_DAMAGE_GAUGE,
+        ASSAULT_DAMAGE_GAUGE,
+        ASSAULT_DISTANCE_GAUGE,
     }
 
-    public enum ANIM_CALLBACK_ENUM
+    public enum AnimCallbackEnum
     {
-        NONE,
-        STUN_DAMAGE_CALLBACK
+        STUN_DAMAGE_CALLBACK,
     }
 
-    public enum ANIM_TREE_ENUM
+    public enum AnimTreeEnum
     {
-        NONE,
-        STUN_DAMAGE_TREE
+        STUN_DAMAGE_TREE,
     }
 
-    public enum WEAPON_PROPERTY
+    public enum WeaponProperty
     {
         ALIEN_THREAT_AWARE_OF
     }
 
-    public enum SUSPICIOUS_ITEM_STAGE
+    public enum SuspiciousItemStage
     {
-        NONE,
-        FIRST_SENSED,
         INITIAL_REACTION,
         WAIT_FOR_TEAM_MEMBERS_ROUTING,
         MOVE_CLOSE_TO,
         CLOSE_TO_REACTION,
         CLOSE_TO_WAIT_FOR_GROUP_MEMBERS,
-        SEARCH_AREA
+        SEARCH_AREA,
     }
 
-    public enum SUSPICIOUS_ITEM_REACTION
+    public enum SuspiciousItemReaction
     {
         INITIAL_REACTION,
         CLOSE_TO_FIRST_GROUP_MEMBER_REACTION,
-        CLOSE_TO_SUBSEQUENT_GROUP_MEMBER_REACTION
+        CLOSE_TO_SUBSEQUENT_GROUP_MEMBER_REACTION,
     }
 
     public enum NPC_COMBAT_STATE
@@ -310,7 +290,7 @@ namespace LegendPlugin
         DONE_ADVANCE,
         BLOCKING,
         HEARD_BS_ALIEN,
-        ALIEN_SIGHTED
+        ALIEN_SIGHTED,
     }
 
     public enum CHARACTER_CLASS
@@ -323,8 +303,6 @@ namespace LegendPlugin
         FACEHUGGER,
         INNOCENT,
         ANDROID_HEAVY,
-        MOTION_TRACKER,
-        MELEE_HUMAN
     }
 
     public enum BEHAVIOUR_MOOD_SET
@@ -334,7 +312,7 @@ namespace LegendPlugin
         THREAT_ESCALATION_PANICKED,
         AGGRESSIVE,
         PANICKED,
-        SUSPICIOUS
+        SUSPICIOUS,
     }
 
     public enum NPC_COVER_REQUEST_TYPE
@@ -344,7 +322,7 @@ namespace LegendPlugin
         AGGRESSIVE,
         DEFENSIVE,
         ALIEN,
-        PLAYER_IN_VENT
+        PLAYER_IN_VENT,
     }
 
 
@@ -352,7 +330,7 @@ namespace LegendPlugin
     //    Any below here are non-CATHODE enums which are only for behaviours.     //
     ////////////////////////////////////////////////////////////////////////////////
 
-    public enum AwarenessState
+    public enum GROUP_AWARENESS_STATE
     {
         DEAD,
         STUNNED,
@@ -360,23 +338,23 @@ namespace LegendPlugin
         SUSPICIOUS,
         SEARCHING_AREA,
         SEARCHING_LAST_SENSED,
-        AWARE
+        AWARE,
     }
 
-    public enum WithdrawState
+    public enum WITHDRAW_STATE
     {
         NOT_WITHDRAWING,
         NEEDS_TO_WITHDRAW,
-        WITHDRAWING
+        WITHDRAWING,
     }
 
-    public enum ChildStateType
+    public enum SequenceChildStateType
     {
         CHILD_DEFAULT,
         IGNORE_CHILD_FAIL,
     }
 
-    public enum RequestShutDownSpeed
+    public enum SHUTDOWN_SPEED_TYPE
     {
         SST_GRACEFULL,
         SST_EXPEDIENT,
@@ -391,33 +369,38 @@ namespace LegendPlugin
         UPPER_THRESHOLD,
     }
 
-    public enum BackstageBehaviour
+    public enum BACKSTAGE_BEHAVIOUR
     {
         BACKSTAGE_ONLY,
         ALLOW_KILLTRAP,
     }
 
-    public enum SenseSet
+    public enum SENSE_SET
     {
         SET_1,
         SET_2,
-        SET_3 
+        SET_3,
     }
 
-    public enum Step_Type
+    public enum STEP_TYPE
     {
         FORWARD,
         BACK
     }
 
-    public enum RoleType
+    public enum JobCentreRoleType
     {
         IDLE,
         DESPAWN,
         SYSTEMATIC_SEARCH,
         SYSTEMATIC_SEARCH_SUSPICIOUS_ITEM,
         STALK,
+        BACKSTAGE_STALK,
+        BREAKOUT,
+        COVER,
+        PICKUP_WEAPON,
         BACKSTAGE_AMBUSH,
+        ASSAULT,
         HIDING_PLAYER,
         FOLLOW,
         SUSPECT_RESPONSE_MOVE_TO,
@@ -428,19 +411,19 @@ namespace LegendPlugin
     {
         VISUAL,
         HEARD_COMBAT,
+        HEARD_AMMO_IMPACT,
         HEARD_MOVEMENT,
         DAMAGED,
         TOUCHED,
         AFFECTED_BY_FLAME_THROWER,
         SEE_FLASH_LIGHT,
-        COMBINED
+        COMBINED,
     }
 
-    public enum MotivationType
+    public enum CharacterMotivationType
     {
         CINEMATIC_MOTIVATION,
         ATTACK_MOTIVATION,
-        AIM_MOTIVATION,
         DESPAWN_MOTIVATION,
         FOLLOW_MOTIVATION,
         STANDARD_MOTIVATION,
@@ -451,6 +434,7 @@ namespace LegendPlugin
         SUSPECT_TARGET_RESPONSE_MOTIVATION,
         THREAT_AWARE_MOTIVATION,
         BACKSTAGE_AMBUSH_MOTIVATION,
+        AIM_MOTIVATION,
         IDLE_JOB_MOTIVATION,
         USE_COVER_MOTIVATION,
         ASSAULT_MOTIVATION,
@@ -459,7 +443,6 @@ namespace LegendPlugin
         CLOSE_ON_TARGET_MOTIVATION,
         MUTUAL_MELEE_ONLY_MOTIVATION,
         VENT_MELEE_MOTIVATION,
-        MULTIPLAYER_MOTIVATION,
         REACT_TO_WEAPON_MOTIVATION,
         SUSPICIOUS_ITEM_MOTIVATION,
         AGGRESSION_ESCALATION_MOTIVATION,
@@ -469,84 +452,98 @@ namespace LegendPlugin
         OBSERVE_TARGET_MOTIVATION,
         ADVANCING_MOTIVATION,
         AMBUSH_MOTIVATION,
-        PANIC_MOTIVATION,
         DEBUG_FORCE_CHARACTER_IDLE_MOTIVATION,
+        PANIC_MOTIVATION,
         BACKSTAGE_ALIEN_RESPONSE_MOTIVATION,
         ESCALATION_PREVENTS_SEARCH_MOTIVATION,
-        ALIEN_ATTACK_MOTIVATION,
-        ANDROID_ATTACK_MOTIVATION
     }
 
-    public enum CharacterType
+    public enum CHARACTER_TYPE
     {
         OWNER,
         TARGET,
-        OWNER_AND_TARGET
+    };
+
+    public enum VENT_CHARACTER_TYPE
+    {
+        OWNER,
+        TARGET,
+        OWNER_AND_TARGET,
     }
 
     public enum SoundType
     {
-        ALIEN_AFFECTED_BY_FLAME_THROWER, 
-        ALIEN_ATTACK, 
-        ALIEN_BREATH_SLOW_LOOP, 
-        ALIEN_CHARGE_TO_ATTACK, 
-        ALIEN_DAMAGED_BY_FLAME_THROWER, 
-        ALIEN_DAMAGED_BY_ORDNANCE, 
-        ALIEN_SEARCHING, 
-        ALIEN_SEARCHING_FAIL, 
-        ALIEN_STALKING, 
-        ALIEN_STARTS_SEARCHING, 
-        ALIEN_SUSPECTS_TARGET
+        ALIEN_AFFECTED_BY_FLAME_THROWER,
+        ALIEN_ATTACK,
+        ALIEN_BREATH_SLOW_LOOP,
+        ALIEN_CHARGE_TO_ATTACK,
+        ALIEN_DAMAGED_BY_FLAME_THROWER,
+        ALIEN_DAMAGED_BY_ORDNANCE,
+        ALIEN_SEARCHING,
+        ALIEN_SEARCHING_FAIL,
+        ALIEN_STALKING,
+        ALIEN_STARTS_SEARCHING,
+        ALIEN_SUSPECTS_TARGET,
     }
 
-    public enum AttackType
+    public enum ATOMIC_ATTACK_TYPE
     {
         ANY,
         MELEE,
-        VENT,
         GRAB,
+        VENT,
         TRAP
     }
 
-    public enum TimeThreshold
+    public enum ATTACK_TYPE
     {
-        TM_0, 
-        TM_1, 
+        ANY,
+        MELEE,
+        GRAB,
+        VENT,
+        TRAP
+    };
+
+    public enum TIME_THRESHOLD
+    {
+        TM_0,
+        TM_1,
         TM_2,
-        TM_3, 
-        TM_4, 
-        TM_5, 
+        TM_3,
+        TM_4,
+        TM_5,
         TM_10,
         TM_15,
         TM_20,
-        TM_25, 
+        TM_25,
         TM_30,
-        TM_35, 
-        TM_40, 
-        TM_45, 
-        TM_50, 
-        TM_55, 
-        TM_60, 
-        TM_70, 
-        TM_80, 
-        TM_90, 
+        TM_35,
+        TM_40,
+        TM_45,
+        TM_50,
+        TM_55,
+        TM_60,
+        TM_70,
+        TM_80,
+        TM_90,
         TM_100,
         TM_110,
-        TM_120
+        TM_120,
+        TM_MAX, 
     }
 
-    public enum DistanceThreshold
+    public enum DISTANCE_THRESHOLD
     {
         DT_0,
-        DT_1, 
+        DT_1,
         DT_2,
-        DT_3, 
+        DT_3,
         DT_4,
-        DT_5, 
-        DT_6, 
-        DT_7, 
-        DT_8, 
-        DT_9, 
+        DT_5,
+        DT_6,
+        DT_7,
+        DT_8,
+        DT_9,
         DT_10,
         DT_12,
         DT_14,
@@ -558,7 +555,8 @@ namespace LegendPlugin
         DT_35,
         DT_40,
         DT_45,
-        DT_50 
+        DT_50,
+        DT_MAX,
     }
 
     public enum GaugeAmountType
@@ -571,64 +569,105 @@ namespace LegendPlugin
         GAUGE_FULL,
     }
 
-    public enum CombatAreaType
+    public enum COMBAT_AREA_TYPE
     {
         COMBAT_AREA_DEFEND,
         COMBAT_AREA_PURSUIT,
     }
 
-    public enum ObjectiveType
+    public enum OBJECTIVE_TYPE
     {
         OBJECTIVE_TYPE_MOVE,
         OBJECTIVE_TYPE_START_POS,
         OBJECTIVE_TYPE_COVER,
-        OBJECTIVE_TYPE_SAFE_POINT
+        OBJECTIVE_TYPE_SAFE_POINT,
     }
 
-    public enum Npc_Weapon_Type
+    public enum NPC_WEAPON_TYPE
     {
         WEAPON_TYPE_ANY,
         WEAPON_TYPE_PROJECTILE,
-        WEAPON_TYPE_MELEE
+        WEAPON_TYPE_MELEE,
     }
 
-    public enum ShouldWeaponEquip
+    public enum WeaponEquipEnum
     {
         SHOULD_EQUIP,
         SHOULD_UNEQUIP
     }
 
-    public enum ShouldRaiseGun
+    public enum GunStance
     {
         GUN_RAISED,
         GUN_LOWERED
     }
 
-    public enum WeaponRange
+    public enum WEAPON_RANGE_THRESHOLD
     {
         WRT_TOO_CLOSE,
         WRT_EFFECTIVE_RANGE,
         WRT_MAX_RANGE,
-        WRT_TOO_FAR, 
+        WRT_TOO_FAR,
         WRT_PREFERRED_RANGE
     }
 
-    public enum TerminationCondition
+    public enum ShotCountTerminator
     {
         Continuous,
+        EmptyClip,
         Shot_1,
         Shot_2,
         Shot_3,
         Shot_4,
         Random_between_1_and_4,
-        Random_between_1_and_ClipCount
+        Random_between_1_and_ClipCount,
     }
 
-    public enum Direction
+    public enum MoveDirection
     {
-        Forward,
-        Back,
-        Right,
-        Left
+        Back, 
+        Left, 
+        Right, 
+        Forward
+    }
+
+    public enum DodgeDirection 
+    { 
+        Back, 
+        Left, 
+        Right, 
+        Forward
+    }
+
+    public enum HEALTH_STATE_TYPE
+    {
+        FULL,
+        DAMAGED,
+        INJURED,
+        DOWN_BUT_NOT_OUT,
+    };
+
+    public enum SearchJobPositionQualifier
+    {
+        MOST_RESENT_SENSED_TARGET_POSITION,
+        SPECIFIED_SENSED_TARGET_POSITION,
+        NPC_INITIAL_POSITION,
+        NPC_CURRENT_POSITION,
+    }
+
+    public enum NPC_AGGRO_LEVEL
+    {
+        NONE,
+        STAND_DOWN,
+        INTERROGATIVE,
+        WARNING,
+        LAST_CHANCE,
+    };
+
+    public enum DIFFICULTY_SETTING_TYPE
+    {
+        EASY,
+        MEDIUM,
+        HARD,
     }
 }

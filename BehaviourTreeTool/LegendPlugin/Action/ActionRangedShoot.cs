@@ -38,12 +38,12 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _type;
+        protected SHUTDOWN_SPEED_TYPE _type;
         private bool _ShootStraightAway = false;
-        protected TerminationCondition _cond;
+        protected ShotCountTerminator _cond;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }
@@ -57,7 +57,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Termination Condition", "TerminationCondition", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public TerminationCondition TerminationCondition
+        public ShotCountTerminator TerminationCondition
         {
             get { return _cond; }
             set { _cond = value; }

@@ -70,85 +70,85 @@ namespace LegendPlugin
             /*
              * ACTIONS
             */
-            actions.Items.Add(typeof(Nodes.ActionAbortMeleeAttack));
-            actions.Items.Add(typeof(Nodes.ActionAffectedByFlameThrower));
-            actions.Items.Add(typeof(Nodes.ActionAffectedByFlameThrowerInVent));
-            actions.Items.Add(typeof(Nodes.ActionAlienWonScareTest));
             actions.Items.Add(typeof(Nodes.ActionApplyPrimaryDamageControlResponse));
-            actions.Items.Add(typeof(Nodes.ActionAssert));
-            actions.Items.Add(typeof(Nodes.ActionBackstageAlienResponse));
-            actions.Items.Add(typeof(Nodes.ActionBackstageAreaSweep));
-            actions.Items.Add(typeof(Nodes.ActionBreakout));
-            actions.Items.Add(typeof(Nodes.ActionBrokenCover));
-            actions.Items.Add(typeof(Nodes.ActionChangeCover));
             actions.Items.Add(typeof(Nodes.ActionDead));
-            actions.Items.Add(typeof(Nodes.ActionDebugMenuLinkItem));
-            actions.Items.Add(typeof(Nodes.ActionDebugString));
-            actions.Items.Add(typeof(Nodes.ActionDespawn));
-            actions.Items.Add(typeof(Nodes.ActionDoneSystematicSearch));
-            actions.Items.Add(typeof(Nodes.ActionExpireTimer));
-            actions.Items.Add(typeof(Nodes.ActionFail));
-            actions.Items.Add(typeof(Nodes.ActionFakeSense));
-            actions.Items.Add(typeof(Nodes.ActionForceIdle));
-            actions.Items.Add(typeof(Nodes.ActionForceSearch));
-            actions.Items.Add(typeof(Nodes.ActionGetOutOfTheWay));
-            actions.Items.Add(typeof(Nodes.ActionHitTargetAndRun));
             actions.Items.Add(typeof(Nodes.ActionIdle));
-            actions.Items.Add(typeof(Nodes.ActionIdleInCover));
+            actions.Items.Add(typeof(Nodes.ActionForceIdle));
             actions.Items.Add(typeof(Nodes.ActionIdleTime));
-            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingSuspiciousItem));
-            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTarget));
-            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTargetMostRecentSensedPosition));
-            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTargetOutsideCombatArea));
-            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTargetSensedPosition));
-            actions.Items.Add(typeof(Nodes.ActionListeningInConvo));
-            actions.Items.Add(typeof(Nodes.ActionMakeAggressive));
-            actions.Items.Add(typeof(Nodes.ActionMeleeAttack));
-            actions.Items.Add(typeof(Nodes.ActionMoveInDirection));
-            actions.Items.Add(typeof(Nodes.ActionMoveThroughTarget));
-            actions.Items.Add(typeof(Nodes.ActionMoveToAttackTarget));
-            actions.Items.Add(typeof(Nodes.ActionMoveToBackstageViaVentClosestToAlien));
-            actions.Items.Add(typeof(Nodes.ActionMoveToConvo));
-            actions.Items.Add(typeof(Nodes.ActionMoveToCover));
-            actions.Items.Add(typeof(Nodes.ActionMoveToFrontStageViaFlankedVentClosestToPlayer));
-            actions.Items.Add(typeof(Nodes.ActionMoveToMostRecentSensedPosition));
-            actions.Items.Add(typeof(Nodes.ActionMoveToNearestStandingPointToTarget));
-            actions.Items.Add(typeof(Nodes.ActionMoveToObjective));
             actions.Items.Add(typeof(Nodes.ActionMoveToTarget));
+            actions.Items.Add(typeof(Nodes.ActionMoveToAttackTarget));
+            actions.Items.Add(typeof(Nodes.ActionMoveToNearestStandingPointToTarget));
+            actions.Items.Add(typeof(Nodes.ActionMoveThroughTarget));
+            actions.Items.Add(typeof(Nodes.ActionMoveToObjective));
             actions.Items.Add(typeof(Nodes.ActionMoveWithGamepad));
-            actions.Items.Add(typeof(Nodes.ActionNotifySquad));
-            actions.Items.Add(typeof(Nodes.ActionPauseSenses));
-            actions.Items.Add(typeof(Nodes.ActionPerformAmbush));
-            actions.Items.Add(typeof(Nodes.ActionPerformRole));
+            actions.Items.Add(typeof(Nodes.ActionMoveInDirection));
+            actions.Items.Add(typeof(Nodes.ActionGetOutOfTheWay));
+            actions.Items.Add(typeof(Nodes.ActionScript));
+            actions.Items.Add(typeof(Nodes.ActionSuspend));
             actions.Items.Add(typeof(Nodes.ActionPlayerController));
-            actions.Items.Add(typeof(Nodes.ActionPlayTree));
-            actions.Items.Add(typeof(Nodes.ActionPlayTreeAndFaceTarget));
             actions.Items.Add(typeof(Nodes.ActionRangedAim));
             actions.Items.Add(typeof(Nodes.ActionRangedShoot));
-            actions.Items.Add(typeof(Nodes.ActionRequestCover));
-            actions.Items.Add(typeof(Nodes.ActionResetSearchJobs));
-            actions.Items.Add(typeof(Nodes.ActionScript));
-            actions.Items.Add(typeof(Nodes.ActionSetFrameFlag));
-            actions.Items.Add(typeof(Nodes.ActionSetGaugeAmount));
-            actions.Items.Add(typeof(Nodes.ActionSetLogicCharacterFlags));
-            actions.Items.Add(typeof(Nodes.ActionSetMenaceManager));
-            actions.Items.Add(typeof(Nodes.ActionSetWithdrawState));
-            actions.Items.Add(typeof(Nodes.ActionSpeakingInConvo));
-            actions.Items.Add(typeof(Nodes.ActionStartTimer));
-            actions.Items.Add(typeof(Nodes.ActionStartTimerRandom));
-            actions.Items.Add(typeof(Nodes.ActionSuccess));
-            actions.Items.Add(typeof(Nodes.ActionSuspectTargetResponse));
-            actions.Items.Add(typeof(Nodes.ActionSuspend));
-            actions.Items.Add(typeof(Nodes.ActionSuspiciousItemDoneStage));
-            actions.Items.Add(typeof(Nodes.ActionSuspiciousItemMoveTo));
-            actions.Items.Add(typeof(Nodes.ActionSuspiciousItemReaction));
+            actions.Items.Add(typeof(Nodes.ActionPerformRole));
             actions.Items.Add(typeof(Nodes.ActionSwitchToNextTarget));
-            actions.Items.Add(typeof(Nodes.ActionTakeStep));
-            actions.Items.Add(typeof(Nodes.ActionThreatAware));
-            actions.Items.Add(typeof(Nodes.ActionThreatEscalation));
+            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTargetSensedPosition));
+            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTargetMostRecentSensedPosition));
+            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTargetOutsideCombatArea));
+            actions.Items.Add(typeof(Nodes.ActionResetSearchJobs));
+            actions.Items.Add(typeof(Nodes.ActionAlienWonScareTest));
+            actions.Items.Add(typeof(Nodes.ActionSuccess));
+            actions.Items.Add(typeof(Nodes.ActionDebugMenuLinkItem));
+            actions.Items.Add(typeof(Nodes.ActionAssert));
+            actions.Items.Add(typeof(Nodes.ActionForceSearch));
+            actions.Items.Add(typeof(Nodes.ActionAbortMeleeAttack));
+            actions.Items.Add(typeof(Nodes.ActionNotifySquad));
+            actions.Items.Add(typeof(Nodes.ActionHitTargetAndRun));
+            actions.Items.Add(typeof(Nodes.ActionMeleeAttack));
+            actions.Items.Add(typeof(Nodes.ActionFail));
             actions.Items.Add(typeof(Nodes.ActionTriggerSound));
             actions.Items.Add(typeof(Nodes.ActionWeaponEquip));
-            
+            actions.Items.Add(typeof(Nodes.ActionSuspectTargetResponse));
+            actions.Items.Add(typeof(Nodes.ActionThreatEscalation));
+            actions.Items.Add(typeof(Nodes.ActionStartTimer));
+            actions.Items.Add(typeof(Nodes.ActionStartTimerRandom));
+            actions.Items.Add(typeof(Nodes.ActionSetLogicCharacterFlags));
+            actions.Items.Add(typeof(Nodes.ActionPauseSenses));
+            actions.Items.Add(typeof(Nodes.ActionSetWithdrawState));
+            actions.Items.Add(typeof(Nodes.ActionExpireTimer));
+            actions.Items.Add(typeof(Nodes.ActionAffectedByFlameThrower));
+            actions.Items.Add(typeof(Nodes.ActionAffectedByFlameThrowerInVent));
+            actions.Items.Add(typeof(Nodes.ActionMoveToMostRecentSensedPosition));
+            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingTarget));
+            actions.Items.Add(typeof(Nodes.ActionFakeSense));
+            actions.Items.Add(typeof(Nodes.ActionThreatAware));
+            actions.Items.Add(typeof(Nodes.ActionTakeStep));
+            actions.Items.Add(typeof(Nodes.ActionRequestCover));
+            actions.Items.Add(typeof(Nodes.ActionMoveToCover));
+            actions.Items.Add(typeof(Nodes.ActionIdleInCover));
+            actions.Items.Add(typeof(Nodes.ActionBrokenCover));
+            actions.Items.Add(typeof(Nodes.ActionSetFrameFlag));
+            actions.Items.Add(typeof(Nodes.ActionChangeCover));
+            actions.Items.Add(typeof(Nodes.ActionSuspiciousItemMoveTo));
+            actions.Items.Add(typeof(Nodes.ActionSuspiciousItemReaction));
+            actions.Items.Add(typeof(Nodes.ActionSuspiciousItemDoneStage));
+            actions.Items.Add(typeof(Nodes.ActionIdleTimeFacingSuspiciousItem));
+            actions.Items.Add(typeof(Nodes.ActionMakeAggressive));
+            actions.Items.Add(typeof(Nodes.ActionSetGaugeAmount));
+            actions.Items.Add(typeof(Nodes.ActionPlayTree));
+            actions.Items.Add(typeof(Nodes.ActionPlayTreeAndFaceTarget));
+            actions.Items.Add(typeof(Nodes.ActionDespawn));
+            actions.Items.Add(typeof(Nodes.ActionDoneSystematicSearch));
+            actions.Items.Add(typeof(Nodes.ActionBreakout));
+            actions.Items.Add(typeof(Nodes.ActionBackstageAreaSweep));
+            actions.Items.Add(typeof(Nodes.ActionDebugString));
+            actions.Items.Add(typeof(Nodes.ActionPerformAmbush));
+            actions.Items.Add(typeof(Nodes.ActionMoveToFrontStageViaFlankedVentClosestToPlayer));
+            actions.Items.Add(typeof(Nodes.ActionMoveToBackstageViaVentClosestToAlien));
+            actions.Items.Add(typeof(Nodes.ActionBackstageAlienResponse));
+            actions.Items.Add(typeof(Nodes.ActionSetMenaceManager));
+            actions.Items.Add(typeof(Nodes.ActionMoveToConvo));
+            actions.Items.Add(typeof(Nodes.ActionSpeakingInConvo));
+            actions.Items.Add(typeof(Nodes.ActionListeningInConvo));
+
 
             /*
              * CONDITIONS
@@ -161,42 +161,42 @@ namespace LegendPlugin
             conditions.Items.Add(typeof(Nodes.ConditionIsEnemyOfTarget));
             conditions.Items.Add(typeof(Nodes.ConditionIsCharacterClass));
             conditions.Items.Add(typeof(Nodes.ConditionTargetIsWithinDistance));
-            //conditions.Items.Add(typeof(Nodes.ConditionTargetIsWithinDistanceOfAlien));
+            conditions.Items.Add(typeof(Nodes.ConditionTargetIsWithinDistanceOfAlien));
             conditions.Items.Add(typeof(Nodes.ConditionTargetIsWithinAggroRadius));
             conditions.Items.Add(typeof(Nodes.ConditionIsPerformingRoleOrCouldPerformRole));
-            //conditions.Items.Add(typeof(Nodes.ConditionMostRecentSenseActivationHasBeenAbove));
+            conditions.Items.Add(typeof(Nodes.ConditionMostRecentSenseActivationHasBeenAbove));
             conditions.Items.Add(typeof(Nodes.ConditionHasMotivation));
             conditions.Items.Add(typeof(Nodes.ConditionHasScript));
             conditions.Items.Add(typeof(Nodes.ConditionTargetIsOnlyAccessibleCrouching));
             conditions.Items.Add(typeof(Nodes.ConditionHasValidRouteToNearTarget));
             conditions.Items.Add(typeof(Nodes.ConditionShouldFollow));
-            //conditions.Items.Add(typeof(Nodes.ConditionPlayerIsAnEnemy));
+            conditions.Items.Add(typeof(Nodes.ConditionPlayerIsAnEnemy));
             conditions.Items.Add(typeof(Nodes.ConditionPlayerIsInExploitableArea));
             conditions.Items.Add(typeof(Nodes.ConditionShouldSuspend));
             conditions.Items.Add(typeof(Nodes.ConditionHaveNextTarget));
             conditions.Items.Add(typeof(Nodes.ConditionIsSenseActivationAbove));
             conditions.Items.Add(typeof(Nodes.ConditionIsAnySenseActivationAbove));
-            //conditions.Items.Add(typeof(Nodes.ConditionHasSenseActivationBeenAbove));
+            conditions.Items.Add(typeof(Nodes.ConditionHasSenseActivationBeenAbove));
             conditions.Items.Add(typeof(Nodes.ConditionHasAnySenseBeenAbove));
-            //conditions.Items.Add(typeof(Nodes.ConditionWasSenseThresholdLastIncreaseActivation));
+            conditions.Items.Add(typeof(Nodes.ConditionWasSenseThresholdLastIncreaseActivation));
             conditions.Items.Add(typeof(Nodes.ConditionAngleToTargetLessThan));
             conditions.Items.Add(typeof(Nodes.ConditionHasMeleeAttackAvailableOrIsAttacking));
             conditions.Items.Add(typeof(Nodes.ConditionHasMeleeAttackAvailable));
-            //conditions.Items.Add(typeof(Nodes.ConditionHasMeleeCounterAttackAvailable));
-            //conditions.Items.Add(typeof(Nodes.ConditionHasMeleeBlockAvailable));
-            //conditions.Items.Add(typeof(Nodes.ConditionTargetIsUsingMeleeAttack));
+            conditions.Items.Add(typeof(Nodes.ConditionHasMeleeCounterAttackAvailable));
+            conditions.Items.Add(typeof(Nodes.ConditionHasMeleeBlockAvailable));
+            conditions.Items.Add(typeof(Nodes.ConditionTargetIsUsingMeleeAttack));
             conditions.Items.Add(typeof(Nodes.ConditionTargetIsTargetingMe));
             conditions.Items.Add(typeof(Nodes.ConditionLastTimeTargetShotAtMe));
             conditions.Items.Add(typeof(Nodes.ConditionTargetIsPlayer));
             conditions.Items.Add(typeof(Nodes.ConditionIsGaugeAmountAbove));
             conditions.Items.Add(typeof(Nodes.ConditionTargetIsWithinDistanceThreshold));
-            //conditions.Items.Add(typeof(Nodes.ConditionTargetIsInWeaponRange));
+            conditions.Items.Add(typeof(Nodes.ConditionTargetIsInWeaponRange));
             conditions.Items.Add(typeof(Nodes.ConditionAllowedToAttackTarget));
             conditions.Items.Add(typeof(Nodes.ConditionAllowedToPursueTarget));
             conditions.Items.Add(typeof(Nodes.ConditionHasAlertnessState));
-            //conditions.Items.Add(typeof(Nodes.ConditionHasAggroLevel));
+            conditions.Items.Add(typeof(Nodes.ConditionHasAggroLevel));
             conditions.Items.Add(typeof(Nodes.ConditionIsInVent));
-            //conditions.Items.Add(typeof(Nodes.ConditionIsCrouching));
+            conditions.Items.Add(typeof(Nodes.ConditionIsCrouching));
             conditions.Items.Add(typeof(Nodes.ConditionIsInCrawlSpace));
             conditions.Items.Add(typeof(Nodes.ConditionScriptedWithdrawRequested));
             conditions.Items.Add(typeof(Nodes.ConditionRangeTestForScriptedWithdrawal));
@@ -215,8 +215,8 @@ namespace LegendPlugin
             conditions.Items.Add(typeof(Nodes.ConditionObjectiveIsInCombatArea));
             conditions.Items.Add(typeof(Nodes.ConditionHasObjective));
             conditions.Items.Add(typeof(Nodes.ConditionObjectiveIsWithinDistance));
-            //conditions.Items.Add(typeof(Nodes.ConditionHasGroupAwarenessState));
-            //conditions.Items.Add(typeof(Nodes.ConditionCheckHealthState));
+            conditions.Items.Add(typeof(Nodes.ConditionHasGroupAwarenessState));
+            conditions.Items.Add(typeof(Nodes.ConditionCheckHealthState));
             conditions.Items.Add(typeof(Nodes.ConditionWithdrawState));
             conditions.Items.Add(typeof(Nodes.ConditionAngleNPCToTargetsAimLessThan));
             conditions.Items.Add(typeof(Nodes.ConditionIsInTargetsWeaponRange));
@@ -229,13 +229,13 @@ namespace LegendPlugin
             conditions.Items.Add(typeof(Nodes.ConditionTargetNearestStandPointIsWithinDistance));
             conditions.Items.Add(typeof(Nodes.ConditionHasSearchedMostRecentSensedPosition));
             conditions.Items.Add(typeof(Nodes.ConditionIsBranchActive));
-            //conditions.Items.Add(typeof(Nodes.ConditionCanTakeStep));
+            conditions.Items.Add(typeof(Nodes.ConditionCanTakeStep));
             conditions.Items.Add(typeof(Nodes.ConditionIsInCover));
-            //conditions.Items.Add(typeof(Nodes.ConditionCanShootNow));
+            conditions.Items.Add(typeof(Nodes.ConditionCanShootNow));
             conditions.Items.Add(typeof(Nodes.ConditionHasValidCoverToChangeTo));
             conditions.Items.Add(typeof(Nodes.ConditionIsCurrentCoverValid));
             conditions.Items.Add(typeof(Nodes.ConditionIsRequestingCover));
-            //conditions.Items.Add(typeof(Nodes.ConditionIsCoverTooClose));
+            conditions.Items.Add(typeof(Nodes.ConditionIsCoverTooClose));
             conditions.Items.Add(typeof(Nodes.ConditionIsCoverExposed));
             conditions.Items.Add(typeof(Nodes.ConditionShouldProcessSuspiciousItem));
             conditions.Items.Add(typeof(Nodes.ConditionSuspiciousItemBTPriority));
@@ -248,8 +248,8 @@ namespace LegendPlugin
             conditions.Items.Add(typeof(Nodes.ConditionSquadDoingEscalation));
             conditions.Items.Add(typeof(Nodes.ConditionSquadDoingSuspiciousWarning));
             conditions.Items.Add(typeof(Nodes.ConditionAllowedToSearch));
-            //conditions.Items.Add(typeof(Nodes.ConditionAllowedToDoSuspiciousWarning));
-            //conditions.Items.Add(typeof(Nodes.ConditionIsGaugeAmountBelow));
+            conditions.Items.Add(typeof(Nodes.ConditionAllowedToDoSuspiciousWarning));
+            conditions.Items.Add(typeof(Nodes.ConditionIsGaugeAmountBelow));
             conditions.Items.Add(typeof(Nodes.ConditionHasAnySenseBeenAboveWithinTime));
             conditions.Items.Add(typeof(Nodes.ConditionLastTimeSearchedWithinTime));
             conditions.Items.Add(typeof(Nodes.ConditionLastTimeWasAbleToShootTarget));
@@ -272,7 +272,7 @@ namespace LegendPlugin
             conditions.Items.Add(typeof(Nodes.ConditionHasDoneSuspectResponseMoveTo));
             conditions.Items.Add(typeof(Nodes.ConditionHasDoneSuspectResponseWithinTime));
             conditions.Items.Add(typeof(Nodes.ConditionWasSenseThresholdLastIncreaseActivationAbove));
-            //conditions.Items.Add(typeof(Nodes.ConditionGameIsDifficulty));
+            conditions.Items.Add(typeof(Nodes.ConditionGameIsDifficulty));
             conditions.Items.Add(typeof(Nodes.ConditionInConvo));
             conditions.Items.Add(typeof(Nodes.ConditionTalkingInConvo));
             conditions.Items.Add(typeof(Nodes.ConditionListeningInConvo));
@@ -281,28 +281,28 @@ namespace LegendPlugin
             conditions.Items.Add(typeof(Nodes.ConditionSomeoneJoinedConvo));
             conditions.Items.Add(typeof(Nodes.ConditionPlayerJoinedConvo));
             conditions.Items.Add(typeof(Nodes.ConditionInPositionForConvo));
-            
 
-			/*
+
+            /*
              * DECORATORS
             */
-            decorators.Items.Add(typeof(Nodes.DecoratorAggressionEscalation));
-            decorators.Items.Add(typeof(Nodes.DecoratorAwarenessState));
-            decorators.Items.Add(typeof(Nodes.DecoratorBranch));
-            decorators.Items.Add(typeof(Nodes.DecoratorLockBestVents));
-            decorators.Items.Add(typeof(Nodes.DecoratorLoop));
-            decorators.Items.Add(typeof(Nodes.DecoratorMood));
             decorators.Items.Add(typeof(Nodes.DecoratorPercentage));
-            decorators.Items.Add(typeof(Nodes.DecoratorSetSenseSet));
-            decorators.Items.Add(typeof(Nodes.DecoratorSquadSearch));
-            decorators.Items.Add(typeof(Nodes.DecoratorSuspiciousItemInProgress));
+            decorators.Items.Add(typeof(Nodes.DecoratorLoop));
             decorators.Items.Add(typeof(Nodes.DecoratorTimer));
-            
+            decorators.Items.Add(typeof(Nodes.DecoratorBranch));
+            decorators.Items.Add(typeof(Nodes.DecoratorAwarenessState));
+            decorators.Items.Add(typeof(Nodes.DecoratorSuspiciousItemInProgress));
+            decorators.Items.Add(typeof(Nodes.DecoratorAggressionEscalation));
+            decorators.Items.Add(typeof(Nodes.DecoratorSquadSearch));
+            decorators.Items.Add(typeof(Nodes.DecoratorSetSenseSet));
+            decorators.Items.Add(typeof(Nodes.DecoratorMood));
+            decorators.Items.Add(typeof(Nodes.DecoratorLockBestVents));
+
 
             /*
              * SELECTORS
             */
-			selectors.Items.Add(typeof(Nodes.SelectorLinear));
+            selectors.Items.Add(typeof(Nodes.SelectorLinear));
             selectors.Items.Add(typeof(Nodes.SelectorPercentage));
 
 

@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected MotivationType _cond;
+        protected CharacterMotivationType _cond;
 
         [DesignerEnum("Motivation type", "MotivationType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MotivationType MotivationType
+        public CharacterMotivationType MotivationType
         {
             get { return _cond; }
             set { _cond = value; }

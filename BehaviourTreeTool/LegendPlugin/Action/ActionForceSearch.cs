@@ -34,36 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionPlayTree : Action
+    public class ActionForceSearch : Action
 	{
-        protected RequestShutDownSpeed _type;
-        protected string _animEnum;
-        protected string _animCallback;
+        protected SHUTDOWN_SPEED_TYPE _type;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }
         }
 
-        [DesignerString("Animation tree enum", "AnimTreeEnum", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AnimTreeEnum
-        {
-            //STUN_DAMAGE_TREE, or NONE
-            get { return _animEnum; }
-            set { _animEnum = value; }
-        }
-
-        [DesignerString("Animation callback enum", "AnimCallbackEnum", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AnimCallbackEnum
-        {
-            //STUN_DAMAGE_CALLBACK, or NONE
-            get { return _animCallback; }
-            set { _animCallback = value; }
-        }
-
-        public ActionPlayTree() : base("PlayTree", "Play an animation tree on us - unused in the final game.")
+        public ActionForceSearch() : base("ForceSearch", "Force us to search - unused in the final game.")
 
         {
         }
@@ -72,10 +54,8 @@ namespace LegendPlugin.Nodes
         {
             base.CloneProperties(newnode);
 
-            ActionPlayTree cond = (ActionPlayTree)newnode;
+            ActionForceSearch cond = (ActionForceSearch)newnode;
             cond._type = _type;
-            cond._animEnum = _animEnum;
-            cond._animCallback = _animCallback;
-        }        
+        }
     }
 }

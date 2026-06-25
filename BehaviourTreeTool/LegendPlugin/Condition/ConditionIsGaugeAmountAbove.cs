@@ -39,7 +39,7 @@ namespace LegendPlugin.Nodes
         //All parameters added
 
         protected GaugeAmountType _cond;
-        protected LOGIC_CHARACTER_GAUGE_TYPE _cond2;
+        protected GaugeType _cond2;
         private bool _ShouldAim = false;
 
         [DesignerEnum("Gauge amount type", "GaugeAmountType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
@@ -50,7 +50,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Gauge type", "GaugeType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOGIC_CHARACTER_GAUGE_TYPE GaugeType
+        public GaugeType GaugeType
         {
             get { return _cond2; }
             set { _cond2 = value; }

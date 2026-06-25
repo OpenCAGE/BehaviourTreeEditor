@@ -38,18 +38,18 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _type;
-        protected BackstageBehaviour _behave;
+        protected SHUTDOWN_SPEED_TYPE _type;
+        protected BACKSTAGE_BEHAVIOUR _behave;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }
         }
 
         [DesignerEnum("Backstage behaviour", "BackstageBehaviour", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public BackstageBehaviour BackstageBehaviour
+        public BACKSTAGE_BEHAVIOUR BackstageBehaviour
         {
             get { return _behave; }
             set { _behave = value; }

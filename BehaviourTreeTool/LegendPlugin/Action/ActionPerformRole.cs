@@ -39,8 +39,8 @@ namespace LegendPlugin.Nodes
         //All parameters added
 
         private string _cond1 = "";
-        protected RequestShutDownSpeed _cond2;
-        protected RoleType _cond3;
+        protected SHUTDOWN_SPEED_TYPE _cond2;
+        protected JobCentreRoleType _cond3;
 
         [DesignerString("Query ID", "QueryID", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public string QueryID
@@ -50,14 +50,14 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _cond2; }
             set { _cond2 = value; }
         }
 
         [DesignerEnum("Role type", "RoleType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RoleType RoleType
+        public JobCentreRoleType RoleType
         {
             get { return _cond3; }
             set { _cond3 = value; }

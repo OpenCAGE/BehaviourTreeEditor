@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected ALIEN_DEVELOPMENT_MANAGER_ABILITIES _type;
+        protected ALIEN_STAGE _type;
 
         [DesignerEnum("Alien action", "What action should we test?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ALIEN_DEVELOPMENT_MANAGER_ABILITIES AlienAction
+        public ALIEN_STAGE AlienAction
         {
             get { return _type; }
             set { _type = value; }

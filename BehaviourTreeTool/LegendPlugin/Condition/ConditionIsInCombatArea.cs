@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected CombatAreaType _type;
+        protected COMBAT_AREA_TYPE _type;
 
         [DesignerEnum("Combat area type", "CombatAreaType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CombatAreaType CombatAreaType
+        public COMBAT_AREA_TYPE CombatAreaType
         {
             get { return _type; }
             set { _type = value; }

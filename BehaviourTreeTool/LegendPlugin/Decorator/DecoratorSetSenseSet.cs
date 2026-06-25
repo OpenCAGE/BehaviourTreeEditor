@@ -36,10 +36,10 @@ namespace LegendPlugin.Nodes
 {
 	public class DecoratorSetSenseSet : Decorator
     {
-        protected SenseSet _type;
+        protected SENSE_SET _type;
 
         [DesignerEnum("Sense set", "SenseSet", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseSet SenseSet
+        public SENSE_SET SenseSet
         {
             get { return _type; }
             set { _type = value; }

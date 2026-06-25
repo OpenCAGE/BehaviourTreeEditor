@@ -34,50 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionIdleTimeFacingTargetSensedPosition : Action
+    public class ActionTakeStep : Action
 	{
-        protected RequestShutDownSpeed _shutdownspeed;
-        protected string _time;
-        protected string _tolerance;
-        protected SenseType _sensetype;
-        protected ThresholdQualifier _threshold;
+        protected SHUTDOWN_SPEED_TYPE _speed;
+        protected STEP_TYPE _type;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
-            get { return _shutdownspeed; }
-            set { _shutdownspeed = value; }
+            get { return _speed; }
+            set { _speed = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        [DesignerEnum("Step type", "Step_Type", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public STEP_TYPE AnimTreeEnum
         {
-            get { return _time; }
-            set { _time = value; }
+            get { return _type; }
+            set { _type = value; }
         }
 
-        [DesignerString("Facing tolerance", "FacingTolerance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string FacingTolerance
-        {
-            get { return _tolerance; }
-            set { _tolerance = value; }
-        }
-
-        [DesignerEnum("Sense type", "SenseType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseType SenseType
-        {
-            get { return _sensetype; }
-            set { _sensetype = value; }
-        }
-
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ThresholdQualifier ThresholdQualifier
-        {
-            get { return _threshold; }
-            set { _threshold = value; }
-        }
-
-        public ActionIdleTimeFacingTargetSensedPosition() : base("IdleTimeFacingTargetSensedPosition", "Idle for a set time while facing our target's sensed position - unused in the final game.")
+        public ActionTakeStep() : base("TakeStep", "Take a step in a direction - unused in the final game.")
 
         {
         }
@@ -86,12 +62,9 @@ namespace LegendPlugin.Nodes
         {
             base.CloneProperties(newnode);
 
-            ActionIdleTimeFacingTargetSensedPosition cond = (ActionIdleTimeFacingTargetSensedPosition)newnode;
-            cond._shutdownspeed = _shutdownspeed;
-            cond._time = _time;
-            cond._tolerance = _tolerance;
-            cond._sensetype = _sensetype;
-            cond._threshold = _threshold;
+            ActionTakeStep cond = (ActionTakeStep)newnode;
+            cond._type = _type;
+            cond._speed = _speed;
         }
     }
 }

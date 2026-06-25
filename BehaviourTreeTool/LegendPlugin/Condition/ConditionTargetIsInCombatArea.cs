@@ -38,7 +38,7 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected CombatAreaType _cond2;
+        protected COMBAT_AREA_TYPE _cond2;
         private bool _ShouldAim = false;
 
         [DesignerBoolean("Use last sensed position", "UseLastSensedPosition", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
@@ -49,7 +49,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Combat area type", "CombatAreaType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CombatAreaType CombatAreaType
+        public COMBAT_AREA_TYPE CombatAreaType
         {
             get { return _cond2; }
             set { _cond2 = value; }

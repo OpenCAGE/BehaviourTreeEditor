@@ -39,7 +39,7 @@ namespace LegendPlugin.Nodes
         //All parameters added
 
         private string _cond1 = "";
-        protected RoleType _cond3;
+        protected JobCentreRoleType _cond3;
 
         [DesignerString("Query ID", "QueryID", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public string QueryID
@@ -49,7 +49,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Role type", "RoleType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RoleType RoleType
+        public JobCentreRoleType RoleType
         {
             get { return _cond3; }
             set { _cond3 = value; }

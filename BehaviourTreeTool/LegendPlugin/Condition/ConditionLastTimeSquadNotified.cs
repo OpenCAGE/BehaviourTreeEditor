@@ -39,7 +39,7 @@ namespace LegendPlugin.Nodes
         //All parameters added
 
         protected NPC_COMBAT_STATE _cond;
-        protected TimeThreshold _cond2;
+        protected TIME_THRESHOLD _cond2;
 
         [DesignerEnum("Combat state", "CombatState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public NPC_COMBAT_STATE CombatState
@@ -49,7 +49,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Time threshold", "TimeThreshold", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public TimeThreshold TimeThreshold
+        public TIME_THRESHOLD TimeThreshold
         {
             get { return _cond2; }
             set { _cond2 = value; }

@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY _type;
+        protected SuspiciousItemStageBehaviourTreePriority _type;
 
         [DesignerEnum("Priority", "Priority", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY Priority
+        public SuspiciousItemStageBehaviourTreePriority Priority
         {
             get { return _type; }
             set { _type = value; }

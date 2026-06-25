@@ -38,18 +38,18 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _cond;
-        protected ShouldWeaponEquip _cond2;
+        protected SHUTDOWN_SPEED_TYPE _cond;
+        protected WeaponEquipEnum _cond2;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _cond; }
             set { _cond = value; }
         }
 
         [DesignerEnum("Should weapon equip", "ShouldWeaponEquip", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ShouldWeaponEquip ShouldWeaponEquip
+        public WeaponEquipEnum ShouldWeaponEquip
         {
             get { return _cond2; }
             set { _cond2 = value; }

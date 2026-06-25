@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected LOGIC_CHARACTER_FLAGS _cond;
+        protected LOGIC_CHARACTER_FLAG_TYPE _cond;
 
         [DesignerEnum("Flag type", "FlagType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOGIC_CHARACTER_FLAGS FlagType
+        public LOGIC_CHARACTER_FLAG_TYPE FlagType
         {
             get { return _cond; }
             set { _cond = value; }

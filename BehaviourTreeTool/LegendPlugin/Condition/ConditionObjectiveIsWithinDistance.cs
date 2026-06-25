@@ -38,7 +38,7 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected ObjectiveType _cond;
+        protected OBJECTIVE_TYPE _cond;
         private string _cond4 = "";
 
         [DesignerString("Distance", "Distance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
@@ -49,7 +49,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Objective type", "ObjectiveType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ObjectiveType ObjectiveType
+        public OBJECTIVE_TYPE ObjectiveType
         {
             get { return _cond; }
             set { _cond = value; }

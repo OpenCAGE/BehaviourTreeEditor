@@ -38,11 +38,11 @@ namespace LegendPlugin.Nodes
     {
         //All parameters added
 
-        protected ChildStateType _childStateType;
+        protected SequenceChildStateType _childStateType;
         private string _Name = "";
 
         [DesignerEnum("Child state type", "ChildStateType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ChildStateType ChildStateType
+        public SequenceChildStateType ChildStateType
         {
             get { return _childStateType; }
             set { _childStateType = value; }

@@ -38,18 +38,18 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _cond;
-        protected SUSPICIOUS_ITEM_REACTION _cond2;
+        protected SHUTDOWN_SPEED_TYPE _cond;
+        protected SuspiciousItemReaction _cond2;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _cond; }
             set { _cond = value; }
         }
 
         [DesignerEnum("Suspicious item reaction", "SuspiciousItemReaction", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SUSPICIOUS_ITEM_REACTION SuspiciousItemReaction
+        public SuspiciousItemReaction SuspiciousItemReaction
         {
             get { return _cond2; }
             set { _cond2 = value; }

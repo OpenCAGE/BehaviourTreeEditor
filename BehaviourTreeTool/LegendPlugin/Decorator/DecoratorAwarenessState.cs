@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected AwarenessState _type;
+        protected GROUP_AWARENESS_STATE _type;
 
         [DesignerEnum("Awareness state", "AwarenessState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public AwarenessState AwarenessState
+        public GROUP_AWARENESS_STATE AwarenessState
         {
             get { return _type; }
             set { _type = value; }

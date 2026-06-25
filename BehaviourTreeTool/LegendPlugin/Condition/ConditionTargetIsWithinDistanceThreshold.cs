@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected DistanceThreshold _type;
+        protected DISTANCE_THRESHOLD _type;
 
         [DesignerEnum("Distance threshold", "DistanceThreshold", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public DistanceThreshold DistanceThreshold
+        public DISTANCE_THRESHOLD DistanceThreshold
         {
             get { return _type; }
             set { _type = value; }

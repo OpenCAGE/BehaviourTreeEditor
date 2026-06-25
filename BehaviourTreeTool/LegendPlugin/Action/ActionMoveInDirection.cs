@@ -38,13 +38,13 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _type;
-        protected LOCOMOTION_TARGET_SPEED _MovementSpeedType;
-        protected Direction _Direction;
+        protected SHUTDOWN_SPEED_TYPE _type;
+        protected MovementSpeedType _MovementSpeedType;
+        protected MoveDirection _Direction;
         private string _Distance = "";
 
         [DesignerEnum("Direction", "Direction", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public Direction Direction
+        public MoveDirection Direction
         {
             get { return _Direction; }
             set { _Direction = value; }
@@ -58,14 +58,14 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOCOMOTION_TARGET_SPEED MovementSpeedType
+        public MovementSpeedType MovementSpeedType
         {
             get { return _MovementSpeedType; }
             set { _MovementSpeedType = value; }
         }
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }

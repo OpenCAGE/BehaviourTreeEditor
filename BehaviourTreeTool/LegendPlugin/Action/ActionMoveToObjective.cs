@@ -38,26 +38,26 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _type;
-        protected LOCOMOTION_TARGET_SPEED _type2;
-        protected ObjectiveType _type3;
+        protected SHUTDOWN_SPEED_TYPE _type;
+        protected MovementSpeedType _type2;
+        protected OBJECTIVE_TYPE _type3;
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }
         }
 
         [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOCOMOTION_TARGET_SPEED VentLockReason
+        public MovementSpeedType VentLockReason
         {
             get { return _type2; }
             set { _type2 = value; }
         }
 
         [DesignerEnum("Objective type", "ObjectiveType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ObjectiveType ObjectiveType
+        public OBJECTIVE_TYPE ObjectiveType
         {
             get { return _type3; }
             set { _type3 = value; }

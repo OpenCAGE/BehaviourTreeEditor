@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected WithdrawState _type;
+        protected WITHDRAW_STATE _type;
 
         [DesignerEnum("Withdraw state", "WithdrawState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WithdrawState WithdrawState
+        public WITHDRAW_STATE WithdrawState
         {
             get { return _type; }
             set { _type = value; }

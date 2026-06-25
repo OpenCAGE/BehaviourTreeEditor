@@ -38,18 +38,18 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected RequestShutDownSpeed _type;
-        protected AttackType _Attacktype;
+        protected SHUTDOWN_SPEED_TYPE _type;
+        protected ATOMIC_ATTACK_TYPE _Attacktype;
 
         [DesignerEnum("Attack type", "AttackType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public AttackType AttackType
+        public ATOMIC_ATTACK_TYPE AttackType
         {
             get { return _Attacktype; }
             set { _Attacktype = value; }
         }
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }

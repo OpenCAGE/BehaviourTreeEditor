@@ -39,7 +39,7 @@ namespace LegendPlugin.Nodes
         //All parameters added
 
         protected CHARACTER_CLASS _cond;
-        protected CharacterType _cond2;
+        protected CHARACTER_TYPE _cond2;
 
         [DesignerEnum("Character class", "CharacterClass", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public CHARACTER_CLASS CharacterClass
@@ -49,7 +49,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Character type", "CharacterType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CharacterType CharacterType
+        public CHARACTER_TYPE CharacterType
         {
             get { return _cond2; }
             set { _cond2 = value; }

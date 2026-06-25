@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected AttackType _cond;
+        protected ATOMIC_ATTACK_TYPE _cond;
 
         [DesignerEnum("Attack type", "AttackType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public AttackType AttackType
+        public ATOMIC_ATTACK_TYPE AttackType
         {
             get { return _cond; }
             set { _cond = value; }

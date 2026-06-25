@@ -40,7 +40,7 @@ namespace LegendPlugin.Nodes
 
         private string _FacingTolerance = "";
         private string _NoiseTime = "";
-        protected RequestShutDownSpeed _type;
+        protected SHUTDOWN_SPEED_TYPE _type;
         protected ThresholdQualifier _ThresholdQualifier;
         private string _Time = "";
 
@@ -59,7 +59,7 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _type; }
             set { _type = value; }

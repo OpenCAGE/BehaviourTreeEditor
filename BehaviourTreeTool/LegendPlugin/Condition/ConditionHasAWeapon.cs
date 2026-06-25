@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected Npc_Weapon_Type _cond;
+        protected NPC_WEAPON_TYPE _cond;
 
         [DesignerEnum("NPC weapon type", "Npc_Weapon_Type", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public Npc_Weapon_Type Npc_Weapon_Type
+        public NPC_WEAPON_TYPE Npc_Weapon_Type
         {
             get { return _cond; }
             set { _cond = value; }

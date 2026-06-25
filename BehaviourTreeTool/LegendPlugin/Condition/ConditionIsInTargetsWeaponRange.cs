@@ -38,10 +38,10 @@ namespace LegendPlugin.Nodes
 	{
         //All parameters added
 
-        protected WeaponRange _cond2;
+        protected WEAPON_RANGE_THRESHOLD _cond2;
 
         [DesignerEnum("Weapon range", "WeaponRange", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WeaponRange WeaponRange
+        public WEAPON_RANGE_THRESHOLD WeaponRange
         {
             get { return _cond2; }
             set { _cond2 = value; }

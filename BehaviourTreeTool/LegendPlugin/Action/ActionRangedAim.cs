@@ -39,8 +39,8 @@ namespace LegendPlugin.Nodes
         //All parameters added
 
         private string _cond1 = "";
-        protected RequestShutDownSpeed _cond2;
-        protected ShouldRaiseGun _cond3;
+        protected SHUTDOWN_SPEED_TYPE _cond2;
+        protected GunStance _cond3;
         private string _cond4 = "";
 
         [DesignerString("Noise time", "NoiseTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
@@ -51,14 +51,14 @@ namespace LegendPlugin.Nodes
         }
 
         [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
         {
             get { return _cond2; }
             set { _cond2 = value; }
         }
 
         [DesignerEnum("Should raise gun", "ShouldRaiseGun", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ShouldRaiseGun ShouldRaiseGun
+        public GunStance ShouldRaiseGun
         {
             get { return _cond3; }
             set { _cond3 = value; }
