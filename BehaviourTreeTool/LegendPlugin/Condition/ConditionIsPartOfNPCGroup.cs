@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsPartOfNPCGroup : ConditionConnectors
-	{
+    public class ConditionIsPartOfNPCGroup : ConditionConnectors
+    {
         public ConditionIsPartOfNPCGroup()
-            : base("IsPartOfNPCGroup", "ARE WE PART OF AN NPC GROUP?")
- 
-        {
-            //All parameters added
-        }
+            : base("IsPartOfNPCGroup", "Returns true if the character is part of an NPC group.")
+        { }
     }
 }

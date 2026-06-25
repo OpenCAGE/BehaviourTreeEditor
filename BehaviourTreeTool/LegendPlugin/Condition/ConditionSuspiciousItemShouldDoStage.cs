@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemShouldDoStage : ConditionConnectors
-	{
-        //All parameters added
-
-        protected SuspiciousItemStage _type;
-
-        [DesignerEnum("Stage", "Stage", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SuspiciousItemStage Stage
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
+    public class ConditionSuspiciousItemShouldDoStage : ConditionConnectors
+    {
         public ConditionSuspiciousItemShouldDoStage()
-            : base("SuspiciousItemShouldDoStage", "SHOULD WE PERFORM A SPECIFIED STAGE ON THIS SUSPICIOUS ITEM?")
- 
+            : base("SuspiciousItemShouldDoStage", "Returns true if the suspicious item should proceed to the specified stage.")
+        { }
+
+        protected SUSPICIOUS_ITEM_STAGE _stage;
+        [DesignerEnum("Stage", "The stage.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SUSPICIOUS_ITEM_STAGE Stage
         {
+            get { return _stage; }
+            set { _stage = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionSuspiciousItemShouldDoStage cond = (ConditionSuspiciousItemShouldDoStage)newnode;
-            cond._type = _type;
+            cond._stage = _stage;
         }
     }
 }

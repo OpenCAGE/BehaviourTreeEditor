@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasSearchedMostRecentSensedPosition : ConditionConnectors
-	{
+    public class ConditionHasSearchedMostRecentSensedPosition : ConditionConnectors
+    {
         public ConditionHasSearchedMostRecentSensedPosition()
-            : base("HasSearchedMostRecentSensedPosition", "HAVE WE SEARCHED THE POSITION THAT WE MOST RECENTLY SENSED ACTIVITY?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasSearchedMostRecentSensedPosition", "Have we searched at our target's most recent sensed position?")
+        { }
     }
 }

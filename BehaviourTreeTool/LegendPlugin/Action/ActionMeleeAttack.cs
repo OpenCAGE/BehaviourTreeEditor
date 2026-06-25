@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,39 +33,28 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMeleeAttack : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected ATOMIC_ATTACK_TYPE _Attacktype;
-
-        [DesignerEnum("Attack type", "AttackType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ATOMIC_ATTACK_TYPE AttackType
+    public class ActionMeleeAttack : Normal_Atomic
+    {
+        public ActionMeleeAttack()
+            : base("MeleeAttackTarget", "Character attacks current target with their possible melee.")
         {
-            get { return _Attacktype; }
-            set { _Attacktype = value; }
+            _attackType = ATTACK_TYPE.ANY;
         }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+        protected ATTACK_TYPE _attackType;
+        [DesignerEnum("AttackType", "Type of attack.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ATTACK_TYPE AttackType
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionMeleeAttack() : base("MeleeAttack", "PERFORM A MELEE ATTACK.")
- 
-        {
+            get { return _attackType; }
+            set { _attackType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionMeleeAttack cond = (ActionMeleeAttack)newnode;
-            cond._type = _type;
-            cond._Attacktype = _Attacktype;
+            ActionMeleeAttack action = (ActionMeleeAttack)newnode;
+            action._attackType = _attackType;
         }
     }
 }

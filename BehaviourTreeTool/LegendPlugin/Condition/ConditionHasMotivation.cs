@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasMotivation : ConditionConnectors
-	{
-        //All parameters added
-
-        protected CharacterMotivationType _cond;
-
-        [DesignerEnum("Motivation type", "MotivationType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CharacterMotivationType MotivationType
-        {
-            get { return _cond; }
-            set { _cond = value; }
+    public class ConditionHasMotivation : ConditionConnectors
+    {
+        public ConditionHasMotivation()
+            : base("HasMotivation", "Returns true if the character has the specified motivation type.")
+        { 
         }
 
-        public ConditionHasMotivation()
-            : base("HasMotivation", "DO WE HAVE A SPECIFIED CHARACTER MOTIVATION ACTIVE?")
- 
+        protected MOTIVATION_TYPE _motivationType;
+        [DesignerEnum("MotivationType", "The motivation type to check for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public MOTIVATION_TYPE MotivationType
         {
+            get { return _motivationType; }
+            set { _motivationType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasMotivation cond = (ConditionHasMotivation)newnode;
-            cond._cond = _cond;
+            cond._motivationType = _motivationType;
         }
     }
 }

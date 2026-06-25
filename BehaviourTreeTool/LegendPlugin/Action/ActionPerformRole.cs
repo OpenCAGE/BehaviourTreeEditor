@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,48 +33,29 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionPerformRole : Action
-	{
-        //All parameters added
-
-        private string _cond1 = "";
-        protected SHUTDOWN_SPEED_TYPE _cond2;
-        protected JobCentreRoleType _cond3;
-
-        [DesignerString("Query ID", "QueryID", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string QueryID
+    public class ActionPerformRole : Normal_Atomic
+    {
+        public ActionPerformRole()
+            : base("PerformRole", "Perform a role.")
         {
-            get { return _cond1; }
-            set { _cond1 = value; }
+            _roleType = ConditionIsPerformingRoleOrCouldPerformRole.LastRoleID;
         }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+        protected ROLE_TYPE _roleType;
+        [DesignerEnum("RoleType", "The role type to perform.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ROLE_TYPE RoleType
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        [DesignerEnum("Role type", "RoleType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public JobCentreRoleType RoleType
-        {
-            get { return _cond3; }
-            set { _cond3 = value; }
-        }
-
-        public ActionPerformRole() : base("PerformRole", "PERFORM A SPECIFIED ROLE.")
- 
-        {
+            get { return _roleType; }
+            set { _roleType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionPerformRole cond = (ActionPerformRole)newnode;
-            cond._cond1 = _cond1;
-            cond._cond2 = _cond2;
-            cond._cond3 = _cond3;
+            ActionPerformRole action = (ActionPerformRole)newnode;
+
+            action._roleType = _roleType;
         }
     }
 }

@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasObjective : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionHasObjective : ConditionConnectors
+    {
+        public ConditionHasObjective()
+            : base("HasObjective", "Do we have an objective set?")
+        { }
 
-        protected OBJECTIVE_TYPE _cond;
-
-        [DesignerEnum("Objective type", "ObjectiveType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected OBJECTIVE_TYPE _objectiveType;
+        [DesignerEnum("ObjectiveType", "The type of objective we are interested in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public OBJECTIVE_TYPE ObjectiveType
         {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        public ConditionHasObjective()
-            : base("HasObjective", "DO WE HAVE A SPECIFIED OBJECTIVE TYPE ACTIVE?")
- 
-        {
+            get { return _objectiveType; }
+            set { _objectiveType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasObjective cond = (ConditionHasObjective)newnode;
-            cond._cond = _cond;
+            cond._objectiveType = _objectiveType;
         }
     }
 }

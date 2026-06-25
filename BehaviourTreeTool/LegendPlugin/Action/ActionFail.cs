@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,12 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionFail : Action
-	{
-        public ActionFail() : base("Fail", "RESULT IN A FAILED ACTION.")
- 
+    public class ActionFail : Search_Atomic
+    {
+        public ActionFail()
+            : base("Fail", "Returns failure.")
         {
-            //All parameters added
         }
     }
 }

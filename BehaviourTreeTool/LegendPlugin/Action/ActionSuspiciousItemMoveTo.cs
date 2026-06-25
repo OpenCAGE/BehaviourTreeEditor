@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,48 +33,16 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSuspiciousItemMoveTo : Action
-	{
-        //All parameters added
-        
-        protected MovementSpeedType _cond;
-        protected SHUTDOWN_SPEED_TYPE _cond2;
-        private bool _ShouldAim = false;
-
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MovementSpeedType MovementSpeedType
-        {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        [DesignerBoolean("Should aim", "ShouldAim", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool ShouldAim
-        {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
-        }
-
-        public ActionSuspiciousItemMoveTo() : base("SuspiciousItemMoveTo", "PERFORM THE ACTION OF MOVING TO A SUSPICIOUS ITEM.")
- 
+    public class ActionSuspiciousItemMoveTo : ActionMoveAndShootBase
+    {
+        public ActionSuspiciousItemMoveTo()
+            : base("SuspiciousItemMoveTo", "Move to suspicious item.")
         {
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
-
-            ActionSuspiciousItemMoveTo cond = (ActionSuspiciousItemMoveTo)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
-            cond._ShouldAim = _ShouldAim;
         }
     }
 }

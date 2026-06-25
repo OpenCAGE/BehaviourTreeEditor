@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionNeedsToGetOutOfTheWay : ConditionConnectors
-	{
+    public class ConditionNeedsToGetOutOfTheWay : ConditionConnectors
+    {
         public ConditionNeedsToGetOutOfTheWay()
-            : base("NeedsToGetOutOfTheWay", "DO WE NEED TO GET OUT OF THE ACTION?")
- 
-        {
-            //All parameters added
-        }
+            : base("NeedsToGetOutOfTheWay", "Do we need to get out of the way?")
+        { }
     }
 }

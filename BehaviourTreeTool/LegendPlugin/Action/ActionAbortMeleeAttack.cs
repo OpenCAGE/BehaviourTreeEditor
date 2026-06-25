@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -33,12 +32,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionAbortMeleeAttack : Action
-	{
+    public class ActionAbortMeleeAttack : Search_Atomic
+    {
         public ActionAbortMeleeAttack()
-            : base("AbortMeleeAttack", "Abort our melee attack - unused in the final game.")
-		{
-            
+            : base("AbortMeleeAttackTarget", "Force an abort of the current melee attack. This will immediately succeed.")
+        {
         }
     }
 }

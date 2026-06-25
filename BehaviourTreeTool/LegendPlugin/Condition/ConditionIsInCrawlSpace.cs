@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsInCrawlSpace : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionIsInCrawlSpace : ConditionConnectors
+    {
+        public ConditionIsInCrawlSpace()
+            : base("IsInCrawlSpace", "Is the given character inside a crawl space?")
+        { }
 
-        protected CHARACTER_TYPE _cond2;
-
-        [DesignerEnum("Character type", "CharacterType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected CHARACTER_TYPE _characterType;
+        [DesignerEnum("CharacterType", "Character to check - is it the owner of the tree or the target?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public CHARACTER_TYPE CharacterType
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ConditionIsInCrawlSpace()
-            : base("IsInCrawlSpace", "ARE WE AND/OR OUR TARGET IN A CRAWL SPACE?")
- 
-        {
+            get { return _characterType; }
+            set { _characterType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsInCrawlSpace cond = (ConditionIsInCrawlSpace)newnode;
-            cond._cond2 = _cond2;
+            cond._characterType = _characterType;
         }
     }
 }

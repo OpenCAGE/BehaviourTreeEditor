@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasValidCoverToChangeTo : ConditionConnectors
-	{
+    public class ConditionHasValidCoverToChangeTo : ConditionConnectors
+    {
         public ConditionHasValidCoverToChangeTo()
-            : base("HasValidCoverToChangeTo", "DO WE HAVE A VALID COVER LOCATION TO SWITCH TO?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasValidCoverToChangeTo", "Do I have valid cover to change to?")
+        { }
     }
 }

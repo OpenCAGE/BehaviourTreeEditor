@@ -34,22 +34,20 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAngleFromTargetAgainstTargetCameraDirnLessThan : ConditionConnectors
-	{
-        //All parameters added
-        
-        private string _cond4 = "";
-
-        [DesignerString("Angle less than", "The angle that we should check against.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AngleLessThan
+    public class ConditionAngleFromTargetAgainstTargetCameraDirnLessThan : ConditionConnectors
+    {
+        public ConditionAngleFromTargetAgainstTargetCameraDirnLessThan()
+            : base("AngleFromTargetAgainstTargetCameraDirnLessThan", "Test the absolute angle of the target's facing direction against vector from target to owner.")
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
+
         }
 
-        public ConditionAngleFromTargetAgainstTargetCameraDirnLessThan()
-            : base("AngleFromTargetAgainstTargetCameraDirnLessThan", "IS THE ANGLE FROM OUR TARGET AGAINST THE TARGET'S CAMERA DIRECTION LESS THAN A SPECIFIED ANGLE?")
+        protected float _angleLessThan;
+        [DesignerFloat("ConditionAngleFromTargetAgainstTargetCameraDirnLessThan", "Maximum angle in degrees between the target's camera direction and the vector from target to self.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 180, 0.01f, 2, "UnitsCount")]
+        public float AngleLessThan
         {
+            get { return _angleLessThan; }
+            set { _angleLessThan = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -57,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionAngleFromTargetAgainstTargetCameraDirnLessThan cond = (ConditionAngleFromTargetAgainstTargetCameraDirnLessThan)newnode;
-            cond._cond4 = _cond4;
+            cond._angleLessThan = _angleLessThan;
         }
     }
 }

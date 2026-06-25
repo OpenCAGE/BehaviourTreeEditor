@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,48 +33,45 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionIdleTimeFacingSuspiciousItem : Action
-	{
-        //All parameters added
-
-        private string _NoiseTime = "";
-        protected SHUTDOWN_SPEED_TYPE _type;
-        private string _Time = "";
-
-        [DesignerString("Noise time", "NoiseTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string NoiseTime
+    public class ActionIdleTimeFacingSuspiciousItem : Normal_Atomic
+    {
+        public ActionIdleTimeFacingSuspiciousItem()
+            : base("IdleTimeFacingSuspiciousItem", "Idle time facing suspicious item.")
         {
-            get { return _NoiseTime; }
-            set { _NoiseTime = value; }
         }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+        protected float _time = 5.0f;
+        [DesignerFloat("Time", "Duration in seconds.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float Time
         {
-            get { return _type; }
-            set { _type = value; }
+            get { return _time; }
+            set { _time = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        protected float _noiseTime = 0.0f;
+        [DesignerFloat("NoiseTime", "Random variation in seconds applied to the base duration.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float NoiseTime
         {
-            get { return _Time; }
-            set { _Time = value; }
+            get { return _noiseTime; }
+            set { _noiseTime = value; }
         }
 
-        public ActionIdleTimeFacingSuspiciousItem() : base("IdleTimeFacingSuspiciousItem", "PERFORM IDLE OVER TIME WHILE FACING A SUSPICIOUS ACTIVITY.")
- 
+        protected bool _waitForTeamMembersRouting = false;
+        [DesignerBoolean("WaitForTeamMembersRouting", "If set then this is used in the WaitForTeamMembersRouting branch.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool WaitForTeamMembersRouting
         {
+            get { return _waitForTeamMembersRouting; }
+            set { _waitForTeamMembersRouting = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionIdleTimeFacingSuspiciousItem cond = (ActionIdleTimeFacingSuspiciousItem)newnode;
-            cond._NoiseTime = _NoiseTime;
-            cond._type = _type;
-            cond._Time = _Time;
+            ActionIdleTimeFacingSuspiciousItem action = (ActionIdleTimeFacingSuspiciousItem)newnode;
+            action._time = _time;
+            action._noiseTime = _noiseTime;
+            action._waitForTeamMembersRouting = _waitForTeamMembersRouting;
         }
     }
 }

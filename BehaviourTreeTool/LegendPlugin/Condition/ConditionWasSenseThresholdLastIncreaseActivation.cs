@@ -34,12 +34,44 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionWasSenseThresholdLastIncreaseActivation : ConditionConnectors
-	{
+    public class ConditionWasSenseThresholdLastIncreaseActivation : ConditionConnectors
+    {
         public ConditionWasSenseThresholdLastIncreaseActivation()
-            : base(Resources.ConditionWasSenseThresholdLastIncreaseActivation, Resources.ConditionWasSenseThresholdLastIncreaseActivation)
+            : base("WasSenseThresholdLastIncreaseActivation", "Check if the supplied sense threshold was the last one that increased.")
+        { }
+
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The sensory information we are checking that we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
         {
-            //Unknown parameters. Not used in final game.
+            get { return _sense; }
+            set { _sense = value; }
+        }
+
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "The threshold qualifier of the information we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ThresholdQualifier ThresholdQualifier
+        {
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
+        }
+
+        protected bool _mustBeTriggered;
+        [DesignerBoolean("MustBeTriggered", "If the sense must be triggered this frame.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool MustBeTriggered
+        {
+            get { return _mustBeTriggered; }
+            set { _mustBeTriggered = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionWasSenseThresholdLastIncreaseActivation cond = (ConditionWasSenseThresholdLastIncreaseActivation)newnode;
+            cond._sense = _sense;
+            cond._thresholdQualifier = _thresholdQualifier;
+            cond._mustBeTriggered = _mustBeTriggered;
         }
     }
 }

@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,39 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToConvo : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected MovementSpeedType _type2;
-
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MovementSpeedType MovementSpeedType
+    public class ActionMoveToConvo : ActionMoveBase
+    {
+        public ActionMoveToConvo()
+            : base("MoveToConvo", "Move to our current conversation.")
         {
-            get { return _type2; }
-            set { _type2 = value; }
-        }
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionMoveToConvo() : base("MoveToConvo", "MOVE OVER TO A CONVERSATION AT A SPECIFIED SPEED.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionMoveToConvo cond = (ActionMoveToConvo)newnode;
-            cond._type = _type;
-            cond._type2 = _type2;
         }
     }
 }

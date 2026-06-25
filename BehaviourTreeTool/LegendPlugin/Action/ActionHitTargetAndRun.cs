@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionHitTargetAndRun : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionHitTargetAndRun : Normal_Atomic
+    {
+        public ActionHitTargetAndRun()
+            : base("HitTargetAndRun", "Attack the target and run.")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionHitTargetAndRun() : base("HitTargetAndRun", "PERFORM A HIT AND RUN ACTION.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionHitTargetAndRun cond = (ActionHitTargetAndRun)newnode;
-            cond._type = _type;
         }
     }
 }

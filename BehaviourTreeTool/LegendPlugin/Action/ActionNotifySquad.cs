@@ -25,39 +25,36 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionNotifySquad : Action
-	{
-        //All parameters added
-
-        protected NPC_COMBAT_STATE _type;
-
-        [DesignerEnum("Combat state", "CombatState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public NPC_COMBAT_STATE CombatState
+    public class ActionNotifySquad : Search_Atomic
+    {
+        public ActionNotifySquad()
+            : base("NotifySquad", "Notify my squad of an event.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public ActionNotifySquad() : base("NotifySquad", "NOTIFY OUR SQUAD OF A COMBAT STATE.")
- 
+        protected NPC_COMBAT_STATE _combatState;
+        [DesignerEnum("CombatState", "The combat state you want to notify.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public NPC_COMBAT_STATE CombatState
         {
+            get { return _combatState; }
+            set { _combatState = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionNotifySquad cond = (ActionNotifySquad)newnode;
-            cond._type = _type;
+            ActionNotifySquad action = (ActionNotifySquad)newnode;
+            action._combatState = _combatState;
         }
     }
 }

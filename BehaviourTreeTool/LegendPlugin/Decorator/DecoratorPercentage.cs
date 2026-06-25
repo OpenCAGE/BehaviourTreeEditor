@@ -34,31 +34,28 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorPercentage : Decorator
-	{
-        //All parameters added
-        
-        private string _cond4 = "";
-
-        [DesignerString("Percentage pass", "PercentagePass", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string PercentagePass
+    public class DecoratorPercentage : Decorator
+    {
+        public DecoratorPercentage()
+            : base("Percentage", "Stores a percentage (for use with SelectorPercentage, for example).")
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
         }
 
-        public DecoratorPercentage()
-            : base("Percentage", "A DECORATOR FOR PERCENTAGE, USED IN CONJUNCTION WITH THE PERCENTAGE SELECTOR.")
- 
+        protected int _percentageToPass = 50;
+        [DesignerInteger("Percentage", "A percentage value between 1-100.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 1, "UnitsCount")]
+        public int PercentagePass
         {
+            get { return _percentageToPass; }
+            set { _percentageToPass = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            DecoratorPercentage cond = (DecoratorPercentage)newnode;
-            cond._cond4 = _cond4;
+            DecoratorPercentage node = (DecoratorPercentage)newnode;
+
+            node._percentageToPass = _percentageToPass;
         }
     }
 }

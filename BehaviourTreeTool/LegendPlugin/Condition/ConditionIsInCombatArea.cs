@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsInCombatArea : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionIsInCombatArea : ConditionConnectors
+    {
+        public ConditionIsInCombatArea()
+            : base("IsInCombatArea", "Are we in the specified combat area?")
+        { }
 
-        protected COMBAT_AREA_TYPE _type;
-
-        [DesignerEnum("Combat area type", "CombatAreaType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected COMBAT_AREA_TYPE _combatAreaType;
+        [DesignerEnum("CombatAreaType", "The combat area type we are testing if we are in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public COMBAT_AREA_TYPE CombatAreaType
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ConditionIsInCombatArea()
-            : base("IsInCombatArea", "ARE WE IN A COMBAT AREA?")
- 
-        {
+            get { return _combatAreaType; }
+            set { _combatAreaType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsInCombatArea cond = (ConditionIsInCombatArea)newnode;
-            cond._type = _type;
+            cond._combatAreaType = _combatAreaType;
         }
     }
 }

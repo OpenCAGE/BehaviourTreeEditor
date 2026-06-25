@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionApplyPrimaryDamageControlResponse : Action
+    public class ActionApplyPrimaryDamageControlResponse : Normal_Atomic
     {
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+        public ActionApplyPrimaryDamageControlResponse()
+            : base("ApplyPrimaryDamageControlResponse", "Take an impact by aborting the current action (unless already impacted).")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionApplyPrimaryDamageControlResponse() : base("ApplyPrimaryDamageControlResponse", "PERFORM PRIMARY DAMAGE CONTROL RESPONSE.")
-	
-		{
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionApplyPrimaryDamageControlResponse cond = (ActionApplyPrimaryDamageControlResponse)newnode;
-            cond._type = _type;
         }
     }
 }

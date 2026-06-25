@@ -34,39 +34,37 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionDebugMenuLinkTest : ConditionConnectors
+    public class ConditionDebugMenuLinkTest : ConditionConnectors
     {
-        //All parameters added
-
-        private bool _DefaultBehaviour = false;
-        private string _In_Game_Menu_Text = "";
-
-        [DesignerBoolean("Is default behaviour", "DefaultBehaviour", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool DefaultBehaviour
+        public ConditionDebugMenuLinkTest()
+            : base("DebugMenuLinkTest", "Checks against the in-game debug menu (not functional in retail).")
         {
-            get { return _DefaultBehaviour; }
-            set { _DefaultBehaviour = value; }
         }
 
-        [DesignerString("In-game menu text", "In_Game_Menu_Text", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string In_Game_Menu_Text
+        protected String _In_Game_Menu_Text;
+        [DesignerString("In_Game_Menu_Text", "What to display in the in-game debug menus.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public String In_Game_Menu_Text
         {
             get { return _In_Game_Menu_Text; }
             set { _In_Game_Menu_Text = value; }
         }
 
-        public ConditionDebugMenuLinkTest() : base("DebugMenuLinkTest", "CHECKS TO SEE IF AN OPTION IS ENABLED/DISABLED IN THE DEBUG MENU.")
- 
+        protected bool _defaultBehaviour;
+        [DesignerBoolean("DefaultBehaviour", "Should it fail or succeed by default?", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool DefaultBehaviour
         {
+            get { return _defaultBehaviour; }
+            set { _defaultBehaviour = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ConditionDebugMenuLinkTest cond = (ConditionDebugMenuLinkTest)newnode;
-            cond._DefaultBehaviour = _DefaultBehaviour;
-            cond._In_Game_Menu_Text = _In_Game_Menu_Text;
+            ConditionDebugMenuLinkTest action = (ConditionDebugMenuLinkTest)newnode;
+
+            action._In_Game_Menu_Text = _In_Game_Menu_Text;
+            action._defaultBehaviour = _defaultBehaviour;
         }
     }
 }

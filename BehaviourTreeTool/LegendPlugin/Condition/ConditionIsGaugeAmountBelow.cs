@@ -31,16 +31,39 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsGaugeAmountBelow : ConditionConnectors
-	{
-        //I feel like this could easily be used, adapted from IsGaugeAmountAbove ...?
+    public class ConditionIsGaugeAmountBelow : ConditionConnectors
+    {
         public ConditionIsGaugeAmountBelow()
-            : base(Resources.ConditionIsGaugeAmountBelow, Resources.ConditionIsGaugeAmountBelow)
+            : base("IsGaugeAmountBelow", "Is the gauge amount equal to or below specified amount?")
+        { }
+
+        protected LOGIC_CHARACTER_GAUGE_TYPE _gaugeType;
+        [DesignerEnum("GaugeType", "The type of gauge we are querying.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public LOGIC_CHARACTER_GAUGE_TYPE GaugeType
         {
-            //Unknown parameters. Not used in final game.
+            get { return _gaugeType; }
+            set { _gaugeType = value; }
+        }
+
+        protected GAUGE_AMOUNT_TYPE _gaugeAmountType;
+        [DesignerEnum("GaugeAmountType", "The activation we must be greater than or equal to.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public GAUGE_AMOUNT_TYPE GaugeAmountType
+        {
+            get { return _gaugeAmountType; }
+            set { _gaugeAmountType = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionIsGaugeAmountBelow cond = (ConditionIsGaugeAmountBelow)newnode;
+            cond._gaugeType = _gaugeType;
+            cond._gaugeAmountType = _gaugeAmountType;
         }
     }
 }

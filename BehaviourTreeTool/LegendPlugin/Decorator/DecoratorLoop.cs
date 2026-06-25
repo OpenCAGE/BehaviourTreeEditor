@@ -34,12 +34,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorLoop : Decorator
-	{
+    public class DecoratorLoop : Decorator
+    {
         public DecoratorLoop()
-            : base("Loop", "DecoratorLoop - unused in the final game.")
+            : base("Loop", "Forces a loop in the tree search.")
         {
-            
         }
     }
 }

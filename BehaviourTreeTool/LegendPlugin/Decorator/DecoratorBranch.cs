@@ -31,34 +31,31 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorBranch : Decorator
-	{
-        //All parameters added
-
-        protected BranchType _type;
-
-        [DesignerEnum("Branch type", "BranchType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public BranchType BranchType
+    public class DecoratorBranch : Decorator
+    {
+        public DecoratorBranch()
+            : base("Branch", "Used for marking branch types.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public DecoratorBranch()
-            : base("Branch", "A DECORATOR FOR THE BRANCH TYPE.")
- 
+        protected BEHAVIOR_TREE_BRANCH_TYPE _branchType;
+        [DesignerEnum("BranchType", "The type of branch this is.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public BEHAVIOR_TREE_BRANCH_TYPE BranchType
         {
+            get { return _branchType; }
+            set { _branchType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            DecoratorBranch cond = (DecoratorBranch)newnode;
-            cond._type = _type;
+            DecoratorBranch decor = (DecoratorBranch)newnode;
+            decor._branchType = _branchType;
         }
     }
 }

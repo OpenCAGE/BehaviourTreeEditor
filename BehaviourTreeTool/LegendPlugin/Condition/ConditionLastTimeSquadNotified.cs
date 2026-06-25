@@ -31,34 +31,32 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionLastTimeSquadNotified : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionLastTimeSquadNotified : ConditionConnectors
+    {
+        public ConditionLastTimeSquadNotified()
+            : base("LastTimeSquadNotified", "Checks if the last time our squad received the given notification was within the given time.")
+        {
 
-        protected NPC_COMBAT_STATE _cond;
-        protected TIME_THRESHOLD _cond2;
+        }
 
-        [DesignerEnum("Combat state", "CombatState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected NPC_COMBAT_STATE _combatState;
+        [DesignerEnum("CombatState", "The squad notification we are checking.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public NPC_COMBAT_STATE CombatState
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _combatState; }
+            set { _combatState = value; }
         }
 
-        [DesignerEnum("Time threshold", "TimeThreshold", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected TIME_THRESHOLD _timeThreshold;
+        [DesignerEnum("TimeThreshold", "Time since we last received the squad notification.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public TIME_THRESHOLD TimeThreshold
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ConditionLastTimeSquadNotified()
-            : base("LastTimeSquadNotified", "WAS OUR SQUAD LAST NOTIFIED WITHIN A SPECIFIED TIME THRESHOLD?")
- 
-        {
+            get { return _timeThreshold; }
+            set { _timeThreshold = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +64,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionLastTimeSquadNotified cond = (ConditionLastTimeSquadNotified)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            cond._combatState = _combatState;
+            cond._timeThreshold = _timeThreshold;
         }
     }
 }

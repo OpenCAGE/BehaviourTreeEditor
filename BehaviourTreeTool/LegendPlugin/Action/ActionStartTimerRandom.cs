@@ -25,56 +25,54 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionStartTimerRandom : Action
-	{
-        //All parameters added
-
-        private string _cond2 = "";
-        private string _cond4 = "";
-        protected LOGIC_CHARACTER_TIMER_TYPE _cond;
-
-        [DesignerString("Max time", "MaxTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string MaxTime
+    public class ActionStartTimerRandom : Search_Atomic
+    {
+        public ActionStartTimerRandom()
+            : base("StartTimerRandom", "Starts or restarts a timer, duration is random between the given min and max values.")
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
         }
 
-        [DesignerString("Min time", "MinTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string MinTime
+        protected float _minTime = -1.0f;
+        [DesignerFloat("MinTime", "Minimum duration in seconds.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000.0f, 0.01f, 2, "UnitsCount")]
+        public float MinTime
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
+            get { return _minTime; }
+            set { _minTime = value; }
         }
 
-        [DesignerEnum("Timer type", "TimerType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected float _maxTime = -1.0f;
+        [DesignerFloat("MaxTime", "Maximum duration in seconds.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000.0f, 0.01f, 2, "UnitsCount")]
+        public float MaxTime
+        {
+            get { return _maxTime; }
+            set { _maxTime = value; }
+        }
+
+        protected LOGIC_CHARACTER_TIMER_TYPE _timerType;
+        [DesignerEnum("TimerType", "The type of timer we are starting.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public LOGIC_CHARACTER_TIMER_TYPE TimerType
         {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        public ActionStartTimerRandom() : base("StartTimerRandom", "START A TIMER WITH MAX/MIN VALUES SPECIFIED.")
-        {
+            get { return _timerType; }
+            set { _timerType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionStartTimerRandom cond = (ActionStartTimerRandom)newnode;
-            cond._cond2 = _cond2;
-            cond._cond4 = _cond4;
-            cond._cond = _cond;
+            ActionStartTimerRandom action = (ActionStartTimerRandom)newnode;
+            action._timerType = _timerType;
+            action._minTime = _minTime;
+            action._maxTime = _maxTime;
         }
     }
 }

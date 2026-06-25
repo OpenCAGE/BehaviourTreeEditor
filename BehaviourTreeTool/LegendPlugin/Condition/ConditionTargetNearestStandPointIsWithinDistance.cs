@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetNearestStandPointIsWithinDistance : ConditionConnectors
-	{
-        //All parameters added
-
-        private string _cond4 = "";
-
-        [DesignerString("Distance", "Distance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Distance
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
+    public class ConditionTargetNearestStandPointIsWithinDistance : ConditionConnectors
+    {
         public ConditionTargetNearestStandPointIsWithinDistance()
-            : base("TargetNearestStandPointIsWithinDistance", "IS THE NEAREST STANDING POINT TO OUR TARGET WITHIN A SPECIFIED DISTANCE?")
- 
+            : base("TargetNearestStandPointIsWithinDistance", "Is the nearest standing point to our target within the given distance?")
+        { }
+
+        protected float _distance = 5.0f;
+        [DesignerFloat("Distance to check", "Maximum distance in metres to check.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float Distance
         {
+            get { return _distance; }
+            set { _distance = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionTargetNearestStandPointIsWithinDistance cond = (ConditionTargetNearestStandPointIsWithinDistance)newnode;
-            cond._cond4 = _cond4;
+            cond._distance = _distance;
         }
     }
 }

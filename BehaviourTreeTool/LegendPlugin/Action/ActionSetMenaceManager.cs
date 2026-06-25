@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,46 +33,45 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSetMenaceManager : Action
+    public class ActionSetMenaceManager : Search_Atomic
     {
-        private bool _isAggressive = false;
-        private bool _reset = false;
-        private string _fraction = "";
+        public ActionSetMenaceManager()
+            : base("SetMenaceManager", "Set the menace manager.")
+        {
+        }
 
-        [DesignerBoolean("Aggressive menace", "AggressiveMenace", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        private bool _aggressiveMenace = false;
+        [DesignerBoolean("AggressiveMenace", "Alien moving towards player.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool AggressiveMenace
         {
-            get { return _isAggressive; }
-            set { _isAggressive = value; }
+            get { return _aggressiveMenace; }
+            set { _aggressiveMenace = value; }
         }
 
-        [DesignerBoolean("Reset menace gauge", "ResetMenaceGauge", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        private bool _resetMenaceGuage = false;
+        [DesignerBoolean("ResetMenaceGauge", "Reset menace gauge.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool ResetMenaceGauge
         {
-            get { return _reset; }
-            set { _reset = value; }
+            get { return _resetMenaceGuage; }
+            set { _resetMenaceGuage = value; }
         }
 
-        [DesignerString("Progression fraction", "ProgressionFraction", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string ProgressionFraction
+        protected float _progressionFraction = 0f;
+        [DesignerFloat("ProgressionFraction", "Fraction of progression between 0 and 1.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -0f, 1f, 0.01f, 2, "UnitsCount")]
+        public float ProgressionFraction
         {
-            get { return _fraction; }
-            set { _fraction = value; }
-        }
-
-        public ActionSetMenaceManager() : base("SetMenaceManager", "Directly set values on the menace gauge manager system - unused in the final game.")
-        {
-            
+            get { return _progressionFraction; }
+            set { _progressionFraction = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionSetMenaceManager cond = (ActionSetMenaceManager)newnode;
-            cond._isAggressive = _isAggressive;
-            cond._reset = _reset;
-            cond._fraction = _fraction;
+            ActionSetMenaceManager action = (ActionSetMenaceManager)newnode;
+            action._aggressiveMenace = _aggressiveMenace;
+            action._resetMenaceGuage = _resetMenaceGuage;
+            action._progressionFraction = _progressionFraction;
         }
     }
 }

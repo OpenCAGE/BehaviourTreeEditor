@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSuspend : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionSuspend : Normal_Atomic
+    {
+        public ActionSuspend()
+            : base("Suspend", "Suspend the behaviour tree.")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionSuspend() : base("Suspend", "SUSPEND US UNTIL NEEDED.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionSuspend cond = (ActionSuspend)newnode;
-            cond._type = _type;
         }
     }
 }

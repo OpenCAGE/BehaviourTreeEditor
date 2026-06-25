@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionShouldSuspend : ConditionConnectors
-	{
+    public class ConditionShouldSuspend : ConditionConnectors
+    {
         public ConditionShouldSuspend()
-            : base("ShouldSuspend", "SHOULD WE BE SUSPENDED?")
- 
-        {
-            //All parameters added
-        }
+            : base("ShouldSuspend", "Should the tree get suspended?")
+        { }
     }
 }

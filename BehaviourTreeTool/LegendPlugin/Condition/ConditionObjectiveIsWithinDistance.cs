@@ -34,31 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionObjectiveIsWithinDistance : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionObjectiveIsWithinDistance : ConditionConnectors
+    {
+        public ConditionObjectiveIsWithinDistance()
+            : base("ObjectiveIsWithinDistance", "Are within a specified distance of the objective?")
+        { }
 
-        protected OBJECTIVE_TYPE _cond;
-        private string _cond4 = "";
-
-        [DesignerString("Distance", "Distance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Distance
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
-        [DesignerEnum("Objective type", "ObjectiveType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected OBJECTIVE_TYPE _objectiveType;
+        [DesignerEnum("ObjectiveType", "The type of dynamic objective we are interested in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public OBJECTIVE_TYPE ObjectiveType
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _objectiveType; }
+            set { _objectiveType = value; }
         }
 
-        public ConditionObjectiveIsWithinDistance()
-            : base("ObjectiveIsWithinDistance", "IS OUR OBJECTIVE WITHIN A SPECIFIED DISTANCE?")
- 
+        protected float _distance = 5.0f;
+        [DesignerFloat("Distance to check", "Maximum distance in metres to check", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float Distance
         {
+            get { return _distance; }
+            set { _distance = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +61,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionObjectiveIsWithinDistance cond = (ConditionObjectiveIsWithinDistance)newnode;
-            cond._cond4 = _cond4;
-            cond._cond = _cond;
+            cond._distance = _distance;
+            cond._objectiveType = _objectiveType;
         }
     }
 }

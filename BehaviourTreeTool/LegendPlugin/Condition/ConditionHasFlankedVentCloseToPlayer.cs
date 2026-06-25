@@ -31,26 +31,23 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasFlankedVentCloseToPlayer : ConditionConnectors
-	{
-        //All parameters added
-
-        protected VENT_LOCK_REASON _cond;
-
-        [DesignerEnum("Vent lock reason", "VentLockReason", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public VENT_LOCK_REASON VentLockReason
-        {
-            get { return _cond; }
-            set { _cond = value; }
+    public class ConditionHasFlankedVentCloseToPlayer : ConditionConnectors
+    {
+        public ConditionHasFlankedVentCloseToPlayer()
+            : base("HasFlankedVentCloseToPlayer", "Returns true if a flanked vent exists close to the player.")
+        { 
         }
 
-        public ConditionHasFlankedVentCloseToPlayer()
-            : base("HasFlankedVentCloseToPlayer", "DO WE HAVE A VENT CLOSE TO THE PLAYER?")
- 
+        protected VENT_LOCK_REASON _ventLockReason;
+        [DesignerEnum("VentLockReason", "The vent lock reason to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public VENT_LOCK_REASON VentLockReason
         {
+            get { return _ventLockReason; }
+            set { _ventLockReason = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasFlankedVentCloseToPlayer cond = (ConditionHasFlankedVentCloseToPlayer)newnode;
-            cond._cond = _cond;
+            cond._ventLockReason = _ventLockReason;
         }
     }
 }

@@ -25,47 +25,36 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionPlayTree : Action
-	{
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected string _animEnum;
-        protected string _animCallback;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionPlayTree : Normal_Atomic
+    {
+        public ActionPlayTree()
+            : base("ActionPlayTree", "Play anim tree.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        [DesignerString("Animation tree enum", "AnimTreeEnum", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AnimTreeEnum
+        ANIM_TREE_ENUM _treeEnum;
+        [DesignerEnum("AnimTreeEnum", "The anim tree to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ANIM_TREE_ENUM AnimTreeEnum
         {
-            //STUN_DAMAGE_TREE, or NONE
-            get { return _animEnum; }
-            set { _animEnum = value; }
+            get { return _treeEnum; }
+            set { _treeEnum = value; }
         }
 
-        [DesignerString("Animation callback enum", "AnimCallbackEnum", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AnimCallbackEnum
+        ANIM_CALLBACK_ENUM _finishedAnimsCallbackEnum;
+        [DesignerEnum("AnimCallbackEnum", "The anim callback to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ANIM_CALLBACK_ENUM AnimCallbackEnum
         {
-            //STUN_DAMAGE_CALLBACK, or NONE
-            get { return _animCallback; }
-            set { _animCallback = value; }
-        }
-
-        public ActionPlayTree() : base("PlayTree", "Play an animation tree on us - unused in the final game.")
-
-        {
+            get { return _finishedAnimsCallbackEnum; }
+            set { _finishedAnimsCallbackEnum = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -73,9 +62,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ActionPlayTree cond = (ActionPlayTree)newnode;
-            cond._type = _type;
-            cond._animEnum = _animEnum;
-            cond._animCallback = _animCallback;
-        }        
+            cond.AnimCallbackEnum = AnimCallbackEnum;
+            cond._finishedAnimsCallbackEnum = _finishedAnimsCallbackEnum;
+        }
     }
 }

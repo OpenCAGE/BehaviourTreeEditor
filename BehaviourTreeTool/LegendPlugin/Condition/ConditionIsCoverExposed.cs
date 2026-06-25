@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsCoverExposed : ConditionConnectors
-	{
-        //All parameters added
-
-        private string _cond4 = "";
-
-        [DesignerString("Angle", "Angle", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Angle
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
+    public class ConditionIsCoverExposed : ConditionConnectors
+    {
         public ConditionIsCoverExposed()
-            : base("IsCoverExposed", "CHECKS TO SEE IF OUR COVER IS EXPOSED USING A SPECIFIED ANGLE.")
- 
+            : base("IsCoverExposed", "Is our cover exposed?")
+        { }
+
+        protected float _angle = 90f;
+        [DesignerFloat("Exposure Angle", "Angle in degrees above which cover is considered exposed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 180, 1f, 0, "Degrees")]
+        public float Angle
         {
+            get { return _angle; }
+            set { _angle = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsCoverExposed cond = (ConditionIsCoverExposed)newnode;
-            cond._cond4 = _cond4;
+            cond._angle = _angle;
         }
     }
 }

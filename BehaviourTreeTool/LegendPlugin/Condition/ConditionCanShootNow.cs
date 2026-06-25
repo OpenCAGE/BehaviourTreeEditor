@@ -34,12 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCanShootNow : ConditionConnectors
-	{
+    public class ConditionCanShootNow : ConditionConnectors
+    {
         public ConditionCanShootNow()
-            : base(Resources.ConditionCanShootNow, Resources.ConditionCanShootNow)
-        {
-            //Unknown parameters. Not used in final game.
-        }
+            : base("CanShootNow", "Can I shoot now?")
+        { }
     }
 }

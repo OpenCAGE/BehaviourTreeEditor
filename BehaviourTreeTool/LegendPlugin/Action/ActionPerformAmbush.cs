@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionPerformAmbush : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionPerformAmbush : Normal_Atomic
+    {
+        public ActionPerformAmbush()
+            : base("PerformAmbush", "Perform an ambush.")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionPerformAmbush() : base("PerformAmbush", "PERFORM AN AMBUSH OUR TARGET.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionPerformAmbush cond = (ActionPerformAmbush)newnode;
-            cond._type = _type;
         }
     }
 }

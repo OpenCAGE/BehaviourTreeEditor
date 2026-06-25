@@ -34,23 +34,20 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasAWeapon : ConditionConnectors
-	{
-        //All parameters added
-
-        protected NPC_WEAPON_TYPE _cond;
-
-        [DesignerEnum("NPC weapon type", "Npc_Weapon_Type", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public NPC_WEAPON_TYPE Npc_Weapon_Type
+    public class ConditionHasAWeapon : ConditionConnectors
+    {
+        public ConditionHasAWeapon()
+            : base("HasAWeapon", "Do we have a weapon?")
         {
-            get { return _cond; }
-            set { _cond = value; }
+            _npcWeaponType = NPC_WEAPON_TYPE.WEAPON_TYPE_ANY;
         }
 
-        public ConditionHasAWeapon()
-            : base("HasAWeapon", "CHECKS TO SEE IF AN NPC HAS A SPECIFIED WEAPON.")
- 
+        protected NPC_WEAPON_TYPE _npcWeaponType;
+        [DesignerEnum("Npc_Weapon_Type", "The weapon type.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public NPC_WEAPON_TYPE Npc_Weapon_Type
         {
+            get { return _npcWeaponType; }
+            set { _npcWeaponType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasAWeapon cond = (ConditionHasAWeapon)newnode;
-            cond._cond = _cond;
+            cond._npcWeaponType = _npcWeaponType;
         }
     }
 }

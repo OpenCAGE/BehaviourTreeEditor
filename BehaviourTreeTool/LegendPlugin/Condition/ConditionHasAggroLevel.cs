@@ -31,15 +31,31 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasAggroLevel : ConditionConnectors
-	{
+    public class ConditionHasAggroLevel : ConditionConnectors
+    {
         public ConditionHasAggroLevel()
-            : base(Resources.ConditionHasAggroLevel, Resources.ConditionHasAggroLevel)
+            : base("HasAggroLevel", "Returns true if the character has the specified aggro level.")
+        { 
+        }
+
+        protected NPC_AGGRO_LEVEL _aggroLevel;
+        [DesignerEnum("AggroLevel", "The aggro level to check for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public NPC_AGGRO_LEVEL AggroLevel
         {
-            //Unknown parameters. Not used in final game.
+            get { return _aggroLevel; }
+            set { _aggroLevel = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionHasAggroLevel cond = (ConditionHasAggroLevel)newnode;
+            cond._aggroLevel = _aggroLevel;
         }
     }
 }

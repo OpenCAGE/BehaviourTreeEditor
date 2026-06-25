@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,66 +33,53 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionIdleTimeFacingTargetOutsideCombatArea : Action
-	{
-        //All parameters added
+    public class ActionIdleTimeFacingTargetOutsideCombatArea : Normal_Atomic
+    {
+        public ActionIdleTimeFacingTargetOutsideCombatArea()
+            : base("IdleTimeFacingTargetOutsideCombatArea", "Switch to an idle state for a set time and face target outside combat area using sense threshold.")
+        { }
 
-        private string _FacingTolerance = "";
-        private string _NoiseTime = "";
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected ThresholdQualifier _ThresholdQualifier;
-        private string _Time = "";
-
-        [DesignerString("Facing tolerance", "FacingTolerance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string FacingTolerance
-        {
-            get { return _FacingTolerance; }
-            set { _FacingTolerance = value; }
-        }
-
-        [DesignerString("Noise time", "NoiseTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string NoiseTime
-        {
-            get { return _NoiseTime; }
-            set { _NoiseTime = value; }
-        }
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "Which sensory threshold to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _ThresholdQualifier; }
-            set { _ThresholdQualifier = value; }
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        protected float _facingTolerance = 5.0f;
+        [DesignerFloat("Facing Tolerance", "What angle do we turn to face target?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 360, 1.0f, 2, "Degrees")]
+        public float FacingTolerance
         {
-            get { return _Time; }
-            set { _Time = value; }
+            get { return _facingTolerance; }
+            set { _facingTolerance = value; }
         }
 
-        public ActionIdleTimeFacingTargetOutsideCombatArea() : base("IdleTimeFacingTargetOutsideCombatArea", "PERFORM IDLE FOR A SPECIFIED TIME WHILE FACING OUR TARGET THAT IS OUTSIDE COMBAT ZONE.")
- 
+        protected float _time = 5.0f;
+        [DesignerFloat("Time to Idle", "Duration in seconds to remain idle.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float Time
         {
+            get { return _time; }
+            set { _time = value; }
+        }
+
+        protected float _noiseTime = 0.0f;
+        [DesignerFloat("NoiseTime", "Random variation in seconds applied to the base duration.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float NoiseTime
+        {
+            get { return _noiseTime; }
+            set { _noiseTime = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionIdleTimeFacingTargetOutsideCombatArea cond = (ActionIdleTimeFacingTargetOutsideCombatArea)newnode;
-            cond._FacingTolerance = _FacingTolerance;
-            cond._NoiseTime = _NoiseTime;
-            cond._type = _type;
-            cond._ThresholdQualifier = _ThresholdQualifier;
-            cond._Time = _Time;
+            ActionIdleTimeFacingTargetOutsideCombatArea action = (ActionIdleTimeFacingTargetOutsideCombatArea)newnode;
+            action._thresholdQualifier = _thresholdQualifier;
+            action._time = _time;
+            action._facingTolerance = _facingTolerance;
+            action._noiseTime = _noiseTime;
         }
     }
 }

@@ -25,31 +25,28 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSetFrameFlag : Action
-	{
-        //All parameters added
-
-        protected FRAME_FLAG _type;
-
-        [DesignerEnum("Frame flag", "FrameFlag", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public FRAME_FLAG FrameFlag
+    public class ActionSetFrameFlag : Search_Atomic
+    {
+        public ActionSetFrameFlag()
+            : base("SetFrameFlag", "Set frame flag.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public ActionSetFrameFlag() : base("SetFrameFlag", "SET A FRAME FLAG FOR QUERYING LATER.")
- 
+        protected FRAME_FLAGS _frameFlag;
+        [DesignerEnum("FrameFlag", "The frame flag to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public FRAME_FLAGS FrameFlag
         {
+            get { return _frameFlag; }
+            set { _frameFlag = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -57,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ActionSetFrameFlag cond = (ActionSetFrameFlag)newnode;
-            cond._type = _type;
+            cond._frameFlag = _frameFlag;
         }
     }
 }

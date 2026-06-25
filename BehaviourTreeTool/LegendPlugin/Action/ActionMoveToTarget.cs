@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,45 +33,31 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToTarget : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected MovementSpeedType _MovementSpeedType;
-        private string _Distance = "";
-        private bool _PlayStoppingAnim = false;
-
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MovementSpeedType MovementSpeedType
+    public class ActionMoveToTarget : ActionMoveBase
+    {
+        public ActionMoveToTarget()
+            : base("MoveToTarget", "Move to our current target.")
         {
-            get { return _MovementSpeedType; }
-            set { _MovementSpeedType = value; }
         }
 
-        [DesignerBoolean("Play stopping anim", "PlayStoppingAnim", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected bool _playStoppingAnim = true;
+        [DesignerBoolean("PlayStoppingAnim", "Should the atomic succeed when we are close to the target.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool PlayStoppingAnim
         {
-            get { return _PlayStoppingAnim; }
-            set { _PlayStoppingAnim = value; }
+            get { return _playStoppingAnim; }
+            set { _playStoppingAnim = value; }
         }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+        protected float _stoppingDistance = 1.0f;
+        [DesignerFloat("StoppingDistance", "Distance in metres at which movement stops.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 1000, 0.01f, 2, "UnitsCount")]
+        public float StoppingDistance
         {
-            get { return _type; }
-            set { _type = value; }
+            get { return _stoppingDistance; }
+            set { _stoppingDistance = value; }
         }
 
-        [DesignerString("Stopping distance", "StoppingDistance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string StoppingDistance
-        {
-            get { return _Distance; }
-            set { _Distance = value; }
-        }
-
-        public ActionMoveToTarget() : base("MoveToTarget", "MOVE TO OUR TARGET AT A SPECIFIED SPEED WITH A SPECIFIED STOPPING DISTANCE.")
- 
+        public ActionMoveToTarget(string label, string description)
+            : base(label, description)
         {
         }
 
@@ -80,11 +65,9 @@ namespace LegendPlugin.Nodes
         {
             base.CloneProperties(newnode);
 
-            ActionMoveToTarget cond = (ActionMoveToTarget)newnode;
-            cond._PlayStoppingAnim = _PlayStoppingAnim;
-            cond._Distance = _Distance;
-            cond._MovementSpeedType = _MovementSpeedType;
-            cond._type = _type;
+            ActionMoveToTarget action = (ActionMoveToTarget)newnode;
+            action._playStoppingAnim = _playStoppingAnim;
+            action._stoppingDistance = _stoppingDistance;
         }
     }
 }

@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasToken : ConditionConnectors
-	{
+    public class ConditionHasToken : ConditionConnectors
+    {
         public ConditionHasToken()
-            : base("HasToken", "DO WE HAVE A TOKEN?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasToken", "Has a high priority task token?")
+        { }
     }
 }

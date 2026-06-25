@@ -34,12 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionPlayerIsAnEnemy : ConditionConnectors
-	{
+    public class ConditionPlayerIsAnEnemy : ConditionConnectors
+    {
         public ConditionPlayerIsAnEnemy()
-            : base(Resources.ConditionPlayerIsAnEnemy, Resources.ConditionPlayerIsAnEnemy)
-        {
-            //Unknown parameters. Not used in final game.
-        }
+            : base("PlayerIsAnEnemy", "Is the player an enemy?")
+        { }
     }
 }

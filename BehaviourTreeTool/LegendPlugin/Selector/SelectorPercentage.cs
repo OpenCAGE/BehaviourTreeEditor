@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -33,13 +32,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class SelectorPercentage : Selector
-	{
+    public class SelectorPercentage : Brainiac.Design.Nodes.Selector
+    {
         public SelectorPercentage()
-            : base("Percentage", "A SELECTOR VARIED BY PERCENTAGE DECORATOR NODES.")
- 
+            : base("PercentageSelector", "Run a child based on a percentage dice roll.")
         {
-            //All parameters added
         }
     }
 }

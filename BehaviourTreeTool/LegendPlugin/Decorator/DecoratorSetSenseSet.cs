@@ -31,32 +31,31 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorSetSenseSet : Decorator
+    public class DecoratorSetSenseSet : Decorator
     {
-        protected SENSE_SET _type;
-
-        [DesignerEnum("Sense set", "SenseSet", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SENSE_SET SenseSet
+        public DecoratorSetSenseSet()
+            : base("SetSenseSet", "Sets the active sense set for child nodes.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public DecoratorSetSenseSet()
-            : base("SetSenseSet", "Set the sense set for a decorated node - unused in the final game.")
-
+        protected SENSE_SET _senseSet;
+        [DesignerEnum("SENSE_SET", "The sense set to apply.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSE_SET SenseSet
         {
+            get { return _senseSet; }
+            set { _senseSet = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            DecoratorSetSenseSet cond = (DecoratorSetSenseSet)newnode;
-            cond._type = _type;
+            DecoratorSetSenseSet decor = (DecoratorSetSenseSet)newnode;
+            decor._senseSet = _senseSet;
         }
     }
 }

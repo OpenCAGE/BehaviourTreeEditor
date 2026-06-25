@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,11 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionResetSearchJobs : Action
-	{
-        public ActionResetSearchJobs() : base("ResetSearchJobs", "Reset our search jobs - unused in the final game.")
+    public class ActionResetSearchJobs : Search_Atomic
+    {
+        public ActionResetSearchJobs()
+            : base("ResetSearchJobs", "Reset the search jobs.")
         {
-            
         }
     }
 }

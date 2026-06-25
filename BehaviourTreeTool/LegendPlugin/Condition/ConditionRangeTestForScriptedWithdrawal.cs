@@ -34,13 +34,17 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionRangeTestForScriptedWithdrawal : ConditionConnectors
-	{
+    public class ConditionRangeTestForScriptedWithdrawal : ConditionConnectors
+    {
         public ConditionRangeTestForScriptedWithdrawal()
-            : base("RangeTestForScriptedWithdrawal", "DID WE PASS THE RANGE TEST FOR OUR SCRIPTED WITHDRAWAL FROM THE LEVEL?")
- 
+            : base("RangeTestForScriptedWithdrawal", "Has the script asked us to withdraw?")
+        { }
+
+        protected override void CloneProperties(Node newnode)
         {
-            //All parameters added
+            base.CloneProperties(newnode);
+
+            ConditionRangeTestForScriptedWithdrawal cond = (ConditionRangeTestForScriptedWithdrawal)newnode;
         }
     }
 }

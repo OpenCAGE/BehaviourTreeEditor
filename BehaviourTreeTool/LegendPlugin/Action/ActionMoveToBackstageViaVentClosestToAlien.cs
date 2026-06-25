@@ -25,39 +25,28 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToBackstageViaVentClosestToAlien : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected VENT_LOCK_REASON _type2;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionMoveToBackstageViaVentClosestToAlien : Normal_Atomic
+    {
+        public ActionMoveToBackstageViaVentClosestToAlien()
+            : base("MoveToBackstageViaVentClosestToAlien", "Move to backstage via vent closest to Alien.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        [DesignerEnum("Vent lock reason", "VentLockReason", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected VENT_LOCK_REASON _ventLockReason;
+        [DesignerEnum("VentLockReason", "The vent lock reason to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public VENT_LOCK_REASON VentLockReason
         {
-            get { return _type2; }
-            set { _type2 = value; }
-        }
-
-        public ActionMoveToBackstageViaVentClosestToAlien() : base("MoveToBackstageViaVentClosestToAlien", "PERFORM THE ACTION OF MOVING BACKSTAGE, USING THE VENT CLOSEST TO THE ALIEN.")
- 
-        {
+            get { return _ventLockReason; }
+            set { _ventLockReason = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -65,8 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ActionMoveToBackstageViaVentClosestToAlien cond = (ActionMoveToBackstageViaVentClosestToAlien)newnode;
-            cond._type = _type;
-            cond._type2 = _type2;
+            cond._ventLockReason = _ventLockReason;
         }
     }
 }

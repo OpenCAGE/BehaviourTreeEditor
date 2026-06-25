@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetsWeaponHasProperty : ConditionConnectors
+    public class ConditionTargetsWeaponHasProperty : ConditionConnectors
     {
-        //All parameters added
-
-        protected WeaponProperty _type;
-
-        [DesignerEnum("Weapon property", "WeaponProperty", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WeaponProperty WeaponProperty
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
         public ConditionTargetsWeaponHasProperty()
-            : base("TargetsWeaponHasProperty", "DOES OUR TARGET'S WEAPON HAVE A SPECIFIED PROPERTY?")
- 
+            : base("TargetsWeaponHasProperty", "Does the target's weapon have the specified property?")
+        { }
+
+        WEAPON_PROPERTY _weaponProperty;
+        [DesignerEnum("WeaponProperty", "Which weapon property to test.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WEAPON_PROPERTY WeaponProperty
         {
+            get { return _weaponProperty; }
+            set { _weaponProperty = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionTargetsWeaponHasProperty cond = (ConditionTargetsWeaponHasProperty)newnode;
-            cond._type = _type;
+            cond._weaponProperty = _weaponProperty;
         }
     }
 }

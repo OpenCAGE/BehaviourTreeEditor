@@ -34,12 +34,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsCrouching : ConditionConnectors
-	{
+    public class ConditionIsCrouching : ConditionConnectors
+    {
         public ConditionIsCrouching()
-            : base(Resources.ConditionIsCrouching, Resources.ConditionIsCrouching)
+            : base("IsCrouching", "Is the given character crouching?")
+        { 
+        }
+
+        protected CHARACTER_TYPE _characterType;
+        [DesignerEnum("CharacterType", "Character to check - is it the owner of the tree or the target?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public CHARACTER_TYPE CharacterType
         {
-            //Unknown parameters. Not used in final game.
+            get { return _characterType; }
+            set { _characterType = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionIsCrouching cond = (ConditionIsCrouching)newnode;
+            cond._characterType = _characterType;
         }
     }
 }

@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAlienIsAllowed : ConditionConnectors
-	{
-        //All parameters added
-
-        protected ALIEN_STAGE _type;
-
-        [DesignerEnum("Alien action", "What action should we test?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ALIEN_STAGE AlienAction
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
+    public class ConditionAlienIsAllowed : ConditionConnectors
+    {
         public ConditionAlienIsAllowed()
-            : base("AlienIsAllowed", "IS THE ALIEN ALLOWED TO PERFORM A SPECIFIED ACTION?")
- 
+            : base("AlienIsAllowed", "Is the Alien allowed to do this?")
+        { }
+
+        protected ALIEN_DEVELOPMENT_MANAGER_ABILITIES _alienStage;
+        [DesignerEnum("AlienAction", "Is the Alien allowed to do this?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ALIEN_DEVELOPMENT_MANAGER_ABILITIES AlienAction
         {
+            get { return _alienStage; }
+            set { _alienStage = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionAlienIsAllowed cond = (ConditionAlienIsAllowed)newnode;
-            cond._type = _type;
+            cond._alienStage = _alienStage;
         }
     }
 }

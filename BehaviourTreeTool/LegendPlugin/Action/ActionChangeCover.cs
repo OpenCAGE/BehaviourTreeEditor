@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,12 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionChangeCover : Action
-	{
-        public ActionChangeCover() : base("ChangeCover", "ACTION OF CHANGING COVER.")
- 
+    public class ActionChangeCover : Search_Atomic
+    {
+        public ActionChangeCover()
+            : base("ChangeCover", "Change to pending cover.")
         {
-            //All parameters added
         }
     }
 }

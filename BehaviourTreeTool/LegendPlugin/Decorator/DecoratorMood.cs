@@ -31,34 +31,31 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorMood : Decorator
-	{
-        //All parameters added
-
-        protected BEHAVIOUR_MOOD_SET _type;
-
-        [DesignerEnum("Mood set", "MoodSet", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public BEHAVIOUR_MOOD_SET MoodSet
+    public class DecoratorMood : Decorator
+    {
+        public DecoratorMood()
+            : base("DecoratorMood", "Sets the behaviour mood for child nodes.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public DecoratorMood()
-            : base("Mood", "DECORATOR FOR MOOD.")
- 
+        protected BEHAVIOUR_MOOD_SET _moodSet;
+        [DesignerEnum("BEHAVIOUR_MOOD_SET", "The behaviour mood to apply.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public BEHAVIOUR_MOOD_SET MoodSet
         {
+            get { return _moodSet; }
+            set { _moodSet = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            DecoratorMood cond = (DecoratorMood)newnode;
-            cond._type = _type;
+            DecoratorMood decor = (DecoratorMood)newnode;
+            decor._moodSet = _moodSet;
         }
     }
 }

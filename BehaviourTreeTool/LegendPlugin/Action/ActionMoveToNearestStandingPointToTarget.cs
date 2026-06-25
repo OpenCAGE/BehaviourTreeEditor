@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,57 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToNearestStandingPointToTarget : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected MovementSpeedType _MovementSpeedType;
-        private string _Distance = "";
-        private bool _PlayStoppingAnim = false;
-
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MovementSpeedType MovementSpeedType
+    public class ActionMoveToNearestStandingPointToTarget : ActionMoveToTarget
+    {
+        public ActionMoveToNearestStandingPointToTarget()
+            : base("MoveToNearestStandingPointToTarget", "Move to the nearest standing point by our current target.")
         {
-            get { return _MovementSpeedType; }
-            set { _MovementSpeedType = value; }
-        }
-
-        [DesignerBoolean("Play stopping anim", "PlayStoppingAnim", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool PlayStoppingAnim
-        {
-            get { return _PlayStoppingAnim; }
-            set { _PlayStoppingAnim = value; }
-        }
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        [DesignerString("Stopping distance", "StoppingDistance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string StoppingDistance
-        {
-            get { return _Distance; }
-            set { _Distance = value; }
-        }
-
-        public ActionMoveToNearestStandingPointToTarget() : base("MoveToNearestStandingPointToTarget", "PERFORM A MOVEMENT OF SPECIFIED SPEED TO THE NEAREST STANDING POINT TO TARGET.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionMoveToNearestStandingPointToTarget cond = (ActionMoveToNearestStandingPointToTarget)newnode;
-            cond._PlayStoppingAnim = _PlayStoppingAnim;
-            cond._Distance = _Distance;
-            cond._MovementSpeedType = _MovementSpeedType;
-            cond._type = _type;
         }
     }
 }

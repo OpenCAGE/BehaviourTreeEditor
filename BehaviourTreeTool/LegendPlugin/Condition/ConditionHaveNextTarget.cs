@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHaveNextTarget : ConditionConnectors
-	{
+    public class ConditionHaveNextTarget : ConditionConnectors
+    {
         public ConditionHaveNextTarget()
-            : base("HaveNextTarget", "DO WE HAVE A VALID SECONDARY TARGET?")
- 
-        {
-            //All parameters added
-        }
+            : base("HaveNextTarget", "Should we switch to the next target?")
+        { }
     }
 }

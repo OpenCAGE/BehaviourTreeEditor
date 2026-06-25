@@ -25,28 +25,28 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using LegendPlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Attributes;
-using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionDebugString : Action
+    public class ActionDebugString : Search_Atomic
     {
-        private string _DebugString = "";
-
-        [DesignerString("Debug string", "DebugString", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string DebugString
+        public ActionDebugString()
+            : base("DebugString", "Debug string (not functional in retail).")
         {
-            get { return _DebugString; }
-            set { _DebugString = value; }
         }
 
-        public ActionDebugString() : base("DebugString", "Output a debug string.")
+        protected String _debugString;
+        [DesignerString("DebugString", "Debug string to log.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public String DebugString
         {
+            get { return _debugString; }
+            set { _debugString = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -54,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ActionDebugString cond = (ActionDebugString)newnode;
-            cond._DebugString = _DebugString;
+            cond._debugString = _debugString;
         }
     }
 }

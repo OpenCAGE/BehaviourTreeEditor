@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasAnySenseBeenAbove : ConditionConnectors
-	{
-        //All parameters added
-        
-        protected ThresholdQualifier _cond;
-
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ThresholdQualifier ThresholdQualifier
-        {
-            get { return _cond; }
-            set { _cond = value; }
+    public class ConditionHasAnySenseBeenAbove : ConditionConnectors
+    {
+        public ConditionHasAnySenseBeenAbove()
+            : base("HasAnySenseBeenAbove", "Can we have sensed our target using the given threshold?")
+        { 
         }
 
-        public ConditionHasAnySenseBeenAbove()
-            : base("HasAnySenseBeenAbove", "CHECK TO SEE IF ANY OF OUR SENSES WENT ABOVE A SPECIFIED THRESHOLD.")
- 
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "The threshold to check against.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ThresholdQualifier ThresholdQualifier
         {
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasAnySenseBeenAbove cond = (ConditionHasAnySenseBeenAbove)newnode;
-            cond._cond = _cond;
+            cond._thresholdQualifier = _thresholdQualifier;
         }
     }
 }

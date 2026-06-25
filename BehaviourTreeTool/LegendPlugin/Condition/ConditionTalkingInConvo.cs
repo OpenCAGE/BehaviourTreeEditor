@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTalkingInConvo : ConditionConnectors
-	{
+    public class ConditionTalkingInConvo : ConditionConnectors
+    {
         public ConditionTalkingInConvo()
-            : base("TalkingInConvo", "ARE WE CURRENTLY TALKING IN A CONVERSATION?")
- 
-        {
-            //All parameters added
-        }
+            : base("TalkingInConvo", "Talking in conversation.")
+        { }
     }
 }

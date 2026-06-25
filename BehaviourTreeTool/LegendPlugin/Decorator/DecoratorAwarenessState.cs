@@ -34,31 +34,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorAwarenessState : Decorator
-	{
-        //All parameters added
-
-        protected GROUP_AWARENESS_STATE _type;
-
-        [DesignerEnum("Awareness state", "AwarenessState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public GROUP_AWARENESS_STATE AwarenessState
+    public class DecoratorAwarenessState : Decorator
+    {
+        public DecoratorAwarenessState()
+            : base("AwarenessState", "Used to set NPC target awareness state.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public DecoratorAwarenessState()
-            : base("AwarenessState", "DECORATOR FOR CURRENT AWARENESS STATE.")
- 
+        protected AWARENESS_STATE _awarenessState;
+        [DesignerEnum("AwarenessState", "The awareness state we are setting.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public AWARENESS_STATE AwarenessState
         {
+            get { return _awarenessState; }
+            set { _awarenessState = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            DecoratorAwarenessState cond = (DecoratorAwarenessState)newnode;
-            cond._type = _type;
+            DecoratorAwarenessState decor = (DecoratorAwarenessState)newnode;
+            decor._awarenessState = _awarenessState;
         }
     }
 }

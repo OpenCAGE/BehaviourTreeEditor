@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,37 +33,35 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionFakeSense : Action
+    public class ActionFakeSense : Search_Atomic
     {
-        protected SenseType _type;
-        protected ThresholdQualifier _threshold;
+        public ActionFakeSense()
+            : base("FakeSense", "Fakes a sense to the specified threshold.")
+        { }
 
-        [DesignerEnum("Sense type", "SenseType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseType SenseType
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The sensory type to fake.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
         {
-            get { return _type; }
-            set { _type = value; }
+            get { return _sense; }
+            set { _sense = value; }
         }
-        
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "Which sensory threshold to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _threshold; }
-            set { _threshold = value; }
-        }
-
-        public ActionFakeSense() : base("FakeSense", "Fake a sense - unused in the final game.")
-        {
-            
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionFakeSense cond = (ActionFakeSense)newnode;
-            cond._type = _type;
-            cond._threshold = _threshold;
+            ActionFakeSense action = (ActionFakeSense)newnode;
+            action._sense = _sense;
+            action._thresholdQualifier = _thresholdQualifier;
         }
     }
 }

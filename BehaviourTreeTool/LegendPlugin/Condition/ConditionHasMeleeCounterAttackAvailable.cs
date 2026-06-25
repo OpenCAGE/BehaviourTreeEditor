@@ -34,12 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasMeleeCounterAttackAvailable : ConditionConnectors
-	{
+    public class ConditionHasMeleeCounterAttackAvailable : ConditionConnectors
+    {
         public ConditionHasMeleeCounterAttackAvailable()
-            : base(Resources.ConditionHasMeleeCounterAttackAvailable, Resources.ConditionHasMeleeCounterAttackAvailable)
-        {
-            //Unknown parameters. Not used in final game.
-        }
+            : base("HasMeleeCounterAttackAvailable", "Is there a melee counter-attack available on the current target?")
+        { }
     }
 }

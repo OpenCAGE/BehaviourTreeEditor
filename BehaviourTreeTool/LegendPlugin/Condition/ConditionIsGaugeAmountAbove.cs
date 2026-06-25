@@ -31,42 +31,40 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsGaugeAmountAbove : ConditionConnectors
-	{
-        //All parameters added
-
-        protected GaugeAmountType _cond;
-        protected GaugeType _cond2;
-        private bool _ShouldAim = false;
-
-        [DesignerEnum("Gauge amount type", "GaugeAmountType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public GaugeAmountType GaugeAmountType
-        {
-            get { return _cond; }
-            set { _cond = value; }
+    public class ConditionIsGaugeAmountAbove : ConditionConnectors
+    {
+        public ConditionIsGaugeAmountAbove()
+            : base("IsGaugeAmountAbove", "Is the gauge amount equal to or above specified amount?")
+        { 
+            _mustBeTriggered = false;
         }
 
-        [DesignerEnum("Gauge type", "GaugeType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public GaugeType GaugeType
+        protected LOGIC_CHARACTER_GAUGE_TYPE _gaugeType;
+        [DesignerEnum("GaugeType", "The type of gauge we are querying.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public LOGIC_CHARACTER_GAUGE_TYPE GaugeType
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
+            get { return _gaugeType; }
+            set { _gaugeType = value; }
         }
 
-        [DesignerBoolean("Must be triggered", "MustBeTriggered", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected GAUGE_AMOUNT_TYPE _gaugeAmountType;
+        [DesignerEnum("GaugeAmountType", "The type activation we much be greater than or equal to.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public GAUGE_AMOUNT_TYPE GaugeAmountType
+        {
+            get { return _gaugeAmountType; }
+            set { _gaugeAmountType = value; }
+        }
+
+        protected bool _mustBeTriggered;
+        [DesignerBoolean("MustBeTriggered", "If the gauge must be triggered this frame.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool MustBeTriggered
         {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
-        }
-
-        public ConditionIsGaugeAmountAbove()
-            : base("IsGaugeAmountAbove", "IS THE SPECIFIED GAUGE ABOVE A SPECIFIED AMOUNT?")
- 
-        {
+            get { return _mustBeTriggered; }
+            set { _mustBeTriggered = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -74,9 +72,9 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsGaugeAmountAbove cond = (ConditionIsGaugeAmountAbove)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
-            cond._ShouldAim = _ShouldAim;
+            cond._gaugeType = _gaugeType;
+            cond._gaugeAmountType = _gaugeAmountType;
+            cond._mustBeTriggered = _mustBeTriggered;
         }
     }
 }

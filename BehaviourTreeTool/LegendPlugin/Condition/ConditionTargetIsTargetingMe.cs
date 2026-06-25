@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsTargetingMe : ConditionConnectors
-	{
+    public class ConditionTargetIsTargetingMe : ConditionConnectors
+    {
         public ConditionTargetIsTargetingMe()
-            : base("TargetIsTargetingMe", "ARE WE BEING TARGETED BY OUR OWN TARGET?")
- 
-        {
-            //All parameters added
-        }
+            : base("TargetIsTargetingMe", "Is the current target targetting us?")
+        { }
     }
 }

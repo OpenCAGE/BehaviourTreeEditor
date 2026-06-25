@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -33,12 +32,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionAlienWonScareTest : Action
-	{
+    public class ActionAlienWonScareTest : Search_Atomic
+    {
         public ActionAlienWonScareTest()
-            : base("AlienWonScareTest", "The alien has won the 'scare test' - unused in the final game.")
+            : base("AlienWonScareTest", "Alien won the 'scare test' - appears deprecated.")
         {
-            
         }
     }
 }

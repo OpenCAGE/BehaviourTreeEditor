@@ -34,12 +34,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCanTakeStep : ConditionConnectors
-	{
+    public class ConditionCanTakeStep : ConditionConnectors
+    {
         public ConditionCanTakeStep()
-            : base(Resources.ConditionCanTakeStep, Resources.ConditionCanTakeStep)
+            : base("CanTakeStep", "Can the character take a single step forwards or backwards?")
         {
-            //Unknown parameters. Not used in final game.
+        }
+
+        protected STEP_TYPE _stepType;
+        [DesignerEnum("StepType", "Forwards or backwards?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public STEP_TYPE StepType
+        {
+            get { return _stepType; }
+            set { _stepType = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionCanTakeStep cond = (ConditionCanTakeStep)newnode;
+            cond._stepType = _stepType;
         }
     }
 }

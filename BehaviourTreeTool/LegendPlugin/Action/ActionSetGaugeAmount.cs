@@ -25,47 +25,44 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSetGaugeAmount : Action
-	{
-        //All parameters added
-
-        protected GaugeAmountType _cond;
-        protected GaugeType _cond2;
-        private bool _SetAtleastTo = false;
-        
-        [DesignerEnum("Gauge amount type", "GaugeAmountType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public GaugeAmountType GaugeAmountType
+    public class ActionSetGaugeAmount : Search_Atomic
+    {
+        public ActionSetGaugeAmount()
+            : base("SetGaugeAmount", "Set gauge amount.")
         {
-            get { return _cond; }
-            set { _cond = value; }
         }
 
-        [DesignerEnum("Request type", "RequestType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public GaugeType GaugeType
+        protected LOGIC_CHARACTER_GAUGE_TYPE _gaugeType;
+        [DesignerEnum("GaugeType", "The type of gauge we are setting.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public LOGIC_CHARACTER_GAUGE_TYPE GaugeType
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
+            get { return _gaugeType; }
+            set { _gaugeType = value; }
         }
 
-        [DesignerBoolean("Set at least to", "SetAtleastTo", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected GAUGE_AMOUNT_TYPE _gaugeAmountType;
+        [DesignerEnum("GaugeAmountType", "The activation we must be greater than or equal to.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public GAUGE_AMOUNT_TYPE GaugeAmountType
+        {
+            get { return _gaugeAmountType; }
+            set { _gaugeAmountType = value; }
+        }
+
+        protected bool _setAtleastTo;
+        [DesignerBoolean("SetAtleastTo", "The gauge will be set to at least this value if it is already higher than it will remain unchanged.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool SetAtleastTo
         {
-            get { return _SetAtleastTo; }
-            set { _SetAtleastTo = value; }
-        }
-
-        public ActionSetGaugeAmount() : base("SetGaugeAmount", "SET A LEVEL ON A SPECIFIED GAUGE.")
- 
-        {
+            get { return _setAtleastTo; }
+            set { _setAtleastTo = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -73,9 +70,9 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ActionSetGaugeAmount cond = (ActionSetGaugeAmount)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
-            cond._SetAtleastTo = _SetAtleastTo;
+            cond._gaugeType = _gaugeType;
+            cond._gaugeAmountType = _gaugeAmountType;
+            cond._setAtleastTo = _setAtleastTo;
         }
     }
 }

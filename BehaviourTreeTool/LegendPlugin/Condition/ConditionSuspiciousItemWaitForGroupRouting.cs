@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemWaitForGroupRouting : ConditionConnectors
-	{
+    public class ConditionSuspiciousItemWaitForGroupRouting : ConditionConnectors
+    {
         public ConditionSuspiciousItemWaitForGroupRouting()
-            : base("SuspiciousItemWaitForGroupRouting", "SHOULD WE WAIT FOR OUR GROUP TO ROUTE TO THE SUSPICIOUS ITEM OR NOT?")
- 
-        {
-            //All parameters added
-        }
+            : base("SuspiciousItemWaitForGroupRouting", "Should we wait for rest of group to complete routing checks?")
+        { }
     }
 }

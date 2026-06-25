@@ -34,23 +34,20 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionWithdrawState : ConditionConnectors
-	{
-        //All parameters added
-
-        protected WITHDRAW_STATE _type;
-
-        [DesignerEnum("Withdraw state", "WithdrawState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WITHDRAW_STATE WithdrawState
+    public class ConditionWithdrawState : ConditionConnectors
+    {
+        public ConditionWithdrawState()
+            : base("WithdrawState", "Checks if we are in the specified withdraw state.")
         {
-            get { return _type; }
-            set { _type = value; }
+
         }
 
-        public ConditionWithdrawState()
-            : base("WithdrawState", "DO WE CURRENTLY HAVE A SPECIFIED WITHDRAW STATE?")
- 
+        protected WITHDRAW_STATE _withdrawState;
+        [DesignerEnum("WithdrawState", "Withdraw state.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WITHDRAW_STATE WithdrawState
         {
+            get { return _withdrawState; }
+            set { _withdrawState = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionWithdrawState cond = (ConditionWithdrawState)newnode;
-            cond._type = _type;
+            cond._withdrawState = _withdrawState;
         }
     }
 }

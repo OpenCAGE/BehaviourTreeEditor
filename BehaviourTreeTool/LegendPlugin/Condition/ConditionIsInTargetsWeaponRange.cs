@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsInTargetsWeaponRange : ConditionConnectors
-	{
-        //All parameters added
-
-        protected WEAPON_RANGE_THRESHOLD _cond2;
-
-        [DesignerEnum("Weapon range", "WeaponRange", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WEAPON_RANGE_THRESHOLD WeaponRange
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
+    public class ConditionIsInTargetsWeaponRange : ConditionConnectors
+    {
         public ConditionIsInTargetsWeaponRange()
-            : base("IsInTargetsWeaponRange", "ARE WE IN RANGE OF OUR TARGET'S WEAPON?")
- 
+            : base("IsInTargetsWeaponRange", "Are we in our target's weapon range?")
+        { }
+
+        protected WEAPON_RANGE_THRESHOLD_NO_EFFECTIVE _weaponRange;
+        [DesignerEnum("WeaponRange", "The weapon range of the target's weapon to test against.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WEAPON_RANGE_THRESHOLD_NO_EFFECTIVE WeaponRange
         {
+            get { return _weaponRange; }
+            set { _weaponRange = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsInTargetsWeaponRange cond = (ConditionIsInTargetsWeaponRange)newnode;
-            cond._cond2 = _cond2;
+            cond._weaponRange = _weaponRange;
         }
     }
 }

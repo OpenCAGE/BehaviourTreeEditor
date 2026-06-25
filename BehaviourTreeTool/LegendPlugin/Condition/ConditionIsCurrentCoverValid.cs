@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsCurrentCoverValid : ConditionConnectors
-	{
+    public class ConditionIsCurrentCoverValid : ConditionConnectors
+    {
         public ConditionIsCurrentCoverValid()
-            : base("IsCurrentCoverValid", "CHECKS TO SEE IF CURRENT COVER IS VALID.")
- 
-        {
-            //All parameters added
-        }
+            : base("IsCurrentCoverValid", "Is my current cover valid?")
+        { }
     }
 }

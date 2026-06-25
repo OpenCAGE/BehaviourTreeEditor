@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsWithinDistanceThreshold : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionTargetIsWithinDistanceThreshold : ConditionConnectors
+    {
+        public ConditionTargetIsWithinDistanceThreshold()
+            : base("TargetIsWithinDistanceThreshold", "Is our target within the given distance threshold?")
+        { }
 
-        protected DISTANCE_THRESHOLD _type;
-
-        [DesignerEnum("Distance threshold", "DistanceThreshold", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected DISTANCE_THRESHOLD _distanceThreshold;
+        [DesignerEnum("DistanceThreshold", "The distance threshold the NPC is within.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public DISTANCE_THRESHOLD DistanceThreshold
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ConditionTargetIsWithinDistanceThreshold()
-            : base("TargetIsWithinDistanceThreshold", "IS OUR TARGET WITHIN A SPECIFIED DISTANCE THRESHOLD?")
- 
-        {
+            get { return _distanceThreshold; }
+            set { _distanceThreshold = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionTargetIsWithinDistanceThreshold cond = (ConditionTargetIsWithinDistanceThreshold)newnode;
-            cond._type = _type;
+            cond._distanceThreshold = _distanceThreshold;
         }
     }
 }

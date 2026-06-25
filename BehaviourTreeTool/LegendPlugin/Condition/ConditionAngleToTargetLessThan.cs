@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAngleToTargetLessThan : ConditionConnectors
-	{
-        //All parameters added
-
-        private string _cond4 = "";
-
-        [DesignerString("Angle", "Angle", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Angle
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-        
+    public class ConditionAngleToTargetLessThan : ConditionConnectors
+    {
         public ConditionAngleToTargetLessThan()
-            : base("AngleToTargetLessThan", "VALIDATE THE ANGLE FROM US TO THE TARGET.")
- 
+            : base("AngleToTargetLessThan", "Is angle to target less than (degrees)?")
+        { 
+        }
+
+        protected float _angle = 0.0f;
+        [DesignerFloat("Angle", "Maximum angle in degrees.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 180, 0.01f, 2, "UnitsCount")]
+        public float Angle
         {
+            get { return _angle; }
+            set { _angle = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionAngleToTargetLessThan cond = (ConditionAngleToTargetLessThan)newnode;
-            cond._cond4 = _cond4;
+            cond._angle = _angle;
         }
     }
 }

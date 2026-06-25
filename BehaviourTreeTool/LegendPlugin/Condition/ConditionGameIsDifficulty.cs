@@ -31,15 +31,30 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionGameIsDifficulty : ConditionConnectors
-	{
+    public class ConditionGameIsDifficulty : ConditionConnectors
+    {
         public ConditionGameIsDifficulty()
-            : base(Resources.ConditionGameIsDifficulty, Resources.ConditionGameIsDifficulty)
+            : base("GameIsDifficulty", "Returns true if game is the selected difficulty.")
+        { }
+
+        protected DIFFICULTY_SETTING_TYPE _difficulty;
+        [DesignerEnum("Difficulty", "The difficulty to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public DIFFICULTY_SETTING_TYPE Difficulty
         {
-            //Unknown parameters. Not used in final game.
+            get { return _difficulty; }
+            set { _difficulty = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionGameIsDifficulty cond = (ConditionGameIsDifficulty)newnode;
+            cond._difficulty = _difficulty;
         }
     }
 }

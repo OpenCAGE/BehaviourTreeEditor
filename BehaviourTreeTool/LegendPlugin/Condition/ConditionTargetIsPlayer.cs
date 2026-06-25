@@ -34,13 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsPlayer : ConditionConnectors
-	{
+    public class ConditionTargetIsPlayer : ConditionConnectors
+    {
         public ConditionTargetIsPlayer()
-            : base("TargetIsPlayer", "IS OUR TARGET THE PLAYER?")
- 
+            : base("TargetIsPlayer", "Is our target the player?")
+        { 
+        }
+
+        protected override void CloneProperties(Node newnode)
         {
-            //All parameters added
+            base.CloneProperties(newnode);
+
+            ConditionTargetIsPlayer cond = (ConditionTargetIsPlayer)newnode;
         }
     }
 }

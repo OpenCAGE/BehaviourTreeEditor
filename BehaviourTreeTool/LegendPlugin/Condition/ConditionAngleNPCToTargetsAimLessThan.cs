@@ -34,31 +34,28 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAngleNPCToTargetsAimLessThan : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionAngleNPCToTargetsAimLessThan : ConditionConnectors
+    {
+        public ConditionAngleNPCToTargetsAimLessThan()
+            : base("AngleNPCToTargetsAimLessThan", "Test the absolute angle of the player's aim direction to the NPC.")
+        {
 
-        private bool _OnlyIncreaseExistingEndTime = false;
-        private string _cond4 = "";
+        }
 
-        [DesignerBoolean("Aim must be held", "Must aim be held?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected float _angleLessThan;
+        [DesignerFloat("AngleLessThan", "Maximum angle in degrees.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float AngleLessThan
+        {
+            get { return _angleLessThan; }
+            set { _angleLessThan = value; }
+        }
+
+        protected bool _aimMustBeHeld;
+        [DesignerBoolean("AimMustBeHeld", "Whether the target's aim must be held for the angle test to pass.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool AimMustBeHeld
         {
-            get { return _OnlyIncreaseExistingEndTime; }
-            set { _OnlyIncreaseExistingEndTime = value; }
-        }
-
-        [DesignerString("Angle less than", "The angle to aim less than.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AngleLessThan
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
-        public ConditionAngleNPCToTargetsAimLessThan()
-            : base("AngleNPCToTargetsAimLessThan", "IS THE ANGLE OF NPC TO TARGET'S AIM LESS THAN A SPECIFIED AMOUNT?")
- 
-        {
+            get { return _aimMustBeHeld; }
+            set { _aimMustBeHeld = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +63,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionAngleNPCToTargetsAimLessThan cond = (ConditionAngleNPCToTargetsAimLessThan)newnode;
-            cond._OnlyIncreaseExistingEndTime = _OnlyIncreaseExistingEndTime;
-            cond._cond4 = _cond4;
+            cond._angleLessThan = _angleLessThan;
+            cond._aimMustBeHeld = _aimMustBeHeld;
         }
     }
 }

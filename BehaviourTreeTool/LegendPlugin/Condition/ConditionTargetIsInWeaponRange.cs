@@ -34,12 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsInWeaponRange : ConditionConnectors
-	{
+    public class ConditionTargetIsInWeaponRange : ConditionConnectors
+    {
         public ConditionTargetIsInWeaponRange()
-            : base(Resources.ConditionTargetIsInWeaponRange, Resources.ConditionTargetIsInWeaponRange)
+            : base("TargetIsInWeaponRange", "Is our target within the given weapon range?")
+        { }
+
+        protected WEAPON_RANGE_THRESHOLD _weaponRange;
+        [DesignerEnum("WeaponRange", "The weapon range to check.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WEAPON_RANGE_THRESHOLD WeaponRange
         {
-            //Unknown parameters. Not used in final game.
+            get { return _weaponRange; }
+            set { _weaponRange = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionTargetIsInWeaponRange cond = (ConditionTargetIsInWeaponRange)newnode;
+            cond._weaponRange = _weaponRange;
         }
     }
 }

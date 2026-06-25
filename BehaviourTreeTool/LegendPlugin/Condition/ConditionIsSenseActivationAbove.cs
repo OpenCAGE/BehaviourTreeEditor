@@ -34,39 +34,35 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsSenseActivationAbove : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionIsSenseActivationAbove : ConditionConnectors
+    {
+        public ConditionIsSenseActivationAbove()
+            : base("IsSenseActivationAbove", "Are we sensing the target at the threshold supplied?")
+        { 
+        }
 
-        protected ThresholdQualifier _cond;
-        protected SenseType _cond2;
-        private bool _ShouldAim = false;
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The type we are checking that we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
+        {
+            get { return _sense; }
+            set { _sense = value; }
+        }
 
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "The threshold qualifier of the information we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
-        [DesignerEnum("Sense type", "SenseType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseType SenseType
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        [DesignerBoolean("Must be triggered", "MustBeTriggered", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected bool _mustBeTriggered;
+        [DesignerBoolean("MustBeTriggered", "If the sense must be triggered this frame.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool MustBeTriggered
         {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
-        }
-
-        public ConditionIsSenseActivationAbove()
-            : base("IsSenseActivationAbove", "IS A SPECIFIED SENSE ACTIVATION ABOVE A SPECIFIED THRESHOLD?")
- 
-        {
+            get { return _mustBeTriggered; }
+            set { _mustBeTriggered = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -74,9 +70,9 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsSenseActivationAbove cond = (ConditionIsSenseActivationAbove)newnode;
-            cond._ShouldAim = _ShouldAim;
-            cond._cond2 = _cond2;
-            cond._cond = _cond;
+            cond._sense = _sense;
+            cond._thresholdQualifier = _thresholdQualifier;
+            cond._mustBeTriggered = _mustBeTriggered;
         }
     }
 }

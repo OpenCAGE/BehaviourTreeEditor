@@ -25,57 +25,54 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionStartTimer : Action
-	{
-        //All parameters added
-
-        private bool _OnlyIncreaseExistingEndTime = false;
-        private string _cond4 = "";
-        protected LOGIC_CHARACTER_TIMER_TYPE _cond;
-
-        [DesignerBoolean("Only increase existing end time", "OnlyIncreaseExistingEndTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool OnlyIncreaseExistingEndTime
+    public class ActionStartTimer : Search_Atomic
+    {
+        public ActionStartTimer()
+            : base("StartTimer", "Starts or restarts timer, time of -1 means use timer default time.")
         {
-            get { return _OnlyIncreaseExistingEndTime; }
-            set { _OnlyIncreaseExistingEndTime = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        protected float _time = -1.0f;
+        [DesignerFloat("Time", "Duration in seconds.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000.0f, 0.01f, 2, "UnitsCount")]
+        public float Time
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
+            get { return _time; }
+            set { _time = value; }
         }
 
-        [DesignerEnum("Timer type", "TimerType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected LOGIC_CHARACTER_TIMER_TYPE _timerType;
+        [DesignerEnum("TimerType", "The type of timer we are setting.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public LOGIC_CHARACTER_TIMER_TYPE TimerType
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _timerType; }
+            set { _timerType = value; }
         }
 
-        public ActionStartTimer() : base("StartTimer", "START A TIMER OF A SPECIFIC TYPE.")
- 
+        protected bool _onlyIncreaseExistingEndTime;
+        [DesignerBoolean("OnlyIncreaseExistingEndTime", "If true, only extends an existing timer end time rather than resetting it.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool OnlyIncreaseExistingEndTime
         {
+            get { return _onlyIncreaseExistingEndTime; }
+            set { _onlyIncreaseExistingEndTime = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionStartTimer cond = (ActionStartTimer)newnode;
-            cond._OnlyIncreaseExistingEndTime = _OnlyIncreaseExistingEndTime;
-            cond._cond4 = _cond4;
-            cond._cond = _cond;
+            ActionStartTimer action = (ActionStartTimer)newnode;
+            action._timerType = _timerType;
+            action._time = _time;
+            action._onlyIncreaseExistingEndTime = _onlyIncreaseExistingEndTime;
         }
     }
 }

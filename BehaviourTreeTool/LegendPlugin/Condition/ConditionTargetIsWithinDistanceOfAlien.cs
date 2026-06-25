@@ -34,12 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsWithinDistanceOfAlien : ConditionConnectors
-	{
+    public class ConditionTargetIsWithinDistanceOfAlien : ConditionConnectors
+    {
         public ConditionTargetIsWithinDistanceOfAlien()
-            : base(Resources.ConditionTargetIsWithinDistanceOfAlien, Resources.ConditionTargetIsWithinDistanceOfAlien)
+            : base("TargetIsWithinDistanceOfAlien", "Is our target within the given distance (for the Alien)?")
+        { }
+
+        protected float _distance = 5.0f;
+        [DesignerFloat("Distance to check", "Maximum distance in metres to check.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float Distance
         {
-            //Unknown parameters. Not used in final game.
+            get { return _distance; }
+            set { _distance = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionTargetIsWithinDistanceOfAlien cond = (ConditionTargetIsWithinDistanceOfAlien)newnode;
+            cond._distance = _distance;
         }
     }
 }

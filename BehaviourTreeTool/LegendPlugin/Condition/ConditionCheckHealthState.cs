@@ -34,12 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCheckHealthState : ConditionConnectors
-	{
+    public class ConditionCheckHealthState : ConditionConnectors
+    {
         public ConditionCheckHealthState()
-            : base(Resources.ConditionCheckHealthState, Resources.ConditionCheckHealthState)
+            : base("CheckHealthState", "Check for health state.")
+        { }
+
+        protected HEALTH_STATE_TYPE _healthState;
+        [DesignerEnum("HealthState", "Health state we are testing for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public HEALTH_STATE_TYPE HealthState
         {
-            //Unknown parameters. Not used in final game.
+            get { return _healthState; }
+            set { _healthState = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionCheckHealthState cond = (ConditionCheckHealthState)newnode;
+            cond._healthState = _healthState;
         }
     }
 }

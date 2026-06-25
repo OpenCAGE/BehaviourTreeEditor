@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsBranchActive : ConditionConnectors
-	{
-        //All parameters added
-
-        protected BranchType _type;
-
-        [DesignerEnum("Branch type", "BranchType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public BranchType BranchType
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
+    public class ConditionIsBranchActive : ConditionConnectors
+    {
         public ConditionIsBranchActive()
-            : base("IsBranchActive", "DO WE CURRENTLY HAVE A SPECIFIED BRANCH TYPE ACTIVE?")
- 
+            : base("IsBranchActive", "Is the specified branch decorator active?")
+        { }
+
+        protected BEHAVIOR_TREE_BRANCH_TYPE _branch;
+        [DesignerEnum("BranchType", "The branch type.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public BEHAVIOR_TREE_BRANCH_TYPE BranchType
         {
+            get { return _branch; }
+            set { _branch = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsBranchActive cond = (ConditionIsBranchActive)newnode;
-            cond._type = _type;
+            cond._branch = _branch;
         }
+
     }
 }

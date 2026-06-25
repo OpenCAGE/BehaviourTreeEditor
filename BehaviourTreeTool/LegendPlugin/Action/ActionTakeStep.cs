@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,37 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionTakeStep : Action
-	{
-        protected SHUTDOWN_SPEED_TYPE _speed;
-        protected STEP_TYPE _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionTakeStep : Normal_Atomic
+    {
+        public ActionTakeStep()
+            : base("TakeStep", "Take a step forwards or backwards.")
         {
-            get { return _speed; }
-            set { _speed = value; }
         }
 
-        [DesignerEnum("Step type", "Step_Type", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public STEP_TYPE AnimTreeEnum
+        protected STEP_TYPE _stepType;
+        [DesignerEnum("StepType", "Step forwards or backwards.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public STEP_TYPE Step_Type
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionTakeStep() : base("TakeStep", "Take a step in a direction - unused in the final game.")
-
-        {
+            get { return _stepType; }
+            set { _stepType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionTakeStep cond = (ActionTakeStep)newnode;
-            cond._type = _type;
-            cond._speed = _speed;
+            ActionTakeStep action = (ActionTakeStep)newnode;
+            action._stepType = _stepType;
         }
     }
 }

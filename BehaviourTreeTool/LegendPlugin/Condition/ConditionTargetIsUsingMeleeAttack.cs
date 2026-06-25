@@ -34,12 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsUsingMeleeAttack : ConditionConnectors
-	{
+    public class ConditionTargetIsUsingMeleeAttack : ConditionConnectors
+    {
         public ConditionTargetIsUsingMeleeAttack()
-            : base(Resources.ConditionTargetIsUsingMeleeAttack, Resources.ConditionTargetIsUsingMeleeAttack)
-        {
-            //Unknown parameters. Not used in final game.
-        }
+            : base("TargetIsUsingMeleeAttack", "Is the current target performing a melee attack against us?")
+        { }
     }
 }

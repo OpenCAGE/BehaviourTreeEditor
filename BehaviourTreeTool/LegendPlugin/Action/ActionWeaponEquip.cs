@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,39 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionWeaponEquip : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _cond;
-        protected WeaponEquipEnum _cond2;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionWeaponEquip : Normal_Atomic
+    {
+        public ActionWeaponEquip()
+            : base("WeaponEquip", "Equip or unequip our weapon.")
         {
-            get { return _cond; }
-            set { _cond = value; }
         }
 
-        [DesignerEnum("Should weapon equip", "ShouldWeaponEquip", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WeaponEquipEnum ShouldWeaponEquip
+        protected WEAPON_EQUIP _shouldEquip = WEAPON_EQUIP.SHOULD_EQUIP;
+        [DesignerEnum("ShouldWeaponEquip", "Equip or unequip?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WEAPON_EQUIP ShouldWeaponEquip
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ActionWeaponEquip() : base("WeaponEquip", "EQUIP A WEAPON.")
- 
-        {
+            get { return _shouldEquip; }
+            set { _shouldEquip = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionWeaponEquip cond = (ActionWeaponEquip)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            ActionWeaponEquip action = (ActionWeaponEquip)newnode;
+            action._shouldEquip = _shouldEquip;
         }
     }
 }

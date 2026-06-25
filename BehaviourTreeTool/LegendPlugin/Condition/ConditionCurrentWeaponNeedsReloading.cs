@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCurrentWeaponNeedsReloading : ConditionConnectors
-	{
+    public class ConditionCurrentWeaponNeedsReloading : ConditionConnectors
+    {
         public ConditionCurrentWeaponNeedsReloading()
-            : base("CurrentWeaponNeedsReloading", "DOES OUR CURRENT WEAPON NEED TO BE RELOADED?")
- 
-        {
-            //All parameters added
-        }
+            : base("CurrentWeaponNeedsReloading", "Do we have a weapon and need to reload it?")
+        { }
     }
 }

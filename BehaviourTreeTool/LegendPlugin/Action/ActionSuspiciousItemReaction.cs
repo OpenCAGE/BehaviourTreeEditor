@@ -25,48 +25,36 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSuspiciousItemReaction : Action
-	{
-        //All parameters added
-
-        protected SHUTDOWN_SPEED_TYPE _cond;
-        protected SuspiciousItemReaction _cond2;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+    public class ActionSuspiciousItemReaction : Normal_Atomic
+    {
+        public ActionSuspiciousItemReaction()
+            : base("SuspiciousItemReaction", "Suspicious Item Reaction.")
         {
-            get { return _cond; }
-            set { _cond = value; }
         }
 
-        [DesignerEnum("Suspicious item reaction", "SuspiciousItemReaction", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SuspiciousItemReaction SuspiciousItemReaction
+        protected SUSPICIOUS_ITEM_REACTION _reaction;
+        [DesignerEnum("SuspiciousItemReaction", "The speed at which we move to the suspicious item.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SUSPICIOUS_ITEM_REACTION SuspiciousItemReaction
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ActionSuspiciousItemReaction() : base("SuspiciousItemReaction", "PERFORM A SPECIFIED SUSPICIOUS ITEM REACTION.")
- 
-        {
+            get { return _reaction; }
+            set { _reaction = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionSuspiciousItemReaction cond = (ActionSuspiciousItemReaction)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            ActionSuspiciousItemReaction action = (ActionSuspiciousItemReaction)newnode;
+            _reaction = action._reaction;
         }
     }
 }

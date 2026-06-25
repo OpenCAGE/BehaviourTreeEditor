@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsRequestingCover : ConditionConnectors
-	{
+    public class ConditionIsRequestingCover : ConditionConnectors
+    {
         public ConditionIsRequestingCover()
-            : base("IsRequestingCover", "ARE WE CURRENTLY REQUESTING COVER?")
- 
-        {
-            //All parameters added
-        }
+            : base("IsRequestingCover", "Am I waiting for cover?")
+        { }
     }
 }

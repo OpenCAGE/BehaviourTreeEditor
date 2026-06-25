@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCanBreakout : ConditionConnectors
-	{
+    public class ConditionCanBreakout : ConditionConnectors
+    {
         public ConditionCanBreakout()
-            : base("CanBreakout", "ARE WE ABLE TO BREAK OUT?")
- 
-        {
-            //All parameters added
-        }
+            : base("CanBreakout", "Is there a way to break out?")
+        { }
     }
 }

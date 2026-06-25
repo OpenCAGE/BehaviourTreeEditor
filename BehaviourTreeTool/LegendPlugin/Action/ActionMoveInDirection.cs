@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,45 +33,28 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveInDirection : Action
-	{
-        //All parameters added
+    public class ActionMoveInDirection : ActionMoveBase
+    {
+        protected float _distance = 0f;
 
-        protected SHUTDOWN_SPEED_TYPE _type;
-        protected MovementSpeedType _MovementSpeedType;
-        protected MoveDirection _Direction;
-        private string _Distance = "";
-
-        [DesignerEnum("Direction", "Direction", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MoveDirection Direction
+        [DesignerFloat("Distance", "Distance.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 1000, 0.1f, 2, "Distance to move ( 0 for indefinite)")]
+        public float Distance
         {
-            get { return _Direction; }
-            set { _Direction = value; }
+            get { return _distance; }
+            set { _distance = value; }
         }
 
-        [DesignerString("Distance", "Distance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Distance
+        protected MOVE_DIRECTION _direction;
+        [DesignerEnum("Direction", "The direction in which to move.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public MOVE_DIRECTION Direction
         {
-            get { return _Distance; }
-            set { _Distance = value; }
+            get { return _direction; }
+            set { _direction = value; }
         }
 
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public MovementSpeedType MovementSpeedType
-        {
-            get { return _MovementSpeedType; }
-            set { _MovementSpeedType = value; }
-        }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionMoveInDirection() : base("MoveInDirection", "MOVE IN A SPECIFIED DIRECTION OVER A SPECIFIED DISTANCE AND SPEED.")
- 
+        public ActionMoveInDirection()
+            : base("MoveInDirection", "Move in direction.")
         {
         }
 
@@ -80,11 +62,9 @@ namespace LegendPlugin.Nodes
         {
             base.CloneProperties(newnode);
 
-            ActionMoveInDirection cond = (ActionMoveInDirection)newnode;
-            cond._Direction = _Direction;
-            cond._Distance = _Distance;
-            cond._MovementSpeedType = _MovementSpeedType;
-            cond._type = _type;
+            ActionMoveInDirection action = (ActionMoveInDirection)newnode;
+            action._direction = _direction;
+            action._distance = _distance;
         }
     }
 }

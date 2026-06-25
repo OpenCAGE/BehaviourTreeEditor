@@ -34,12 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasGroupAwarenessState : ConditionConnectors
-	{
+    public class ConditionHasGroupAwarenessState : ConditionConnectors
+    {
         public ConditionHasGroupAwarenessState()
-            : base(Resources.ConditionHasGroupAwarenessState, Resources.ConditionHasGroupAwarenessState)
+            : base("HasGroupAwarenessState", "Are we in the specified NPC group awareness state?")
+        { }
+
+        protected GROUP_AWARENESS_STATE _groupAwarenessState;
+        [DesignerEnum("GroupAwarenessState", "The group awareness state we are testing if we are in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public GROUP_AWARENESS_STATE GroupAwarenessState
         {
-            //Unknown parameters. Not used in final game.
+            get { return _groupAwarenessState; }
+            set { _groupAwarenessState = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionHasGroupAwarenessState cond = (ConditionHasGroupAwarenessState)newnode;
+            cond._groupAwarenessState = _groupAwarenessState;
         }
     }
 }

@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,28 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionPauseSenses : Action
+    public class ActionPauseSenses : Search_Atomic
     {
-        private string _duration = "";
+        public ActionPauseSenses()
+            : base("PauseSenses", "Pause senses for specified duration.")
+        {
+        }
 
-        [DesignerString("Duration", "Duration", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Duration
+        protected float _duration = 5.0f;
+        [DesignerFloat("Duration to pause senses", "Duration in seconds to pause sensory input", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 1000, 0.01f, 2, "UnitsCount")]
+        public float Duration
         {
             get { return _duration; }
             set { _duration = value; }
-        }
-        
-        public ActionPauseSenses() : base("PauseSenses", "Pause our senses for a duration - unused in the final game.")
-        {
-
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionPauseSenses cond = (ActionPauseSenses)newnode;
-            cond._duration = _duration;
+            ActionPauseSenses action = (ActionPauseSenses)newnode;
+            action._duration = _duration;
         }
     }
 }

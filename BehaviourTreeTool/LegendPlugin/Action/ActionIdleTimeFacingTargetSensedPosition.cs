@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,64 +33,62 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionIdleTimeFacingTargetSensedPosition : Action
-	{
-        protected SHUTDOWN_SPEED_TYPE _shutdownspeed;
-        protected string _time;
-        protected string _tolerance;
-        protected SenseType _sensetype;
-        protected ThresholdQualifier _threshold;
+    public class ActionIdleTimeFacingTargetSensedPosition : Normal_Atomic
+    {
+        public ActionIdleTimeFacingTargetSensedPosition()
+            : base("IdleTimeFacingTargetSensedPosition", "Switch to an idle state for a set time and face target position using specified sense threshold.")
+        { }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SHUTDOWN_SPEED_TYPE RequestShutDownSpeed
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The sensory information we are using for finding the last position.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
         {
-            get { return _shutdownspeed; }
-            set { _shutdownspeed = value; }
+            get { return _sense; }
+            set { _sense = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "Which sensory threshold to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ThresholdQualifier ThresholdQualifier
+        {
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
+        }
+
+        protected float _facingTolerance = 5.0f;
+        [DesignerFloat("Facing Tolerance", "What angle do we turn to face target?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 360, 1.0f, 2, "Degrees")]
+        public float FacingTolerance
+        {
+            get { return _facingTolerance; }
+            set { _facingTolerance = value; }
+        }
+
+        protected float _time = 5.0f;
+        [DesignerFloat("Time to Idle", "Duration in seconds to remain idle.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float Time
         {
             get { return _time; }
             set { _time = value; }
         }
 
-        [DesignerString("Facing tolerance", "FacingTolerance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string FacingTolerance
+        protected float _noiseTime = 0.0f;
+        [DesignerFloat("NoiseTime", "Random variation in seconds applied to the base duration.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float NoiseTime
         {
-            get { return _tolerance; }
-            set { _tolerance = value; }
-        }
-
-        [DesignerEnum("Sense type", "SenseType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseType SenseType
-        {
-            get { return _sensetype; }
-            set { _sensetype = value; }
-        }
-
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ThresholdQualifier ThresholdQualifier
-        {
-            get { return _threshold; }
-            set { _threshold = value; }
-        }
-
-        public ActionIdleTimeFacingTargetSensedPosition() : base("IdleTimeFacingTargetSensedPosition", "Idle for a set time while facing our target's sensed position - unused in the final game.")
-
-        {
+            get { return _noiseTime; }
+            set { _noiseTime = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionIdleTimeFacingTargetSensedPosition cond = (ActionIdleTimeFacingTargetSensedPosition)newnode;
-            cond._shutdownspeed = _shutdownspeed;
-            cond._time = _time;
-            cond._tolerance = _tolerance;
-            cond._sensetype = _sensetype;
-            cond._threshold = _threshold;
+            ActionIdleTimeFacingTargetSensedPosition action = (ActionIdleTimeFacingTargetSensedPosition)newnode;
+            action._sense = _sense;
+            action._thresholdQualifier = _thresholdQualifier;
+            action._time = _time;
+            action._facingTolerance = _facingTolerance;
+            action._noiseTime = _noiseTime;
         }
     }
 }

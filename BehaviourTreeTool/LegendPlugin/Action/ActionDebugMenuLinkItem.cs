@@ -25,48 +25,46 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using LegendPlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Attributes;
-using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionDebugMenuLinkItem : Action
+    public class ActionDebugMenuLinkItem : Search_Atomic
     {
-        //All parameters added
+        public ActionDebugMenuLinkItem()
+            : base("DebugMenuLinkItem", "Will always succeed - sets the debug menu item to the given value (not functional) in retail).")
+        {
+        }
 
-        private bool _DefaultBehaviour = false;
-        private string _In_Game_Menu_Text = "";
+        protected String _inGameMenuText;
+        [DesignerString("In_Game_Menu_Text", "What to display in the in-game debug menus.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public String In_Game_Menu_Text
+        {
+            get { return _inGameMenuText; }
+            set { _inGameMenuText = value; }
+        }
 
-        [DesignerBoolean("Default behaviour", "DefaultBehaviour", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected bool _defaultBehaviour;
+        [DesignerBoolean("DefaultBehaviour", "What should it set the menu item back to?", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool DefaultBehaviour
         {
-            get { return _DefaultBehaviour; }
-            set { _DefaultBehaviour = value; }
-        }
-
-        [DesignerString("In game menu text", "In_Game_Menu_Text", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string In_Game_Menu_Text
-        {
-            get { return _In_Game_Menu_Text; }
-            set { _In_Game_Menu_Text = value; }
-        }
-
-        public ActionDebugMenuLinkItem() : base("DebugMenuLinkItem", "LINK TO AN ITEM IN THE IN-GAME DEBUG MENU.")
- 
-        {
+            get { return _defaultBehaviour; }
+            set { _defaultBehaviour = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionDebugMenuLinkItem cond = (ActionDebugMenuLinkItem)newnode;
-            cond._DefaultBehaviour = _DefaultBehaviour;
-            cond._In_Game_Menu_Text = _In_Game_Menu_Text;
+            ActionDebugMenuLinkItem action = (ActionDebugMenuLinkItem)newnode;
+
+            action._inGameMenuText = _inGameMenuText;
+            action._defaultBehaviour = _defaultBehaviour;
         }
     }
 }

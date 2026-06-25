@@ -34,12 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsCoverTooClose : ConditionConnectors
-	{
+    public class ConditionIsCoverTooClose : ConditionConnectors
+    {
         public ConditionIsCoverTooClose()
-            : base(Resources.ConditionIsCoverTooClose, Resources.ConditionIsCoverTooClose)
+            : base("IsCoverTooClose", "Is our target within the given distance of cover?")
+        { }
+
+        protected float _distance = 5.0f;
+        [DesignerFloat("Distance to check", "Maximum distance in metres to check.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float Distance
         {
-            //Unknown parameters. Not used in final game.
+            get { return _distance; }
+            set { _distance = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionIsCoverTooClose cond = (ConditionIsCoverTooClose)newnode;
+            cond._distance = _distance;
         }
     }
 }

@@ -34,12 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAllowedToDoSuspiciousWarning : ConditionConnectors
-	{
+    public class ConditionAllowedToDoSuspiciousWarning : ConditionConnectors
+    {
         public ConditionAllowedToDoSuspiciousWarning()
-            : base(Resources.ConditionAllowedToDoSuspiciousWarning, Resources.ConditionAllowedToDoSuspiciousWarning)
-        {
-            //Unknown parameters. Not used in final game.
-        }
-	}
+            : base("AllowedToDoSuspiciousWarning", "Is squad allowing us to perform a suspicious warning?")
+        { }
+    }
 }

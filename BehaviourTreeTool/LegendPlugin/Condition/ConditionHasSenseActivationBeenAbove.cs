@@ -34,12 +34,36 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasSenseActivationBeenAbove : ConditionConnectors
-	{
+    public class ConditionHasSenseActivationBeenAbove : ConditionConnectors
+    {
         public ConditionHasSenseActivationBeenAbove()
-            : base(Resources.ConditionHasSenseActivationBeenAbove, Resources.ConditionHasSenseActivationBeenAbove)
+            : base("HasSenseActivationBeenAbove", "Can we have sensed the target at the threshold supplied?")
+        { 
+        }
+
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The sensory information we are checking that we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
         {
-            //Unknown parameters. Not used in final game.
+            get { return _sense; }
+            set { _sense = value; }
+        }
+
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "The threshold qualifier for the information we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ThresholdQualifier ThresholdQualifier
+        {
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
+        }
+
+        protected override void CloneProperties(Node newnode)
+        {
+            base.CloneProperties(newnode);
+
+            ConditionHasSenseActivationBeenAbove cond = (ConditionHasSenseActivationBeenAbove)newnode;
+            cond._sense = _sense;
+            cond._thresholdQualifier = _thresholdQualifier;
         }
     }
 }

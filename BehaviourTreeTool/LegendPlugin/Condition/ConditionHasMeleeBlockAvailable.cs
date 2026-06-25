@@ -34,12 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasMeleeBlockAvailable : ConditionConnectors
-	{
+    public class ConditionHasMeleeBlockAvailable : ConditionConnectors
+    {
         public ConditionHasMeleeBlockAvailable()
-            : base(Resources.ConditionHasMeleeBlockAvailable, Resources.ConditionHasMeleeBlockAvailable)
-        {
-            //Unknown parameters. Not used in final game.
-        }
+            : base("HasMeleeBlockAvailable", "Is there a melee block available on the current target.")
+        { }
     }
 }

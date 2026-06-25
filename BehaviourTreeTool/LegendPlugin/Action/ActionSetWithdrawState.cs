@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSetWithdrawState : Action
-	{
-        //All parameters added
-
-        protected WITHDRAW_STATE _type;
-
-        [DesignerEnum("Withdraw state", "WithdrawState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public WITHDRAW_STATE WithdrawState
+    public class ActionSetWithdrawState : Search_Atomic
+    {
+        public ActionSetWithdrawState()
+            : base("SetWithdrawState", "Sets the withdraw state.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public ActionSetWithdrawState() : base("SetWithdrawState", "SET OUR CURRENT WITHDRAW STATE.")
- 
+        protected WITHDRAW_STATE _withdrawState;
+        [DesignerEnum("WithdrawState", "Withdraw state.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WITHDRAW_STATE WithdrawState
         {
+            get { return _withdrawState; }
+            set { _withdrawState = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionSetWithdrawState cond = (ActionSetWithdrawState)newnode;
-            cond._type = _type;
+            ActionSetWithdrawState action = (ActionSetWithdrawState)newnode;
+            action._withdrawState = _withdrawState;
         }
     }
 }
