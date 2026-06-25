@@ -38,8 +38,6 @@ using System.Text;
 
 namespace LegendPlugin
 {
-    //note - for cathode enums i should add a thing that removes the last entry if it's UNKNOWN_<enum_name>
-
     public enum SPEED_BOUNDARY
     {
         Slowest,
