@@ -38,8 +38,11 @@ namespace Brainiac.Design.Nodes
 	/// </summary>
 	public class Sequence : StyledNode
 	{
-		private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(79,129,189) );
-		private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(68,111,163) );
+		//private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(79,129,189) );
+		//private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(68,111,163) );
+
+        private static Brush _theBackgroundBrush = new SolidBrush(Color.FromArgb(49, 133, 156));
+        private static Brush _theDraggedBackgroundBrush = new SolidBrush(Color.FromArgb(41, 112, 131));
 
 		protected ConnectorMultiple _genericChildren;
 
@@ -47,6 +50,12 @@ namespace Brainiac.Design.Nodes
 		{
 			_genericChildren= new ConnectorMultiple(_children, "{0}", "GenericChildren", 2, int.MaxValue);
 		}
+
+        public Sequence( Brush backgroundBrush, Brush draggedBackgroundBrush, string label, string description)
+            : base(null, backgroundBrush, draggedBackgroundBrush, label, true, description)
+        {
+            _genericChildren = new ConnectorMultiple(_children, "{0}", "GenericChildren", 2, int.MaxValue);
+        }
 
 		public override void CheckForErrors(BehaviorNode rootBehavior, List<ErrorCheck> result)
 		{

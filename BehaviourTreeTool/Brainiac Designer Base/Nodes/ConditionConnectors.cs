@@ -47,4 +47,18 @@ namespace Brainiac.Design.Nodes
 			_isFalse= new ConnectorSingle(_children, Resources.ConditionConnectorsFalse, "ConditionFalse");
 		}
 	}
+
+    /// <summary>
+    /// This node represents a condition which can be attached to the behaviour tree.
+    /// </summary>
+    public class ConditionPendingConnectors : ConditionConnectors
+    {
+        protected ConnectorSingle _isPending;
+
+        public ConditionPendingConnectors(string label, string description)
+            : base(label, description)
+        {
+            _isPending = new ConnectorSingle(_children, Resources.ConditionConnectorsPending, "ConditionPending");
+        }
+    }
 }

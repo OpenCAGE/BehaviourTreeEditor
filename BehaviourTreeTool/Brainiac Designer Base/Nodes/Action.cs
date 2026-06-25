@@ -43,5 +43,11 @@ namespace Brainiac.Design.Nodes
 		public Action(string label, string description) : base(null, _theBackgroundBrush, _theDraggedBackgroundBrush, label, false, description)
 		{
 		}
-	}
+
+        public Action(string label, string description, Brush backgroundBrush, Brush draggedBackgroundBrush)
+            : base(null, backgroundBrush, draggedBackgroundBrush, label, false, description)
+        {
+        }
+
+    }
 }
