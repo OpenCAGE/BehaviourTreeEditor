@@ -217,6 +217,10 @@ namespace Brainiac.Design
 		{
 			InitializeComponent();
 
+			// the properties dock is essential, so it may not be closed by the user
+			CloseButton= false;
+			CloseButtonVisible= false;
+
 			__propertyGrids.Add(this);
 
 			propertyGrid.PropertiesVisible(false);

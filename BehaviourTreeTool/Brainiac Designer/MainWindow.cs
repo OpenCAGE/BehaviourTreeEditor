@@ -25,17 +25,18 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using Brainiac.Design.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Brainiac.Design.Attributes;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Properties;
 
 namespace Brainiac.Design
 {
@@ -236,6 +237,13 @@ namespace Brainiac.Design
 			// restore layout
 			if(System.IO.File.Exists(__layoutFile))
 				dockPanel.LoadFromXml(__layoutFile, new WeifenLuo.WinFormsUI.Docking.DeserializeDockContent(GetContentFromPersistString));
+
+			// the properties dock is essential and cannot be reopened, so make sure one always exists
+			if(PropertiesDock.Count <1)
+				new PropertiesDock().Show(dockPanel, WeifenLuo.WinFormsUI.Docking.DockState.DockRight);
+
+			// keep the help button above the fill-docked panel and the MDI client
+			helpBtn.BringToFront();
 
 			// make sure the window is focused
 			Focus();
@@ -447,5 +455,10 @@ namespace Brainiac.Design
 
 			return dockContent;
 		}
-	}
+
+        private void helpBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://opencage.co.uk/docs/behaviour-trees");
+        }
+    }
 }

@@ -72,6 +72,7 @@ namespace Brainiac.Design
             WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient7 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.helpBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dockPanel
@@ -130,12 +131,25 @@ namespace Brainiac.Design
             this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 0;
             // 
+            // helpBtn
+            // 
+            this.helpBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.helpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpBtn.Image = ((System.Drawing.Image)(resources.GetObject("helpBtn.Image")));
+            this.helpBtn.Location = new System.Drawing.Point(1237, 0);
+            this.helpBtn.Name = "helpBtn";
+            this.helpBtn.Size = new System.Drawing.Size(20, 20);
+            this.helpBtn.TabIndex = 373;
+            this.helpBtn.UseVisualStyleBackColor = true;
+            this.helpBtn.Click += new System.EventHandler(this.helpBtn_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 804);
             this.Controls.Add(this.dockPanel);
+            this.Controls.Add(this.helpBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MainWindow";
@@ -150,8 +164,7 @@ namespace Brainiac.Design
 		#endregion
 
 		private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
-
-
-	}
+        private System.Windows.Forms.Button helpBtn;
+    }
 }
 
