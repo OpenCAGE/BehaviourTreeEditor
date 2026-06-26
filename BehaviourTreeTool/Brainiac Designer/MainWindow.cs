@@ -254,17 +254,15 @@ namespace Brainiac.Design
 
 			try
 			{
-				string behaviourFolder = SharedData.pathToAI + "/DATA/BEHAVIOR";
-
 				//Clear out the existing XMLs in the behaviour folder
-				Directory.CreateDirectory(behaviourFolder);
-				foreach (string originalXML in Directory.GetFiles(behaviourFolder, "*.xml"))
+				Directory.CreateDirectory(SharedData.pathToXMLs);
+				foreach (string originalXML in Directory.GetFiles(SharedData.pathToXMLs, "*.xml"))
 				{
 					File.Delete(originalXML);
 				}
 
 				//Extract out the XMLs from the game's DB for us to use
-                BML bml = new BML(SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.BML"); 
+                BML bml = new BML(SharedData.pathToBML); 
 				XmlWriterSettings settings = new XmlWriterSettings
                 {
                     Indent = true,
@@ -272,7 +270,7 @@ namespace Brainiac.Design
                 };
                 foreach (XmlElement file in bml.Content["DIR"])
 				{
-                    using (FileStream stringWriter = File.Create(behaviourFolder + "/" + Path.GetFileNameWithoutExtension(file.GetAttribute("name")) + ".xml"))
+                    using (FileStream stringWriter = File.Create(SharedData.pathToXMLs + "/" + Path.GetFileNameWithoutExtension(file.GetAttribute("name")) + ".xml"))
                     using (XmlWriter xmlTextWriter = XmlWriter.Create(stringWriter, settings))
                     {
                         file.FirstChild.WriteTo(xmlTextWriter);
@@ -281,10 +279,10 @@ namespace Brainiac.Design
 				}
 
 				//Bodge: write out the behaviour path so we can reference it elsewhere (todo - remove this)
-                File.WriteAllText("alien_path.txt", behaviourFolder);
+                File.WriteAllText("alien_path.txt", SharedData.pathToXMLs);
 
                 // set the default behaviour folder
-                behaviorTreeList.BehaviorFolder = behaviourFolder;
+                behaviorTreeList.BehaviorFolder = SharedData.pathToXMLs;
 
 				// load the plugins
 				behaviorTreeList.LoadPlugins("LegendPlugin.dll");

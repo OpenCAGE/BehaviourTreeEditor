@@ -903,7 +903,7 @@ namespace Brainiac.Design
 				ShowBehavior(currNode);
 
 			//Now the XML has been saved, compile them all into one
-            DirectoryInfo XMLFiles = new DirectoryInfo(SharedData.pathToAI + "/DATA/BEHAVIOR");
+            DirectoryInfo XMLFiles = new DirectoryInfo(SharedData.pathToXMLs);
             string XMLContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><DIR>";
             foreach (FileInfo currentFile in XMLFiles.GetFiles())
             {
@@ -917,7 +917,7 @@ namespace Brainiac.Design
             XMLContent += "</DIR>";
 
             //Convert to BML and write
-            BML bml = new BML(SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.BML");
+            BML bml = new BML(SharedData.pathToBML);
 			XmlDocument xml = new XmlDocument();
 			xml.LoadXml(XMLContent);
 			bml.Content = xml;
