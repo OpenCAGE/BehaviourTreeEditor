@@ -909,7 +909,7 @@ namespace Brainiac.Design
             {
 				string fileContents = File.ReadAllText(currentFile.FullName);
                 string fileName = currentFile.Name;
-				string customFileHeader = "<File name=\"" + fileName.Substring(0, fileName.Length - 3).ToUpper() + "bml\">";
+				string customFileHeader = "<File name=\"" + fileName.Substring(0, fileName.Length - 3) + "bml\">";
                 string customFileFooter = "</File>"; 
 
                 XMLContent += customFileHeader + fileContents.Substring(38) + customFileFooter; 
