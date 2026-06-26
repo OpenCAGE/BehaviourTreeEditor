@@ -37,7 +37,7 @@ using System.Reflection;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Properties;
 using System.Xml;
-using BehaviourTreeTool;
+using CATHODE;
 
 namespace Brainiac.Design
 {
@@ -916,16 +916,12 @@ namespace Brainiac.Design
             }
             XMLContent += "</DIR>";
 
-            //Write and convert to BML
-            string BinaryPrefix = SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.";
-            string XMLOutputFile = BinaryPrefix + "XML";
-            string BMLOutputFile = BinaryPrefix + "BML";
-
-            File.WriteAllText(XMLOutputFile, XMLContent);
-			if (File.Exists(BMLOutputFile)) 
-				File.Delete(BMLOutputFile);
-            new AlienConverter(XMLOutputFile, BMLOutputFile).Run();
-            File.Delete(XMLOutputFile);
+            //Convert to BML and write
+            BML bml = new BML(SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.BML");
+			XmlDocument xml = new XmlDocument();
+			xml.LoadXml(XMLContent);
+			bml.Content = xml;
+			bml.Save();
 
             return node.FileManager.Filename;
 		}

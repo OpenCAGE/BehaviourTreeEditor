@@ -28,15 +28,19 @@
 using Brainiac.Design.Attributes;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Properties;
+using CATHODE;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using static CATHODE.RenderableElements;
+using Resources = Brainiac.Design.Properties.Resources;
 
 namespace Brainiac.Design
 {
@@ -250,9 +254,37 @@ namespace Brainiac.Design
 
 			try
 			{
-				// set the default behaviour folder
-				behaviorTreeList.BehaviorFolder= SharedData.pathToAI + "/DATA/BEHAVIOR"; //todo-mattf: this should load from AI folder
-				System.IO.File.WriteAllText("alien_path.txt", behaviorTreeList.BehaviorFolder);
+				string behaviourFolder = SharedData.pathToAI + "/DATA/BEHAVIOR";
+
+				//Clear out the existing XMLs in the behaviour folder
+				Directory.CreateDirectory(behaviourFolder);
+				foreach (string originalXML in Directory.GetFiles(behaviourFolder, "*.xml"))
+				{
+					File.Delete(originalXML);
+				}
+
+				//Extract out the XMLs from the game's DB for us to use
+                BML bml = new BML(SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.BML"); 
+				XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = false
+                };
+                foreach (XmlElement file in bml.Content["DIR"])
+				{
+                    using (FileStream stringWriter = File.Create(behaviourFolder + "/" + Path.GetFileNameWithoutExtension(file.GetAttribute("name")) + ".xml"))
+                    using (XmlWriter xmlTextWriter = XmlWriter.Create(stringWriter, settings))
+                    {
+                        file.FirstChild.WriteTo(xmlTextWriter);
+                        xmlTextWriter.Flush();
+                    }
+				}
+
+				//Bodge: write out the behaviour path so we can reference it elsewhere (todo - remove this)
+                File.WriteAllText("alien_path.txt", behaviourFolder);
+
+                // set the default behaviour folder
+                behaviorTreeList.BehaviorFolder = behaviourFolder;
 
 				// load the plugins
 				behaviorTreeList.LoadPlugins("LegendPlugin.dll");
