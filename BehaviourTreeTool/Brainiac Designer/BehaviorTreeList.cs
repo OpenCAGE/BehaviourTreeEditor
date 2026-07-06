@@ -621,6 +621,7 @@ namespace Brainiac.Design
 		{
 			// assign the new folder
 			_behaviorFolder= folder ==string.Empty ? string.Empty : Path.GetFullPath(folder);
+			FileManagers.FileManager.BehaviorFolder= _behaviorFolder;
 
 			// check if we can clear all behaviours
 			if(ClearBehaviors !=null)

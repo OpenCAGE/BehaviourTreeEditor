@@ -278,9 +278,6 @@ namespace Brainiac.Design
                     }
 				}
 
-				//Bodge: write out the behaviour path so we can reference it elsewhere (todo - remove this)
-                File.WriteAllText("alien_path.txt", SharedData.pathToXMLs);
-
                 // set the default behaviour folder
                 behaviorTreeList.BehaviorFolder = SharedData.pathToXMLs;
 
