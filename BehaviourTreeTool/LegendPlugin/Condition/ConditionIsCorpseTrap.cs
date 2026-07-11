@@ -33,13 +33,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsCorpseTrap : ConditionConnectors
-	{
+    public class ConditionIsCorpseTrap : ConditionConnectors
+    {
         public ConditionIsCorpseTrap()
-            : base("IsCorpseTrap", "ARE WE A CORPSE TRAP?")
- 
-        {
-            //All parameters added
-        }
+            : base("IsCorpseTrap", "Are we a corpse trap?")
+        { }
     }
 }

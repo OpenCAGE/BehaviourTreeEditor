@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAllowedToSearch : ConditionConnectors
-	{
+    public class ConditionAllowedToSearch : ConditionConnectors
+    {
         public ConditionAllowedToSearch()
-            : base("AllowedToSearch", "ARE WE ALLOWED TO SEARCH?")
- 
-        {
-            //All parameters added
-        }
+            : base("AllowedToSearch", "Is squad allowing us to search?")
+        { }
     }
 }

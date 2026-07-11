@@ -39,6 +39,7 @@ namespace Brainiac.Design.FileManagers
 	public abstract class FileManager
 	{
 		protected static Nodes.BehaviorNode _loadedBehavior= null;
+		protected static string _behaviorFolder= string.Empty;
 
 		/// <summary>
 		/// Holds the currently loaded behaviour so you can resolve circular references when loading.
@@ -46,6 +47,15 @@ namespace Brainiac.Design.FileManagers
 		public static Nodes.BehaviorNode LoadedBehavior
 		{
 			get { return _loadedBehavior; }
+		}
+
+		/// <summary>
+		/// The root folder containing behaviour XML files, used when resolving relative references.
+		/// </summary>
+		public static string BehaviorFolder
+		{
+			get { return _behaviorFolder; }
+			set { _behaviorFolder= value ==string.Empty ? string.Empty : Path.GetFullPath(value); }
 		}
 
 		/// <summary>

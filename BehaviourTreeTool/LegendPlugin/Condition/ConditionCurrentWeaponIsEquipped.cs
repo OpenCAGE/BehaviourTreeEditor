@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCurrentWeaponIsEquipped : ConditionConnectors
-	{
+    public class ConditionCurrentWeaponIsEquipped : ConditionConnectors
+    {
         public ConditionCurrentWeaponIsEquipped()
-            : base("CurrentWeaponIsEquipped", "CHECK TO SEE IF CURRENT WEAPON IS EQUIPPED ON ENTITY.")
- 
-        {
-            //All parameters added
-        }
+            : base("CurrentWeaponIsEquipped", "Do we have a weapon equipped?")
+        { }
     }
 }

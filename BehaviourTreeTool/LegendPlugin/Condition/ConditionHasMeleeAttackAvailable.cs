@@ -34,23 +34,20 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasMeleeAttackAvailable : ConditionConnectors
-	{
-        //All parameters added
-
-        protected AttackType _cond;
-
-        [DesignerEnum("Attack type", "AttackType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public AttackType AttackType
+    public class ConditionHasMeleeAttackAvailable : ConditionConnectors
+    {
+        public ConditionHasMeleeAttackAvailable()
+            : base("HasMeleeAttackAvailable", "Is there a melee attack available on the current target?")
         {
-            get { return _cond; }
-            set { _cond = value; }
+            _attackType = ATTACK_TYPE.ANY;
         }
 
-        public ConditionHasMeleeAttackAvailable()
-            : base("HasMeleeAttackAvailable", "DO WE HAVE A MELEE ATTACK TYPE AVAILABLE?")
- 
+        protected ATTACK_TYPE _attackType;
+        [DesignerEnum("AttackType", "The attack type to check for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ATTACK_TYPE AttackType
         {
+            get { return _attackType; }
+            set { _attackType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasMeleeAttackAvailable cond = (ConditionHasMeleeAttackAvailable)newnode;
-            cond._cond = _cond;
+            cond._attackType = _attackType;
         }
     }
 }

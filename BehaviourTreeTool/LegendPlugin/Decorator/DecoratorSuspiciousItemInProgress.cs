@@ -34,13 +34,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorSuspiciousItemInProgress : Decorator
-	{
+    public class DecoratorSuspiciousItemInProgress : Decorator
+    {
         public DecoratorSuspiciousItemInProgress()
-            : base("SuspiciousItemInProgress", "DECORATOR FOR A SUSPICIOUS ITEM CURRENTLY IN PROGRESS.")
- 
+            : base("SuspiciousItemInProgress", "Marks that a suspicious item response is in progress.")
         {
-            //All parameters added
         }
     }
 }

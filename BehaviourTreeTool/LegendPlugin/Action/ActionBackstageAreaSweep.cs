@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,39 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionBackstageAreaSweep : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-        protected BackstageBehaviour _behave;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+    public class ActionBackstageAreaSweep : Normal_Atomic
+    {
+        public ActionBackstageAreaSweep()
+            : base("BackstageAreaSweep", "Backstage area sweep.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        [DesignerEnum("Backstage behaviour", "BackstageBehaviour", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public BackstageBehaviour BackstageBehaviour
+        protected BACKSTAGE_BEHAVIOUR _backstageBehaviour;
+        [DesignerEnum("BackstageBehaviour", "The combat state you want to notify.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public BACKSTAGE_BEHAVIOUR BackstageBehaviour
         {
-            get { return _behave; }
-            set { _behave = value; }
-        }
-
-        public ActionBackstageAreaSweep() : base("BackstageAreaSweep", "PERFORM A BACKSTAGE AREA SWEEP.")
- 
-        {
+            get { return _backstageBehaviour; }
+            set { _backstageBehaviour = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionBackstageAreaSweep cond = (ActionBackstageAreaSweep)newnode;
-            cond._type = _type;
-            cond._behave = _behave;
+            ActionBackstageAreaSweep action = (ActionBackstageAreaSweep)newnode;
+            action._backstageBehaviour = _backstageBehaviour;
         }
     }
 }

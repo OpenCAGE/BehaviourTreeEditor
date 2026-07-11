@@ -34,13 +34,17 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionScriptedWithdrawRequested : ConditionConnectors
-	{
+    public class ConditionScriptedWithdrawRequested : ConditionConnectors
+    {
         public ConditionScriptedWithdrawRequested()
-            : base("ScriptedWithdrawRequested", "HAVE WE REQUESTED A SCRIPTED WITHDRAWAL FROM THE LEVEL?")
- 
+            : base("ScriptedWithdrawRequested", "Has the script asked us to withdraw?")
+        { }
+
+        protected override void CloneProperties(Node newnode)
         {
-            //All parameters added
+            base.CloneProperties(newnode);
+
+            ConditionScriptedWithdrawRequested cond = (ConditionScriptedWithdrawRequested)newnode;
         }
     }
 }

@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemGroupAllowedToProgress : ConditionConnectors
-	{
+    public class ConditionSuspiciousItemGroupAllowedToProgress : ConditionConnectors
+    {
         public ConditionSuspiciousItemGroupAllowedToProgress()
-            : base("SuspiciousItemGroupAllowedToProgress", "ARE WE ALLOWED TO PROGRESS ON THIS SUSPICIOUS ITEM?")
- 
-        {
-            //All parameters added
-        }
+            : base("SuspiciousItemGroupAllowedToProgress", "Controls which group members are allowed to progress with the item.")
+        { }
     }
 }

@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,48 +33,36 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionRangedShoot : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-        private bool _ShootStraightAway = false;
-        protected TerminationCondition _cond;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+    public class ActionRangedShoot : Normal_Atomic
+    {
+        public ActionRangedShoot()
+            : base("RangedShoot", "Shoot at our current target.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        [DesignerBoolean("Shoot straight away", "ShootStraightAway", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        private SHOT_TERMINATOR_TYPE _shotTerminator;
+        [DesignerEnum("TerminationCondition", "The termination condition to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SHOT_TERMINATOR_TYPE TerminationCondition
+        {
+            get { return _shotTerminator; }
+            set { _shotTerminator = value; }
+        }
+
+        private bool _shootStraightAway = false;
+        [DesignerBoolean("ShootStraightAway", "Shoot straight away?", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool ShootStraightAway
         {
-            get { return _ShootStraightAway; }
-            set { _ShootStraightAway = value; }
-        }
-
-        [DesignerEnum("Termination Condition", "TerminationCondition", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public TerminationCondition TerminationCondition
-        {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        public ActionRangedShoot() : base("RangedShoot", "SHOOT AT OUR TARGET FROM A RANGE.")
- 
-        {
+            get { return _shootStraightAway; }
+            set { _shootStraightAway = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionRangedShoot cond = (ActionRangedShoot)newnode;
-            cond._ShootStraightAway = _ShootStraightAway;
-            cond._type = _type;
-            cond._cond = _cond;
+            ActionRangedShoot action = (ActionRangedShoot)newnode;
+            action._shotTerminator = _shotTerminator;
+            action._shootStraightAway = _shootStraightAway;
         }
     }
 }

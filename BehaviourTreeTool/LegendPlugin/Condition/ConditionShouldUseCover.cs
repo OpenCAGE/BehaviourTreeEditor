@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionShouldUseCover : ConditionConnectors
-	{
+    public class ConditionShouldUseCover : ConditionConnectors
+    {
         public ConditionShouldUseCover()
-            : base("ShouldUseCover", "SHOULD WE USE COVER, OR BE STOOD IN THE OPEN?")
- 
-        {
-            //All parameters added
-        }
+            : base("ShouldUseCover", "Can we use cover?")
+        { }
     }
 }

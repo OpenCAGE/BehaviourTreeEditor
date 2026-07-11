@@ -25,39 +25,36 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionExpireTimer : Action
-	{
-        //All parameters added
-
-        protected LOGIC_CHARACTER_TIMER_TYPE _type;
-
-        [DesignerEnum("Timer type", "TimerType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOGIC_CHARACTER_TIMER_TYPE TimerType
+    public class ActionExpireTimer : Search_Atomic
+    {
+        public ActionExpireTimer()
+            : base("ExpireTimer", "Expires a timer.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public ActionExpireTimer() : base("ExpireTimer", "EXPIRE THE TIMER OF A SPECIFIED TYPE.")
- 
+        protected LOGIC_CHARACTER_TIMER_TYPE _timerType;
+        [DesignerEnum("TimerType", "The type of timer we are expiring.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public LOGIC_CHARACTER_TIMER_TYPE TimerType
         {
+            get { return _timerType; }
+            set { _timerType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionExpireTimer cond = (ActionExpireTimer)newnode;
-            cond._type = _type;
+            ActionExpireTimer action = (ActionExpireTimer)newnode;
+            action._timerType = _timerType;
         }
     }
 }

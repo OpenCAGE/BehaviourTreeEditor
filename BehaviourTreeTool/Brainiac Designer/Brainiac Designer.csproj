@@ -94,9 +94,6 @@
     <Compile Include="BehaviorTreeViewDock.Designer.cs">
       <DependentUpon>BehaviorTreeViewDock.cs</DependentUpon>
     </Compile>
-    <Compile Include="BML Scripts\AlienConverter.cs" />
-    <Compile Include="BML Scripts\AlienString.cs" />
-    <Compile Include="BML Scripts\BML.cs" />
     <Compile Include="DynamicPropertyGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -178,6 +175,10 @@
     <Compile Include="Workspace.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CathodeLib\CathodeLib\CathodeLib.csproj">
+      <Project>{8F2D79A7-8EBF-2944-2837-07F29FED4349}</Project>
+      <Name>CathodeLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Brainiac Designer Base\Brainiac Designer Base.csproj">
       <Project>{DE22E2F7-F314-458E-8D17-223CD099B2F0}</Project>
       <Name>Brainiac Designer Base</Name>

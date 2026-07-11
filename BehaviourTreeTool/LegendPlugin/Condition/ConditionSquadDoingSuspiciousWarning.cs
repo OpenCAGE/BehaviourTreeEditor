@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSquadDoingSuspiciousWarning : ConditionConnectors
-	{
+    public class ConditionSquadDoingSuspiciousWarning : ConditionConnectors
+    {
         public ConditionSquadDoingSuspiciousWarning()
-            : base("SquadDoingSuspiciousWarning", "IS OUR SQUAD CURRENTLY PERFORMING A SUSPICIOUS WARNING?")
- 
-        {
-            //All parameters added
-        }
+            : base("SquadDoingSuspiciousWarning", "Is someone in the squad doing a suspicious warning?")
+        { }
     }
 }

@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsTargetInDeepCrouch : ConditionConnectors
-	{
+    public class ConditionIsTargetInDeepCrouch : ConditionConnectors
+    {
         public ConditionIsTargetInDeepCrouch()
-            : base("IsTargetInDeepCrouch", "IS OUR TARGET IN A DEEP CROUCH?")
- 
-        {
-            //All parameters added
-        }
+            : base("IsTargetInDeepCrouch", "Is the target in deep crouch?")
+        { }
     }
 }

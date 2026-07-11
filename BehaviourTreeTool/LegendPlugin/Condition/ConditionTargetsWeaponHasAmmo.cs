@@ -34,13 +34,16 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetsWeaponHasAmmo : ConditionConnectors
-	{
+    public class ConditionTargetsWeaponHasAmmo : ConditionConnectors
+    {
         public ConditionTargetsWeaponHasAmmo()
-            : base("TargetsWeaponHasAmmo", "DOES OUR TARGET'S WEAPON HAVE AMMO, OR NOT?")
- 
+            : base("TargetsWeaponHasAmmo", "Does the target's weapon have ammo?")
+        { 
+        }
+
+        protected override void CloneProperties(Node newnode)
         {
-            //All parameters added
+            base.CloneProperties(newnode);
         }
     }
 }

@@ -25,57 +25,54 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionRequestCover : Action
-	{
-        //All parameters added
-        
-        private bool _InvalidateCurrentCover = false;
-        protected NPC_COVER_REQUEST_TYPE _cond;
-        private string _cond4 = "";
-
-        [DesignerBoolean("Invalidate current cover", "InvalidateCurrentCover", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool InvalidateCurrentCover
+    public class ActionRequestCover : Search_Atomic
+    {
+        public ActionRequestCover()
+            : base("RequestCover", "Request a search around the cover the sensed target is in.")
         {
-            get { return _InvalidateCurrentCover; }
-            set { _InvalidateCurrentCover = value; }
         }
 
-        [DesignerString("Radius", "Radius", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Radius
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
-        [DesignerEnum("Request type", "RequestType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected NPC_COVER_REQUEST_TYPE _requestType;
+        [DesignerEnum("RequestType", "The type of cover.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public NPC_COVER_REQUEST_TYPE RequestType
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _requestType; }
+            set { _requestType = value; }
         }
 
-        public ActionRequestCover() : base("RequestCover", "REQUEST SOME COVER WITHIN A SPECIFIED RADIUS, WITH THE OPTION OF IGNORING OUR CURRENT COVER.")
- 
+        protected float _radius = 20.0f;
+        [DesignerFloat("Radius of search", "Radius in metres to search for cover.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.5f, 2, "m")]
+        public float Radius
         {
+            get { return _radius; }
+            set { _radius = value; }
+        }
+
+        protected bool _shouldInvalidateCover = true;
+        [DesignerBoolean("InvalidateCurrentCover", "Should the atomic invalidate current cover.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool InvalidateCurrentCover
+        {
+            get { return _shouldInvalidateCover; }
+            set { _shouldInvalidateCover = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionRequestCover cond = (ActionRequestCover)newnode;
-            cond._InvalidateCurrentCover = _InvalidateCurrentCover;
-            cond._cond4 = _cond4;
-            cond._cond = _cond;
+            ActionRequestCover action = (ActionRequestCover)newnode;
+            action._requestType = _requestType;
+            action._radius = _radius;
+            action._shouldInvalidateCover = _shouldInvalidateCover;
         }
     }
 }

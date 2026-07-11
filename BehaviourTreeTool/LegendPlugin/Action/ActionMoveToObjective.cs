@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,48 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToObjective : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-        protected LOCOMOTION_TARGET_SPEED _type2;
-        protected ObjectiveType _type3;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+    public class ActionMoveToObjective : ActionMoveBase
+    {
+        public ActionMoveToObjective()
+            : base("MoveToObjective", "Move to our current objective.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOCOMOTION_TARGET_SPEED VentLockReason
+        protected OBJECTIVE_TYPE _objectiveType;
+        [DesignerEnum("ObjectiveType", "The type of objective we are moving to.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public OBJECTIVE_TYPE ObjectiveType
         {
-            get { return _type2; }
-            set { _type2 = value; }
-        }
-
-        [DesignerEnum("Objective type", "ObjectiveType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ObjectiveType ObjectiveType
-        {
-            get { return _type3; }
-            set { _type3 = value; }
-        }
-
-        public ActionMoveToObjective() : base("MoveToObjective", "MOVE TO AN OBJECTIVE TYPE WITH A SPECIFIED SPEED.")
- 
-        {
+            get { return _objectiveType; }
+            set { _objectiveType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionMoveToObjective cond = (ActionMoveToObjective)newnode;
-            cond._type = _type;
-            cond._type2 = _type2;
-            cond._type3 = _type3;
+            ActionMoveToObjective action = (ActionMoveToObjective)newnode;
+            action._objectiveType = _objectiveType;
         }
     }
 }

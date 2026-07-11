@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,57 +33,45 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionRangedAim : Action
-	{
-        //All parameters added
-
-        private string _cond1 = "";
-        protected RequestShutDownSpeed _cond2;
-        protected ShouldRaiseGun _cond3;
-        private string _cond4 = "";
-
-        [DesignerString("Noise time", "NoiseTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string NoiseTime
+    public class ActionRangedAim : Normal_Atomic
+    {
+        public ActionRangedAim()
+            : base("RangedAim", "Aim at our current target.")
         {
-            get { return _cond1; }
-            set { _cond1 = value; }
         }
 
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+        protected WEAPON_STANCE _gunStance;
+        [DesignerEnum("ShouldRaiseGun", "Should we raise our gun?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public WEAPON_STANCE ShouldRaiseGun
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
+            get { return _gunStance; }
+            set { _gunStance = value; }
         }
 
-        [DesignerEnum("Should raise gun", "ShouldRaiseGun", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ShouldRaiseGun ShouldRaiseGun
+        protected float _time = -1f;
+        [DesignerFloat("Time", "Duration in seconds.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1f, 1000, 0.01f, 2, "UnitsCount")]
+        public float Time
         {
-            get { return _cond3; }
-            set { _cond3 = value; }
+            get { return _time; }
+            set { _time = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        protected float _noiseTime = 0.0f;
+        [DesignerFloat("NoiseTime", "Random variation in seconds applied to the base duration.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0.0f, 1000, 0.01f, 2, "UnitsCount")]
+        public float NoiseTime
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
-        public ActionRangedAim() : base("RangedAim", "PERFORM A RANGED AIM AT OUR TARGET.")
- 
-        {
+            get { return _noiseTime; }
+            set { _noiseTime = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionRangedAim cond = (ActionRangedAim)newnode;
-            cond._cond1 = _cond1;
-            cond._cond2 = _cond2;
-            cond._cond3 = _cond3;
-            cond._cond4 = _cond4;
+            ActionRangedAim action = (ActionRangedAim)newnode;
+            action._gunStance = _gunStance;
+            action._time = _time;
+            action._noiseTime = _noiseTime;
         }
     }
 }

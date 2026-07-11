@@ -31,52 +31,49 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorTimer : Decorator
-	{
-        //All parameters added
-
-        private bool _OnlyIncreaseExistingEndTime = false;
-        private string _cond4 = "";
-        protected LOGIC_CHARACTER_TIMER_TYPE _cond;
-
-        [DesignerBoolean("Only increase existing end time", "OnlyIncreaseExistingEndTime", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool OnlyIncreaseExistingEndTime
+    public class DecoratorTimer : Decorator
+    {
+        public DecoratorTimer()
+            : base("Timer", "Used to restart timers every frame.")
         {
-            get { return _OnlyIncreaseExistingEndTime; }
-            set { _OnlyIncreaseExistingEndTime = value; }
         }
 
-        [DesignerString("Time", "Time", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Time
+        protected float _time = -1.0f;
+        [DesignerFloat("Time", "Duration in seconds.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, -1.0f, 1000.0f, 0.01f, 2, "UnitsCount")]
+        public float Time
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
+            get { return _time; }
+            set { _time = value; }
         }
 
-        [DesignerEnum("Timer type", "TimerType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected LOGIC_CHARACTER_TIMER_TYPE _timerType;
+        [DesignerEnum("TimerType", "The type of timer we are restarting.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public LOGIC_CHARACTER_TIMER_TYPE TimerType
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _timerType; }
+            set { _timerType = value; }
         }
 
-        public DecoratorTimer()
-            : base("Timer", "A DECORATOR FOR A TIMER.")
- 
+        protected bool _onlyIncreaseExistingEndTime;
+        [DesignerBoolean("OnlyIncreaseExistingEndTime", "If true, only extends an existing timer end time rather than resetting it.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool OnlyIncreaseExistingEndTime
         {
+            get { return _onlyIncreaseExistingEndTime; }
+            set { _onlyIncreaseExistingEndTime = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            DecoratorTimer cond = (DecoratorTimer)newnode;
-            cond._OnlyIncreaseExistingEndTime = _OnlyIncreaseExistingEndTime;
-            cond._cond4 = _cond4;
-            cond._cond = _cond;
+            DecoratorTimer decor = (DecoratorTimer)newnode;
+            decor._timerType = _timerType;
+            decor._time = _time;
+            decor._onlyIncreaseExistingEndTime = _onlyIncreaseExistingEndTime;
         }
     }
 }

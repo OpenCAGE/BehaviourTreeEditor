@@ -25,48 +25,44 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSetLogicCharacterFlags : Action
-	{
-        //All parameters added
+    public class ActionSetLogicCharacterFlags : Search_Atomic
+    {
+        public ActionSetLogicCharacterFlags()
+            : base("SetLogicCharacterFlags", "Set if have/haven't done the type.")
+        { }
 
-        protected LOGIC_CHARACTER_FLAGS _cond;
-        private bool _SetAtleastTo = false;
-
-        [DesignerEnum("Flag type", "FlagType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected LOGIC_CHARACTER_FLAGS _flagType;
+        [DesignerEnum("FlagType", "The type of thing we are setting we have or haven't done.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public LOGIC_CHARACTER_FLAGS FlagType
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _flagType; }
+            set { _flagType = value; }
         }
 
-        [DesignerBoolean("Flag", "Flag", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected bool _flag;
+        [DesignerBoolean("Flag", "Have or haven't we done it?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 1, DesignerProperty.DesignerFlags.NoFlags)]
         public bool Flag
         {
-            get { return _SetAtleastTo; }
-            set { _SetAtleastTo = value; }
-        }
-
-        public ActionSetLogicCharacterFlags() : base("SetLogicCharacterFlags", "SET SPECIFIED LOGIC FLAGS ON OUR CHARACTER.")
- 
-        {
+            get { return _flag; }
+            set { _flag = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionSetLogicCharacterFlags cond = (ActionSetLogicCharacterFlags)newnode;
-            cond._SetAtleastTo = _SetAtleastTo;
-            cond._cond = _cond;
+            ActionSetLogicCharacterFlags action = (ActionSetLogicCharacterFlags)newnode;
+            action._flagType = _flagType;
+            action._flag = _flag;
         }
     }
 }

@@ -34,31 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsAnySenseActivationAbove : ConditionConnectors
-	{
-        //All parameters added
-        
-        protected ThresholdQualifier _cond2;
-        private bool _ShouldAim = false;
+    public class ConditionIsAnySenseActivationAbove : ConditionConnectors
+    {
+        public ConditionIsAnySenseActivationAbove()
+            : base("IsAnySenseActivationAbove", "Check we are sensing the target at the threshold supplied with any sense.")
+        { }
 
-        [DesignerBoolean("Must be triggered", "MustBeTriggered", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool MustBeTriggered
-        {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
-        }
-
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "The threshold qualifier of the information we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
-        public ConditionIsAnySenseActivationAbove()
-            : base("IsAnySenseActivationAbove", "CHECKS TO SEE IF ANY SENSE ACTIVATION HAS PASSED A SPECIFIED THRESHOLD.")
- 
+        protected bool _mustBeTriggered;
+        [DesignerBoolean("MustBeTriggered", "If the sense must be triggered this frame.", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool MustBeTriggered
         {
+            get { return _mustBeTriggered; }
+            set { _mustBeTriggered = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +61,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsAnySenseActivationAbove cond = (ConditionIsAnySenseActivationAbove)newnode;
-            cond._ShouldAim = _ShouldAim;
-            cond._cond2 = _cond2;
+            cond._thresholdQualifier = _thresholdQualifier;
+            cond._mustBeTriggered = _mustBeTriggered;
         }
     }
 }

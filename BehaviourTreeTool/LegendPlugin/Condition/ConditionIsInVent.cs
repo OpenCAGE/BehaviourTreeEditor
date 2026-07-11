@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsInVent : ConditionConnectors
-	{
-        //All parameters added
-
-        protected CharacterType _cond2;
-
-        [DesignerEnum("Character type", "CharacterType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CharacterType CharacterType
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
+    public class ConditionIsInVent : ConditionConnectors
+    {
+        public ConditionIsInVent()
+            : base("IsInVent", "Is the given character in a vent?")
+        { 
         }
 
-        public ConditionIsInVent()
-            : base("IsInVent", "ARE WE IN A VENT?")
- 
+        protected VENT_CHARACTER_TYPE _characterType;
+        [DesignerEnum("CharacterType", "Character to check - is it the owner of the tree or the target?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public VENT_CHARACTER_TYPE CharacterType
         {
+            get { return _characterType; }
+            set { _characterType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsInVent cond = (ConditionIsInVent)newnode;
-            cond._cond2 = _cond2;
+            cond._characterType = _characterType;
         }
     }
 }

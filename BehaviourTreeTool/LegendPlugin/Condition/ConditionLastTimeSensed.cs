@@ -34,39 +34,36 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionLastTimeSensed : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionLastTimeSensed : ConditionConnectors
+    {
+        public ConditionLastTimeSensed()
+            : base("LastTimeSensed", "Checks if the last time the sense was above the threshold within the given time.")
+        {
 
-        protected ThresholdQualifier _cond;
-        protected SenseType _cond2;
-        protected TimeThreshold _ShouldAim;
+        }
 
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The sense in question.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
+        {
+            get { return _sense; }
+            set { _sense = value; }
+        }
+
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "Which sensory threshold to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
-        [DesignerEnum("Sense type", "SenseType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseType SenseType
+        protected TIME_THRESHOLD _timeThreshold;
+        [DesignerEnum("TimeThreshold", "Time since last sensed threshold qualifier.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public TIME_THRESHOLD TimeThreshold
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        [DesignerEnum("Time threshold", "TimeThreshold", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public TimeThreshold TimeThreshold
-        {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
-        }
-
-        public ConditionLastTimeSensed()
-            : base("LastTimeSensed", "IS THE LAST TIME WE SENSED A SPECIFIED SENSE ABOVE A SPECIFIED THRESHOLD WITHIN A SPECIFIED TIME?")
- 
-        {
+            get { return _timeThreshold; }
+            set { _timeThreshold = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -74,9 +71,9 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionLastTimeSensed cond = (ConditionLastTimeSensed)newnode;
-            cond._cond2 = _cond2;
-            cond._cond = _cond;
-            cond._ShouldAim = _ShouldAim;
+            cond._sense = _sense;
+            cond._thresholdQualifier = _thresholdQualifier;
+            cond._timeThreshold = _timeThreshold;
         }
     }
 }

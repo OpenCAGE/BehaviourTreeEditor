@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionShouldProcessSuspiciousItem : ConditionConnectors
-	{
+    public class ConditionShouldProcessSuspiciousItem : ConditionConnectors
+    {
         public ConditionShouldProcessSuspiciousItem()
-            : base("ShouldProcessSuspiciousItem", "SHOULD WE FOLLOW THROUGH WITH THIS SUSPICIOUS ITEM WE SPOTTED?")
- 
-        {
-            //All parameters added
-        }
+            : base("ShouldProcessSuspiciousItem", "Returns true if this character should process the current suspicious item.")
+        { }
     }
 }

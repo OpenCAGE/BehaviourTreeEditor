@@ -25,40 +25,41 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using LegendPlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Attributes;
-using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class SelectorLinear : Selector
-	{
-        //All parameters added
-        
-        private string _cond4 = "";
-
-        [DesignerString("Name", "Name", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Name
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
+    public class SelectorLinear : Brainiac.Design.Nodes.Selector
+    {
+        static int num = 0;
 
         public SelectorLinear()
-            : base("Linear", "A LINEAR LOGIC SELECTOR BRANCH.")
- 
+            : base("Selector", "Run first successful child.")
         {
+            _name = String.Format("SELECTOR_{0}", num);
+            ++num;
+        }
+
+        protected String _name;
+        [DesignerString("Name", "Selector name.", "CategoryBasic", DesignerProperty.DisplayMode.List, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public String Name
+        {
+            get { return _name; }
+            set { _name = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            SelectorLinear cond = (SelectorLinear)newnode;
-            cond._cond4 = _cond4;
+            SelectorLinear node = (SelectorLinear)newnode;
+
+            node._name = String.Format("{0}_CLONE", _name);
         }
     }
 }

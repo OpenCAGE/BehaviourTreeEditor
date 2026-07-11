@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,12 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveWithGamepad : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionMoveWithGamepad() : base("MoveWithGamepad", "PERFORM THE ACTION OF MOVING WITH A GAMEPAD.")
- 
+    public class ActionMoveWithGamepad : Normal_Atomic
+    {
+        public ActionMoveWithGamepad()
+            : base("MoveWithGamepad", "Move using gamepad (not functional in retail).")
         {
         }
 
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionMoveWithGamepad cond = (ActionMoveWithGamepad)newnode;
-            cond._type = _type;
-        }
     }
 }

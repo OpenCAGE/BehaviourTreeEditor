@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionShouldFollow : ConditionConnectors
-	{
+    public class ConditionShouldFollow : ConditionConnectors
+    {
         public ConditionShouldFollow()
-            : base("ShouldFollow", "SHOULD WE PERFORM A FOLLOW ROLE?")
- 
-        {
-            //All parameters added
-        }
+            : base("ShouldFollow", "Should we follow someone or something?")
+        { }
     }
 }

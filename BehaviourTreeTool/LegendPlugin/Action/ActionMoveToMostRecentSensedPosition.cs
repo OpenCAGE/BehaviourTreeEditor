@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,48 +33,16 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToMostRecentSensedPosition : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-        protected LOCOMOTION_TARGET_SPEED _type2;
-        private bool _type3 = false;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOCOMOTION_TARGET_SPEED VentLockReason
-        {
-            get { return _type2; }
-            set { _type2 = value; }
-        }
-
-        [DesignerBoolean("Should aim", "ShouldAim", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool ShouldAim
-        {
-            get { return _type3; }
-            set { _type3 = value; }
-        }
-
-        public ActionMoveToMostRecentSensedPosition() : base("MoveToMostRecentSensedPosition", "MOVE TO THE POSITION WE MOST RECENTLY SENSED SOMETHING.")
- 
+    public class ActionMoveToMostRecentSensedPosition : ActionMoveAndShootBase
+    {
+        public ActionMoveToMostRecentSensedPosition()
+            : base("MoveToMostRecentSensedPosition", "Move to most recent sensed position.")
         {
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
-
-            ActionMoveToMostRecentSensedPosition cond = (ActionMoveToMostRecentSensedPosition)newnode;
-            cond._type = _type;
-            cond._type2 = _type2;
-            cond._type3 = _type3;
         }
     }
 }

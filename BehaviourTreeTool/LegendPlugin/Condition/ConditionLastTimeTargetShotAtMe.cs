@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionLastTimeTargetShotAtMe : ConditionConnectors
-	{
-        //All parameters added
-
-        private string _cond4 = "";
-
-        [DesignerString("Time constraint", "TimeConstraint", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string TimeConstraint
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
+    public class ConditionLastTimeTargetShotAtMe : ConditionConnectors
+    {
         public ConditionLastTimeTargetShotAtMe()
-            : base("LastTimeTargetShotAtMe", "WAS THE LAST TIME A TARGET SHOT AT US WITHIN A SPECIFIED TIME?")
- 
+            : base("LastTimeTargetShotAtMe", "True if a shot from the target passed nearby within the given time.")
+        { }
+
+        protected float _timeConstraint = 0.0f;
+        [DesignerFloat("TimeConstraint", "Time window in seconds within which the event must have occurred.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 200, 0.01f, 2, "UnitsCount")]
+        public float TimeConstraint
         {
+            get { return _timeConstraint; }
+            set { _timeConstraint = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionLastTimeTargetShotAtMe cond = (ConditionLastTimeTargetShotAtMe)newnode;
-            cond._cond4 = _cond4;
+            cond._timeConstraint = _timeConstraint;
         }
     }
 }

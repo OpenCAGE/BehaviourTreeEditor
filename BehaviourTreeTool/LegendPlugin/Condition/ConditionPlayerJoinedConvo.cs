@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionPlayerJoinedConvo : ConditionConnectors
-	{
+    public class ConditionPlayerJoinedConvo : ConditionConnectors
+    {
         public ConditionPlayerJoinedConvo()
-            : base("PlayerJoinedConvo", "HAS THE PLAYER JOINED OUR CONVERSATION?")
- 
-        {
-            //All parameters added
-        }
+            : base("PlayerJoinedConvo", "Player joined conversation.")
+        { }
     }
 }

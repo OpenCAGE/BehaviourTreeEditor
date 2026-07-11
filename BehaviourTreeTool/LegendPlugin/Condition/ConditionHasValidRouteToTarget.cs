@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasValidRouteToTarget : ConditionConnectors
-	{
+    public class ConditionHasValidRouteToTarget : ConditionConnectors
+    {
         public ConditionHasValidRouteToTarget()
-            : base("HasValidRouteToTarget", "DO WE HAVE A VALID ROUTE TO OUR TARGET?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasValidRouteToTarget", "Can we route to our target?")
+        { }
     }
 }

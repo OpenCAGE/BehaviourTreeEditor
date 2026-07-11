@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,39 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveThroughTarget : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-        protected LOCOMOTION_TARGET_SPEED _MovementSpeedType;
-
-        [DesignerEnum("Movement speed type", "MovementSpeedType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public LOCOMOTION_TARGET_SPEED MovementSpeedType
+    public class ActionMoveThroughTarget : ActionMoveBase
+    {
+        public ActionMoveThroughTarget()
+            : base("MoveThroughTarget", "Move to our current target and do not attempt to stop on arrival.")
         {
-            get { return _MovementSpeedType; }
-            set { _MovementSpeedType = value; }
-        }
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionMoveThroughTarget() : base("MoveThroughTarget", "MOVE THROUGH OUR TARGET AT A SPECIFIED SPEED.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionMoveThroughTarget cond = (ActionMoveThroughTarget)newnode;
-            cond._MovementSpeedType = _MovementSpeedType;
-            cond._type = _type;
         }
     }
 }

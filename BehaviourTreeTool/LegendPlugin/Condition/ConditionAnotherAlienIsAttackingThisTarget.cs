@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAnotherAlienIsAttackingThisTarget : ConditionConnectors
-	{
+    public class ConditionAnotherAlienIsAttackingThisTarget : ConditionConnectors
+    {
         public ConditionAnotherAlienIsAttackingThisTarget()
-            : base("AnotherAlienIsAttackingThisTarget", "CHECKS TO SEE IF THIS TARGET IS ALREADY BEING ATTACKED BY ANOTHER ALIEN.")
- 
-        {
-            //All parameters added
-        }
+            : base("AnotherAlienIsAttackingThisTarget", "Another Alien is attacking this target!")
+        { }
     }
 }

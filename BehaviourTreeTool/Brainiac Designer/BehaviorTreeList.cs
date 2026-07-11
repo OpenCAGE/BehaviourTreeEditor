@@ -37,7 +37,7 @@ using System.Reflection;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Properties;
 using System.Xml;
-using BehaviourTreeTool;
+using CATHODE;
 
 namespace Brainiac.Design
 {
@@ -621,6 +621,7 @@ namespace Brainiac.Design
 		{
 			// assign the new folder
 			_behaviorFolder= folder ==string.Empty ? string.Empty : Path.GetFullPath(folder);
+			FileManagers.FileManager.BehaviorFolder= _behaviorFolder;
 
 			// check if we can clear all behaviours
 			if(ClearBehaviors !=null)
@@ -903,29 +904,25 @@ namespace Brainiac.Design
 				ShowBehavior(currNode);
 
 			//Now the XML has been saved, compile them all into one
-            DirectoryInfo XMLFiles = new DirectoryInfo(SharedData.pathToAI + "/DATA/BEHAVIOR");
+            DirectoryInfo XMLFiles = new DirectoryInfo(SharedData.pathToXMLs);
             string XMLContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><DIR>";
             foreach (FileInfo currentFile in XMLFiles.GetFiles())
             {
 				string fileContents = File.ReadAllText(currentFile.FullName);
                 string fileName = currentFile.Name;
-				string customFileHeader = "<File name=\"" + fileName.Substring(0, fileName.Length - 3).ToUpper() + "bml\">";
+				string customFileHeader = "<File name=\"" + fileName.Substring(0, fileName.Length - 3) + "bml\">";
                 string customFileFooter = "</File>"; 
 
                 XMLContent += customFileHeader + fileContents.Substring(38) + customFileFooter; 
             }
             XMLContent += "</DIR>";
 
-            //Write and convert to BML
-            string BinaryPrefix = SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.";
-            string XMLOutputFile = BinaryPrefix + "XML";
-            string BMLOutputFile = BinaryPrefix + "BML";
-
-            File.WriteAllText(XMLOutputFile, XMLContent);
-			if (File.Exists(BMLOutputFile)) 
-				File.Delete(BMLOutputFile);
-            new AlienConverter(XMLOutputFile, BMLOutputFile).Run();
-            File.Delete(XMLOutputFile);
+            //Convert to BML and write
+            BML bml = new BML(SharedData.pathToBML);
+			XmlDocument xml = new XmlDocument();
+			xml.LoadXml(XMLContent);
+			bml.Content = xml;
+			bml.Save();
 
             return node.FileManager.Filename;
 		}

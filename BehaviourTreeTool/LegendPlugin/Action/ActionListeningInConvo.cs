@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionListeningInConvo : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+    public class ActionListeningInConvo : Normal_Atomic
+    {
+        public ActionListeningInConvo()
+            : base("ListeningInConvo", "Listen in our conversation.")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionListeningInConvo() : base("ListeningInConvo",  "PERFORM THE ACTION OF LISTENER IN A CONVERSATION.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionListeningInConvo cond = (ActionListeningInConvo)newnode;
-            cond._type = _type;
         }
     }
 }

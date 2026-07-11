@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,12 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionDoneSystematicSearch : Action
-	{
-        public ActionDoneSystematicSearch() : base("DoneSystematicSearch", "PERFORM THE FINISH OF OUR SYSTEMATIC SEARCH.")
- 
+    public class ActionDoneSystematicSearch : Search_Atomic
+    {
+        public ActionDoneSystematicSearch()
+            : base("DoneSystematicSearch", "Done systematic search.")
         {
-            //All parameters added
         }
     }
 }

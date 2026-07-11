@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasDoneSuspectResponseWithinTime : ConditionConnectors
-	{
-        //All parameters added
-        
-        private string _cond4 = "";
-
-        [DesignerString("Time constraint", "TimeConstraint", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string TimeConstraint
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
+    public class ConditionHasDoneSuspectResponseWithinTime : ConditionConnectors
+    {
+        public ConditionHasDoneSuspectResponseWithinTime()
+            : base("HasDoneSuspectResponseWithinTime", "Returns true if a suspect response was performed within the given time.")
+        { 
         }
 
-        public ConditionHasDoneSuspectResponseWithinTime()
-            : base("HasDoneSuspectResponseWithinTime", "HAVE WE FINISHED MOVING TO A LOCATION IN RESPONSE TO A SUSPICIOUS ACTIVITY IN THE SPECIFIED TIME?")
- 
+        protected float _timeConstraint = 0.0f;
+        [DesignerFloat("TimeConstraint", "Time window in seconds within which the event must have occurred.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 500, 0.01f, 2, "UnitsCount")]
+        public float TimeConstraint
         {
+            get { return _timeConstraint; }
+            set { _timeConstraint = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasDoneSuspectResponseWithinTime cond = (ConditionHasDoneSuspectResponseWithinTime)newnode;
-            cond._cond4 = _cond4;
+            cond._timeConstraint = _timeConstraint;
         }
     }
 }

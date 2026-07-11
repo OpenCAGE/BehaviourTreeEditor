@@ -31,26 +31,23 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorLockBestVents : Decorator
-	{
-        //All parameters added
-
-        protected VENT_LOCK_REASON _type;
-
-        [DesignerEnum("Vent lock reason", "VentLockReason", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public VENT_LOCK_REASON VentLockReason
-        {
-            get { return _type; }
-            set { _type = value; }
+    public class DecoratorLockBestVents : Decorator
+    {
+        public DecoratorLockBestVents()
+            : base("LockBestVents", "Locks the best vents for the specified reason.")
+        { 
         }
 
-        public DecoratorLockBestVents()
-            : base("LockBestVents", "DECORATOR FOR LOCKING THE BEST VENTS FOR A REASON.")
- 
+        protected VENT_LOCK_REASON _ventLockReason;
+        [DesignerEnum("VentLockReason", "The vent lock reason to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public VENT_LOCK_REASON VentLockReason
         {
+            get { return _ventLockReason; }
+            set { _ventLockReason = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             DecoratorLockBestVents cond = (DecoratorLockBestVents)newnode;
-            cond._type = _type;
+            cond._ventLockReason = _ventLockReason;
         }
     }
 }

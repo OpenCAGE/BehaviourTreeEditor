@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasKilltrap : ConditionConnectors
-	{
+    public class ConditionHasKilltrap : ConditionConnectors
+    {
         public ConditionHasKilltrap()
-            : base("HasKilltrap", "DOES ALIEN HAVE A KILLTRAP POSITION?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasKilltrap", "Do we have a point where we could killtrap the player?")
+        { }
     }
 }

@@ -34,31 +34,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionObjectiveIsInCombatArea : ConditionConnectors
-	{
-        //All parameters added
-
-        protected CombatAreaType _cond;
-        protected ObjectiveType _cond2;
-
-        [DesignerEnum("Combat area type", "CombatAreaType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CombatAreaType CombatAreaType
-        {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        [DesignerEnum("Objective type", "ObjectiveType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ObjectiveType ObjectiveType
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
+    public class ConditionObjectiveIsInCombatArea : ConditionConnectors
+    {
         public ConditionObjectiveIsInCombatArea()
-            : base("ObjectiveIsInCombatArea", "IS OUR CURRENT OBJECTIVE IN A COMBAT AREA?")
- 
+            : base("ObjectiveIsInCombatArea", "Is our objective within the specified combat area type?")
+        { 
+        }
+
+        protected COMBAT_AREA_TYPE _combatAreaType;
+        [DesignerEnum("CombatAreaType", "The combat area we are testing if our objective is in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public COMBAT_AREA_TYPE CombatAreaType
         {
+            get { return _combatAreaType; }
+            set { _combatAreaType = value; }
+        }
+
+        protected OBJECTIVE_TYPE_NO_COVER _objectiveType;
+        [DesignerEnum("ObjectiveType", "The type of objective we are interested in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public OBJECTIVE_TYPE_NO_COVER ObjectiveType
+        {
+            get { return _objectiveType; }
+            set { _objectiveType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +62,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionObjectiveIsInCombatArea cond = (ConditionObjectiveIsInCombatArea)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            cond._combatAreaType = _combatAreaType;
+            cond._objectiveType = _objectiveType;
         }
     }
 }

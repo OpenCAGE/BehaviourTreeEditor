@@ -318,4 +318,7 @@
   <data name="UnitsSeconds" xml:space="preserve">
     <value>sec</value>
   </data>
+  <data name="ConditionConnectorsPending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
 </root>

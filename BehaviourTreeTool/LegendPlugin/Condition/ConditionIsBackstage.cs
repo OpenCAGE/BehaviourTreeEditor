@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsBackstage : ConditionConnectors
-	{
+    public class ConditionIsBackstage : ConditionConnectors
+    {
         public ConditionIsBackstage()
-            : base("IsBackstage", "IS THE ALIEN BACKSTAGE?")
- 
-        {
-            //All parameters added
-        }
+            : base("IsBackstage", "Is the Alien backstage?")
+        { }
     }
 }

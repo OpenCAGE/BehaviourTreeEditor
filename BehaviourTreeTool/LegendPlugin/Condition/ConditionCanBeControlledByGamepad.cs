@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionCanBeControlledByGamepad : ConditionConnectors
-	{
+    public class ConditionCanBeControlledByGamepad : ConditionConnectors
+    {
         public ConditionCanBeControlledByGamepad()
-            : base("CanBeControlledByGamepad", "CHECKS TO SEE IF THIS ENTITY CAN BE CONTROLLED BY A GAMEPAD.")
- 
-        {
-            //All parameters added
-        }
+            : base("CanBeControlledByGamepad", "Can be controlled by gamepad (not functional in retail).")
+        { }
     }
 }

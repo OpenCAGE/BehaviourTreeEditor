@@ -34,38 +34,36 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionLastTimeSensedFloat : ConditionConnectors
-	{
-        //All parameters added
-
-        protected SenseType _cond;
-        protected ThresholdQualifier _cond2;
-        private string _cond4 = "";
-
-        [DesignerString("Last sensed time within", "LastSensedTimeWithin", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string LastSensedTimeWithin
+    public class ConditionLastTimeSensedFloat : ConditionConnectors
+    {
+        public ConditionLastTimeSensedFloat()
+            : base("LastTimeSensedFloat", "Checks if the last time the sense was above the threshold within the given time.")
         {
-            get { return _cond4; }
-            set { _cond4 = value; }
+
         }
 
-        [DesignerEnum("Sense type", "SenseType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SenseType SenseType
+        protected SENSORY_TYPE _sense;
+        [DesignerEnum("SenseType", "The sense in question.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SENSORY_TYPE SenseType
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _sense; }
+            set { _sense = value; }
         }
 
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "Which sensory threshold to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
-        public ConditionLastTimeSensedFloat()
-            : base("LastTimeSensedFloat", "IS THE LAST TIME WE SENSED A SPECIFIED SENSE ABOVE A SPECIFIED THRESHOLD WITHIN A SPECIFIED TIME?")
+        protected float _lastSensedTimeWithin;
+        [DesignerFloat("LastSensedTimeWithin", "Time window in seconds since the sense was last above the threshold.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 1000, 0.01f, 2, "UnitsCount")]
+        public float LastSensedTimeWithin
         {
+            get { return _lastSensedTimeWithin; }
+            set { _lastSensedTimeWithin = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -73,9 +71,9 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionLastTimeSensedFloat cond = (ConditionLastTimeSensedFloat)newnode;
-            cond._cond4 = _cond4;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            cond._sense = _sense;
+            cond._thresholdQualifier = _thresholdQualifier;
+            cond._lastSensedTimeWithin = _lastSensedTimeWithin;
         }
     }
 }

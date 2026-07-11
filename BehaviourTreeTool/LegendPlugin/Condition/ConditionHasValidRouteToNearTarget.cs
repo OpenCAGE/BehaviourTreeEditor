@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasValidRouteToNearTarget : ConditionConnectors
-	{
-        //All parameters added
-        
-        private string _cond4 = "";
-
-        [DesignerString("Distance", "Distance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Distance
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
+    public class ConditionHasValidRouteToNearTarget : ConditionConnectors
+    {
         public ConditionHasValidRouteToNearTarget()
-            : base("HasValidRouteToNearTarget", "DO WE HAVE A VALID ROUTE TO THE NEARBY TARGET, WITHIN A SPECIFIED DISTANCE?")
- 
+            : base("HasValidRouteToNearTarget", "Do we have a valid route to our target (within given range)?")
+        { }
+
+        protected float _distance = 1.2f;
+        [DesignerFloat("Distance to nearest standing point", "Maximum distance in metres to the nearest standing point.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter,
+            0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float Distance
         {
+            get { return _distance; }
+            set { _distance = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasValidRouteToNearTarget cond = (ConditionHasValidRouteToNearTarget)newnode;
-            cond._cond4 = _cond4;
+            cond._distance = _distance;
         }
     }
 }

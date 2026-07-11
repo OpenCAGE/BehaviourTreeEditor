@@ -34,23 +34,19 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsInCover : ConditionConnectors
-	{
-        //All parameters added
-        
-        private bool _ShouldAim = false;
-
-        [DesignerBoolean("Check slot matches desired", "CheckSlotMatchesDesired", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public bool CheckSlotMatchesDesired
-        {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
+    public class ConditionIsInCover : ConditionConnectors
+    {
+        public ConditionIsInCover()
+            : base("IsInCover", "Am I in cover?")
+        { 
         }
 
-        public ConditionIsInCover()
-            : base("IsInCover", "ARE WE IN COVER?")
- 
+        protected bool _checkSlot;
+        [DesignerBoolean("CheckSlotMatchesDesired", "Should check if current slot is the desired slot?", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public bool CheckSlotMatchesDesired
         {
+            get { return _checkSlot; }
+            set { _checkSlot = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsInCover cond = (ConditionIsInCover)newnode;
-            cond._ShouldAim = _ShouldAim;
+            cond._checkSlot = _checkSlot;
         }
+
     }
 }

@@ -25,48 +25,50 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using LegendPlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Attributes;
-using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
     public class SequenceLinear : Sequence
     {
-        //All parameters added
+        static int num = 0;
 
-        protected ChildStateType _childStateType;
-        private string _Name = "";
-
-        [DesignerEnum("Child state type", "ChildStateType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public ChildStateType ChildStateType
+        public SequenceLinear()
+            : base("Sequence", "Run each child in order.")
         {
-            get { return _childStateType; }
-            set { _childStateType = value; }
+            _name = String.Format("SEQUENCE_{0}", num);
+            ++num;
         }
 
-        [DesignerString("Name", "Name", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Name
+        protected String _name;
+        [DesignerString("Name", "Name of sequence.", "CategoryBasic", DesignerProperty.DisplayMode.List, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public String Name
         {
-            get { return _Name; }
-            set { _Name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
-        public SequenceLinear() : base("Linear", "A LINEAR SEQUENCE.")
- 
+        protected SEQUENCE_CHILD_STATE_TYPE _childState;
+        [DesignerEnum("ChildStateType", "How we handle the child state.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SEQUENCE_CHILD_STATE_TYPE ChildStateType
         {
+            get { return _childState; }
+            set { _childState = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            SequenceLinear cond = (SequenceLinear)newnode;
-            cond._childStateType = _childStateType;
-            cond._Name = _Name;
+            SequenceLinear node = (SequenceLinear)newnode;
+
+            node._childState = _childState;
+            node._name = String.Format("{0}_CLONE", _name);
         }
     }
 }

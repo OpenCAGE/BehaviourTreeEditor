@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionVisualSomeRaysThroughGlass : ConditionConnectors
-	{
+    public class ConditionVisualSomeRaysThroughGlass : ConditionConnectors
+    {
         public ConditionVisualSomeRaysThroughGlass()
-            : base("VisualSomeRaysThroughGlass", "DID WE SENSE OUR TARGET THROUGH A GLASS SURFACE?")
- 
-        {
-            //All parameters added
-        }
+            : base("VisualSomeRaysThroughGlass", "Last time we saw the target, was our visual (even partly) through glass?")
+        { }
     }
 }

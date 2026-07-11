@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemFirstGroupMember : ConditionConnectors
-	{
+    public class ConditionSuspiciousItemFirstGroupMember : ConditionConnectors
+    {
         public ConditionSuspiciousItemFirstGroupMember()
-            : base("SuspiciousItemFirstGroupMember", "ARE WE THE FIRST GROUP MEMBER FOR THIS SUSPICIOUS ITEM?")
- 
-        {
-            //All parameters added
-        }
+            : base("SuspiciousItemFirstGroupMember", "Returns true if this character is the first group member handling the suspicious item.")
+        { }
     }
 }

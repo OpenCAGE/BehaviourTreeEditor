@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasScript : ConditionConnectors
-	{
+    public class ConditionHasScript : ConditionConnectors
+    {
         public ConditionHasScript()
-            : base("HasScript", "IS THIS CHARACTER CURRENTLY PERFORMING A SCRIPTED ACTION?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasScript", "Do we have a script to execute?")
+        { }
     }
 }

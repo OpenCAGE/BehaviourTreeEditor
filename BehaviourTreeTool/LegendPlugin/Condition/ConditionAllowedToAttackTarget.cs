@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAllowedToAttackTarget : ConditionConnectors
-	{
+    public class ConditionAllowedToAttackTarget : ConditionConnectors
+    {
         public ConditionAllowedToAttackTarget()
-            : base("AllowedToAttackTarget", "ARE WE ALLOWED TO ATTACK OUR TARGET?")
- 
-        {
-            //All parameters added
-        }
+            : base("AllowedToAttackTarget", "Are we allowed to attack the current target?")
+        { }
     }
 }

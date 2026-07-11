@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsFrameFlagSet : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionIsFrameFlagSet : ConditionConnectors
+    {
+        public ConditionIsFrameFlagSet()
+            : base("IsFrameFlagSet", "Is this frame flag set?")
+        { }
 
-        protected FRAME_FLAGS _type;
-
-        [DesignerEnum("Frame flag", "FrameFlag", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected FRAME_FLAGS _frameFlag;
+        [DesignerEnum("FrameFlag", "The frame flag to check.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public FRAME_FLAGS FrameFlag
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ConditionIsFrameFlagSet()
-            : base("IsFrameFlagSet", "CHECK TO SEE IF A SPECIFIED FRAME FLAG IS CURRENTLY SET.")
- 
-        {
+            get { return _frameFlag; }
+            set { _frameFlag = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsFrameFlagSet cond = (ConditionIsFrameFlagSet)newnode;
-            cond._type = _type;
+            cond._frameFlag = _frameFlag;
         }
     }
 }

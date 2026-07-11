@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasDoneSuspectResponseMoveTo : ConditionConnectors
-	{
+    public class ConditionHasDoneSuspectResponseMoveTo : ConditionConnectors
+    {
         public ConditionHasDoneSuspectResponseMoveTo()
-            : base("HasDoneSuspectResponseMoveTo", "HAVE WE FINISHED MOVING TO A LOCATION IN RESPONSE TO A SUSPICIOUS ACTIVITY?")
- 
-        {
-            //All parameters added
-        }
+            : base("HasDoneSuspectResponseMoveTo", "Returns true if a suspect response move-to action has been completed")
+        { }
     }
 }

@@ -34,13 +34,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorSquadSearch : Decorator
-	{
+    public class DecoratorSquadSearch : Decorator
+    {
         public DecoratorSquadSearch()
-            : base("SquadSearch", "A DECORATOR FOR SQUAD SEARCH.")
- 
+            : base("SquadSearch", "Coordinates squad search behaviour for child nodes.")
         {
-            //All parameters added
         }
     }
 }

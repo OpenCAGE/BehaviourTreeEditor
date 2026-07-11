@@ -31,25 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasTimerExpired : ConditionConnectors
+    public class ConditionHasTimerExpired : ConditionConnectors
     {
-        //All parameters added
+        public ConditionHasTimerExpired()
+            : base("HasTimerExpired", "Has the timer expired?")
+        { }
 
-        protected LOGIC_CHARACTER_TIMER_TYPE _type;
-
-        [DesignerEnum("Timer type", "TimerType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected LOGIC_CHARACTER_TIMER_TYPE _timerType;
+        [DesignerEnum("TimerType", "The type of timer we are querying.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public LOGIC_CHARACTER_TIMER_TYPE TimerType
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ConditionHasTimerExpired() : base("HasTimerExpired", "HAS THE SPECIFIED TIMER EXPIRED?")
-	
-		{
+            get { return _timerType; }
+            set { _timerType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -57,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasTimerExpired cond = (ConditionHasTimerExpired)newnode;
-            cond._type = _type;
+            cond._timerType = _timerType;
         }
-	}
+    }
 }

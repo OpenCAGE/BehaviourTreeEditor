@@ -33,13 +33,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionRequiresPrimaryDamageControlResponse : ConditionConnectors
-	{
+    public class ConditionRequiresPrimaryDamageControlResponse : ConditionConnectors
+    {
         public ConditionRequiresPrimaryDamageControlResponse()
-            : base("RequiresPrimaryDamageControlResponse", "DO WE REQUIRE A 'PRIMARY DAMAGE CONTROL RESPONSE'?")
- 
-        {
-            //All parameters added
-        }
+            : base("RequiresPrimaryDamageControlResponse", "Checks if the character has been damaged.")
+        { }
     }
 }

@@ -34,13 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsWithinAggroRadius : ConditionConnectors
-	{
+    public class ConditionTargetIsWithinAggroRadius : ConditionConnectors
+    {
         public ConditionTargetIsWithinAggroRadius()
-            : base("TargetIsWithinAggroRadius", "IS OUR TARGET WITHIN OUR AGGRO RADIUS? CONFIGURE THIS IN THE MAIN MOD TOOLS WINDOW.")
- 
+            : base("TargetIsWithinAggroRadius", "Is our target within our scripted aggro radius?")
+        { 
+        }
+
+        protected override void CloneProperties(Node newnode)
         {
-            //All parameters added
+            base.CloneProperties(newnode);
+
+            ConditionTargetIsWithinAggroRadius cond = (ConditionTargetIsWithinAggroRadius)newnode;
         }
     }
 }

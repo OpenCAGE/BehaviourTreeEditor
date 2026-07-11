@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemGroupMembersRoutingTo : ConditionConnectors
-	{
+    public class ConditionSuspiciousItemGroupMembersRoutingTo : ConditionConnectors
+    {
         public ConditionSuspiciousItemGroupMembersRoutingTo()
-            : base("SuspiciousItemGroupMembersRoutingTo", "ARE GROUP MEMBERS ROUTING TO A SUSPICIOUS ITEM?")
- 
-        {
-            //All parameters added
-        }
+            : base("SuspiciousItemGroupMembersRoutingTo", "Returns true if group members are routing to the suspicious item.")
+        { }
     }
 }

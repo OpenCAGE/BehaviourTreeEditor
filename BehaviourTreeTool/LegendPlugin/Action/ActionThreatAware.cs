@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionThreatAware : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+    public class ActionThreatAware : Normal_Atomic
+    {
+        public ActionThreatAware()
+            : base("ThreatAware", "Performs suspect behaviour on target.")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionThreatAware() : base("ThreatAware", "BECOME AWARE OF A THREAT.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionThreatAware cond = (ActionThreatAware)newnode;
-            cond._type = _type;
         }
     }
 }

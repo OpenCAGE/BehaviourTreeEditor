@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,12 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMakeAggressive : Action
-	{
-        public ActionMakeAggressive() : base("MakeAggressive", "MAKE US AGRESSIVE!")
- 
+    public class ActionMakeAggressive : Search_Atomic
+    {
+        public ActionMakeAggressive()
+            : base("MakeAggressive", "Make the NPC go into an aggressive state.")
         {
-            //All parameters added
         }
     }
 }

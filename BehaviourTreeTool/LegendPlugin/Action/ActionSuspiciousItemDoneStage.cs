@@ -25,31 +25,28 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSuspiciousItemDoneStage : Action
-	{
-        //All parameters added
-
-        protected SUSPICIOUS_ITEM_STAGE _type;
-
-        [DesignerEnum("Stage", "Stage", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SUSPICIOUS_ITEM_STAGE RequestShutDownSpeed
+    public class ActionSuspiciousItemDoneStage : Search_Atomic
+    {
+        public ActionSuspiciousItemDoneStage()
+            : base("SuspiciousItemDoneStage", "Suspicious item done stage.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public ActionSuspiciousItemDoneStage() : base("SuspiciousItemDoneStage", "SET OUR CURRENT STAGE ON THE SUSPICION STATE.")
- 
+        protected SUSPICIOUS_ITEM_STAGE _stage;
+        [DesignerEnum("Stage", "The stage.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SUSPICIOUS_ITEM_STAGE Stage
         {
+            get { return _stage; }
+            set { _stage = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -57,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ActionSuspiciousItemDoneStage cond = (ActionSuspiciousItemDoneStage)newnode;
-            cond._type = _type;
+            cond._stage = _stage;
         }
     }
 }

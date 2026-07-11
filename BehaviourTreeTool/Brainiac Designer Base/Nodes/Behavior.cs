@@ -51,8 +51,10 @@ namespace Brainiac.Design.Nodes
 	/// </summary>
 	public class Behavior : StyledNode, BehaviorNode
 	{
-		private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(119,147,60) );
-		private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(99,122,50) );
+		//private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(119,147,60) );
+		//private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(99,122,50) );
+		private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(131,139,131) );
+		private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(193,205,193) );
 
 		protected ConnectorSingle _genericChildren;
 		public ConnectorSingle GenericChildren

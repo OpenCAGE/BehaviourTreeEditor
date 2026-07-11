@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsEnemyOfTarget : ConditionConnectors
-	{
+    public class ConditionIsEnemyOfTarget : ConditionConnectors
+    {
         public ConditionIsEnemyOfTarget()
-            : base("IsEnemyOfTarget", "ARE WE AN ENEMY OF OUR TARGET? SHOULDN'T REALLY ATTACK A FRIEND!")
- 
-        {
-            //All parameters added
-        }
+            : base("IsEnemyOfTarget", "Check if target is our enemy.")
+        { }
     }
 }

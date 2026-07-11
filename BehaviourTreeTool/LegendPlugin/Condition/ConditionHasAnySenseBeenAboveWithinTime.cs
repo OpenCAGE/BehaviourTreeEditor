@@ -34,31 +34,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasAnySenseBeenAboveWithinTime : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionHasAnySenseBeenAboveWithinTime : ConditionConnectors
+    {
+        public ConditionHasAnySenseBeenAboveWithinTime()
+            : base("HasAnySenseBeenAboveWithinTime", "Returns true if the character sense has been above the threshold within time.")
+        { 
+        }
 
-        protected ThresholdQualifier _cond;
-        private string _cond4 = "";
+        protected float _timeConstraint = 0.0f;
+        [DesignerFloat("TimeConstraint", "Time window in seconds within which the event must have occurred.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 500, 0.01f, 2, "UnitsCount")]
+        public float TimeConstraint
+        {
+            get { return _timeConstraint; }
+            set { _timeConstraint = value; }
+        }
 
-        [DesignerEnum("Threshold qualifier", "ThresholdQualifier", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected ThresholdQualifier _thresholdQualifier;
+        [DesignerEnum("ThresholdQualifier", "The threshold qualifier of the information we sensed.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ThresholdQualifier ThresholdQualifier
         {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        [DesignerString("Time constraint", "TimeConstraint", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string TimeConstraint
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
-        public ConditionHasAnySenseBeenAboveWithinTime()
-            : base("HasAnySenseBeenAboveWithinTime", "CHECKS TO SEE IF ANY OF OUR SENSES WENT ABOVE A THRESHOLD IN A GIVEN TIME.")
- 
-        {
+            get { return _thresholdQualifier; }
+            set { _thresholdQualifier = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +62,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasAnySenseBeenAboveWithinTime cond = (ConditionHasAnySenseBeenAboveWithinTime)newnode;
-            cond._cond = _cond;
-            cond._cond4 = _cond4;
+            cond._timeConstraint = _timeConstraint;
+            cond._thresholdQualifier = _thresholdQualifier;
         }
     }
 }

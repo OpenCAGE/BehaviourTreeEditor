@@ -34,31 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionTargetIsInCombatArea : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionTargetIsInCombatArea : ConditionConnectors
+    {
+        public ConditionTargetIsInCombatArea()
+            : base("TargetIsInCombatArea", "Is our target in the specified combat area?")
+        { }
 
-        protected CombatAreaType _cond2;
-        private bool _ShouldAim = false;
+        protected COMBAT_AREA_TYPE _combatAreaType;
+        [DesignerEnum("CombatAreaType", "The combat area we are testing if our target is in.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public COMBAT_AREA_TYPE CombatAreaType
+        {
+            get { return _combatAreaType; }
+            set { _combatAreaType = value; }
+        }
 
-        [DesignerBoolean("Use last sensed position", "UseLastSensedPosition", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        protected bool _useLastSensedPosition;
+        [DesignerBoolean("UseLastSensedPosition", "Should we use the last sensed position?", "CategoryBasic", DesignerProperty.DisplayMode.NoDisplay, 0, DesignerProperty.DesignerFlags.NoFlags)]
         public bool UseLastSensedPosition
         {
-            get { return _ShouldAim; }
-            set { _ShouldAim = value; }
-        }
-
-        [DesignerEnum("Combat area type", "CombatAreaType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CombatAreaType CombatAreaType
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ConditionTargetIsInCombatArea()
-            : base("TargetIsInCombatArea", "IS OUR TARGET IN A SPECIFIC COMBAT AREA? SHOULD WE WORK THIS OUT BY ACTUAL POSITION OR SENSED POSITION?")
- 
-        {
+            get { return _useLastSensedPosition; }
+            set { _useLastSensedPosition = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +61,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionTargetIsInCombatArea cond = (ConditionTargetIsInCombatArea)newnode;
-            cond._cond2 = _cond2;
-            cond._ShouldAim = _ShouldAim;
+            cond._combatAreaType = _combatAreaType;
+            cond._useLastSensedPosition = _useLastSensedPosition;
         }
     }
 }

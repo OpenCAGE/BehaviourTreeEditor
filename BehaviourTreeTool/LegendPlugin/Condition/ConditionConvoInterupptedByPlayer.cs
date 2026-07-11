@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionConvoInterupptedByPlayer : ConditionConnectors
-	{
+    public class ConditionConvoInterupptedByPlayer : ConditionConnectors
+    {
         public ConditionConvoInterupptedByPlayer()
-            : base("ConvoInterupptedByPlayer", "WAS THE CONVERSATION INTERRUPTED BY THE PLAYER?")
- 
-        {
-            //All parameters added
-        }
+            : base("ConvoInterruptedByPlayer", "Conversation was interrupted by player.")
+        { }
     }
 }

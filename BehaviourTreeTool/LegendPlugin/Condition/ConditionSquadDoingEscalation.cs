@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSquadDoingEscalation : ConditionConnectors
-	{
+    public class ConditionSquadDoingEscalation : ConditionConnectors
+    {
         public ConditionSquadDoingEscalation()
-            : base("SquadDoingEscalation", "IS OUR SQUAD CURRENTLY PERFORMING A THREAT ESCALATION?")
- 
-        {
-            //All parameters added
-        }
+            : base("SquadDoingEscalation", "Is someone in the squad doing aggression escalation?")
+        { }
     }
 }

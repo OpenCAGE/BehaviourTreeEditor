@@ -33,13 +33,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsDead : ConditionConnectors
-	{
+    public class ConditionIsDead : ConditionConnectors
+    {
         public ConditionIsDead()
-            : base("IsDead", "ARE WE DEAD?")
- 
-        {
-            //All parameters added
-        }
+            : base("IsDead", "Are we dead?")
+        { }
     }
 }

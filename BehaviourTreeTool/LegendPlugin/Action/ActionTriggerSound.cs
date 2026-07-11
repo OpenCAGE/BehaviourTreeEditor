@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,27 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionTriggerSound : Action
-	{
-        //All parameters added
-
-        protected SoundType _type;
-
-        [DesignerEnum("Sound type", "SoundType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SoundType SoundType
+    public class ActionTriggerSound : Search_Atomic
+    {
+        public ActionTriggerSound()
+            : base("TriggerSound", "Trigger sound on owner.")
         {
-            get { return _type; }
-            set { _type = value; }
         }
 
-        public ActionTriggerSound() : base("TriggerSound", "TRIGGER A SOUND OF A CERTAIN TYPE.")
- 
+        protected SOUND_ARGUMENT _Sound;
+        [DesignerEnum("SoundType", "The sound to trigger.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SOUND_ARGUMENT SoundType
         {
+            get { return _Sound; }
+            set { _Sound = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionTriggerSound cond = (ActionTriggerSound)newnode;
-            cond._type = _type;
+            ActionTriggerSound action = (ActionTriggerSound)newnode;
+            action._Sound = _Sound;
         }
     }
 }

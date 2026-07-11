@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,12 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionSwitchToNextTarget : Action
-	{
-        public ActionSwitchToNextTarget() : base("SwitchToNextTarget", "SWITCH TO OUR NEXT TARGET.")
-	
-		{
-            //All parameters added
+    public class ActionSwitchToNextTarget : Search_Atomic
+    {
+        public ActionSwitchToNextTarget()
+            : base("SwitchToNextTarget", "Switch to next target.")
+        {
         }
     }
 }

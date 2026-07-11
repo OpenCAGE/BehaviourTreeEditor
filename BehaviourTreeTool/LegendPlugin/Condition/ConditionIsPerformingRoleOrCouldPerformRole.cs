@@ -34,31 +34,26 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsPerformingRoleOrCouldPerformRole : ConditionConnectors
-	{
-        //All parameters added
-
-        private string _cond1 = "";
-        protected RoleType _cond3;
-
-        [DesignerString("Query ID", "QueryID", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string QueryID
-        {
-            get { return _cond1; }
-            set { _cond1 = value; }
-        }
-
-        [DesignerEnum("Role type", "RoleType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RoleType RoleType
-        {
-            get { return _cond3; }
-            set { _cond3 = value; }
-        }
-
+    public class ConditionIsPerformingRoleOrCouldPerformRole : ConditionConnectors
+    {
         public ConditionIsPerformingRoleOrCouldPerformRole()
-            : base("IsPerformingRoleOrCouldPerformRole", "ARE WE CURRENTLY PERFORMING A SPECIFIED ROLE, AND IF NOT, COULD WE PERFORM IT?")
- 
+            : base("IsPerformingRoleOrCouldPerformRole", "Are we acting out a role or could we act it out?")
         {
+            Random rnd = new Random();
+        }
+
+        protected ROLE_TYPE _roleType;
+        [DesignerEnum("RoleType", "The role type to check for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public ROLE_TYPE RoleType
+        {
+            get { return _roleType; }
+            set { _roleType = value; LastRoleID = value; }
+        }
+
+        public static ROLE_TYPE LastRoleID
+        {
+            get;
+            set;
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +61,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsPerformingRoleOrCouldPerformRole cond = (ConditionIsPerformingRoleOrCouldPerformRole)newnode;
-            cond._cond1 = _cond1;
-            cond._cond3 = _cond3;
+            cond._roleType = _roleType;
+
         }
     }
 }

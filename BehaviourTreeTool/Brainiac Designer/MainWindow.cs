@@ -25,17 +25,22 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using Brainiac.Design.Properties;
+using CATHODE;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Brainiac.Design.Attributes;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Properties;
+using static CATHODE.RenderableElements;
+using Resources = Brainiac.Design.Properties.Resources;
 
 namespace Brainiac.Design
 {
@@ -237,14 +242,44 @@ namespace Brainiac.Design
 			if(System.IO.File.Exists(__layoutFile))
 				dockPanel.LoadFromXml(__layoutFile, new WeifenLuo.WinFormsUI.Docking.DeserializeDockContent(GetContentFromPersistString));
 
+			// the properties dock is essential and cannot be reopened, so make sure one always exists
+			if(PropertiesDock.Count <1)
+				new PropertiesDock().Show(dockPanel, WeifenLuo.WinFormsUI.Docking.DockState.DockRight);
+
+			// keep the help button above the fill-docked panel and the MDI client
+			helpBtn.BringToFront();
+
 			// make sure the window is focused
 			Focus();
 
 			try
 			{
-				// set the default behaviour folder
-				behaviorTreeList.BehaviorFolder= SharedData.pathToAI + "/DATA/BEHAVIOR"; //todo-mattf: this should load from AI folder
-				System.IO.File.WriteAllText("alien_path.txt", behaviorTreeList.BehaviorFolder);
+				//Clear out the existing XMLs in the behaviour folder
+				Directory.CreateDirectory(SharedData.pathToXMLs);
+				foreach (string originalXML in Directory.GetFiles(SharedData.pathToXMLs, "*.xml"))
+				{
+					File.Delete(originalXML);
+				}
+
+				//Extract out the XMLs from the game's DB for us to use
+                BML bml = new BML(SharedData.pathToBML); 
+				XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    OmitXmlDeclaration = false
+                };
+                foreach (XmlElement file in bml.Content["DIR"])
+				{
+                    using (FileStream stringWriter = File.Create(SharedData.pathToXMLs + "/" + Path.GetFileNameWithoutExtension(file.GetAttribute("name")) + ".xml"))
+                    using (XmlWriter xmlTextWriter = XmlWriter.Create(stringWriter, settings))
+                    {
+                        file.FirstChild.WriteTo(xmlTextWriter);
+                        xmlTextWriter.Flush();
+                    }
+				}
+
+                // set the default behaviour folder
+                behaviorTreeList.BehaviorFolder = SharedData.pathToXMLs;
 
 				// load the plugins
 				behaviorTreeList.LoadPlugins("LegendPlugin.dll");
@@ -447,5 +482,10 @@ namespace Brainiac.Design
 
 			return dockContent;
 		}
-	}
+
+        private void helpBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://opencage.co.uk/docs/behaviour-trees");
+        }
+    }
 }

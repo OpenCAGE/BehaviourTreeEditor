@@ -34,13 +34,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class DecoratorAggressionEscalation : Decorator
-	{
+    public class DecoratorAggressionEscalation : Decorator
+    {
         public DecoratorAggressionEscalation()
-            : base("AggressionEscalation", "A DECORATOR TO ESCALATE AGGRESSION.")
- 
+            : base("AggressionEscalation", "Manages aggression escalation for child nodes.")
         {
-            //All parameters added
         }
     }
 }

@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasAlertnessState : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionHasAlertnessState : ConditionConnectors
+    {
+        public ConditionHasAlertnessState()
+            : base("HasAlertnessState", "Returns true if the character has the specified alertness state.")
+        { }
 
-        protected ALERTNESS_STATE _type;
-
-        [DesignerEnum("Alertness state", "AlertnessState", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected ALERTNESS_STATE _alertnessState;
+        [DesignerEnum("AlertnessState", "The alertness state to check for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public ALERTNESS_STATE AlertnessState
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ConditionHasAlertnessState()
-            : base("HasAlertnessState", "CHECK TO SEE IF WE CURRENTLY HAVE A SPECIFIED ALERTNESS STATE.")
- 
-        {
+            get { return _alertnessState; }
+            set { _alertnessState = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionHasAlertnessState cond = (ConditionHasAlertnessState)newnode;
-            cond._type = _type;
+            cond._alertnessState = _alertnessState;
         }
     }
 }

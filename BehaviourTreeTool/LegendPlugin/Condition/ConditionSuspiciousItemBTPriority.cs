@@ -31,26 +31,23 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemBTPriority : ConditionConnectors
-	{
-        //All parameters added
-
-        protected SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY _type;
-
-        [DesignerEnum("Priority", "Priority", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY Priority
-        {
-            get { return _type; }
-            set { _type = value; }
+    public class ConditionSuspiciousItemBTPriority : ConditionConnectors
+    {
+        public ConditionSuspiciousItemBTPriority()
+            : base("SuspiciousItemBTPriority", "Returns true if the suspicious item behaviour tree priority matches.")
+        { 
         }
 
-        public ConditionSuspiciousItemBTPriority()
-            : base("SuspiciousItemBTPriority", "QUERY THE CURRENT PRIORITY OF THIS SUSPICIOUS ITEM BEFORE PERFORMING FURTHER LOGIC.")
- 
+        protected SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY _priority;
+        [DesignerEnum("Priority", "The behaviour tree prioriy.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public SUSPICIOUS_ITEM_BEHAVIOUR_TREE_PRIORITY Priority
         {
+            get { return _priority; }
+            set { _priority = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +55,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionSuspiciousItemBTPriority cond = (ConditionSuspiciousItemBTPriority)newnode;
-            cond._type = _type;
+            cond._priority = _priority;
         }
     }
 }

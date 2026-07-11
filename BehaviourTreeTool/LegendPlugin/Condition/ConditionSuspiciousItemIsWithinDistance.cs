@@ -34,23 +34,18 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionSuspiciousItemIsWithinDistance : ConditionConnectors
-	{
-        //All parameters added
-
-        private string _cond4 = "";
-
-        [DesignerString("Distance", "Distance", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string Distance
-        {
-            get { return _cond4; }
-            set { _cond4 = value; }
-        }
-
+    public class ConditionSuspiciousItemIsWithinDistance : ConditionConnectors
+    {
         public ConditionSuspiciousItemIsWithinDistance()
-            : base("SuspiciousItemIsWithinDistance", "IS OUR CURRENT SUSPICIOUS ITEM WITHIN A CERTAIN SPECIFIED DISTANCE?")
- 
+            : base("SuspiciousItemIsWithinDistance", "Returns true if the suspicious item is within the specified distance.")
+        { }
+
+        protected float _distance = 5.0f;
+        [DesignerFloat("Distance to check", "Maximum distance in metres to check.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, 0, 100, 0.01f, 2, "UnitsCount")]
+        public float Distance
         {
+            get { return _distance; }
+            set { _distance = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +53,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionSuspiciousItemIsWithinDistance cond = (ConditionSuspiciousItemIsWithinDistance)newnode;
-            cond._cond4 = _cond4;
+            cond._distance = _distance;
         }
     }
 }

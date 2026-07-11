@@ -368,4 +368,3 @@ Build/*.xml
 Build/*.pdb
 Build/*.config
 Build/BEHAVIOUR_TREES/*
-Build/alien_path.txt

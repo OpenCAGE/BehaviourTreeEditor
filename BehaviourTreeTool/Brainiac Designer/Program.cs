@@ -36,6 +36,8 @@ namespace Brainiac.Design
     public static class SharedData
     {
         public static string pathToAI = "";
+        public static string pathToBML = "";
+        public static string pathToXMLs = "";
     }
 
     static class Program
@@ -70,8 +72,12 @@ namespace Brainiac.Design
             else
                 SharedData.pathToAI = Environment.CurrentDirectory;
 
+            //Set path to BML/XMLs
+            SharedData.pathToBML = SharedData.pathToAI + "/DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.BML";
+            SharedData.pathToXMLs = SharedData.pathToAI + "/DATA/BEHAVIOR";
+
             //Verify location
-            if (!File.Exists(SharedData.pathToAI + "/AI.exe"))
+            if (!File.Exists(SharedData.pathToBML))
                 throw new Exception("This tool was launched incorrectly, or was not placed within the Alien: Isolation directory.");
 
             //Run app

@@ -31,26 +31,22 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionLogicCharacterFlags : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionLogicCharacterFlags : ConditionConnectors
+    {
+        public ConditionLogicCharacterFlags()
+            : base("LogicCharacterFlags", "Have we done the specified flag?")
+        { }
 
-        protected LOGIC_CHARACTER_FLAGS _cond;
-
-        [DesignerEnum("Flag type", "FlagType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected LOGIC_CHARACTER_FLAGS _flagType;
+        [DesignerEnum("FlagType", "The type of flag we are testing if we have done.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public LOGIC_CHARACTER_FLAGS FlagType
         {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        public ConditionLogicCharacterFlags()
-            : base("LogicCharacterFlags", "DO WE HAVE A SPECIFIED LOGIC FLAG?")
- 
-        {
+            get { return _flagType; }
+            set { _flagType = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -58,7 +54,7 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionLogicCharacterFlags cond = (ConditionLogicCharacterFlags)newnode;
-            cond._cond = _cond;
+            cond._flagType = _flagType;
         }
     }
 }

@@ -31,33 +31,31 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionEventAOccuredAfterB : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionEventAOccuredAfterB : ConditionConnectors
+    {
+        public ConditionEventAOccuredAfterB()
+            : base("EventAOccuredAfterB", "Returns true if event A occurred after event B within the given time")
+        {
+        }
 
-        protected EVENT_OCCURED_TYPE _cond;
-        protected EVENT_OCCURED_TYPE _cond2;
-
-        [DesignerEnum("Event A", "EventA", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        EVENT_OCCURED_TYPE _eventB;
+        [DesignerEnum("EventA", "The event A to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public EVENT_OCCURED_TYPE EventA
         {
-            get { return _cond; }
-            set { _cond = value; }
+            get { return _eventA; }
+            set { _eventA = value; }
         }
 
-        [DesignerEnum("Event B", "EventB", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        EVENT_OCCURED_TYPE _eventA;
+        [DesignerEnum("EventB", "The event B to use.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public EVENT_OCCURED_TYPE EventB
         {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ConditionEventAOccuredAfterB()
-            : base("EventAOccuredAfterB", "CHECK THE ORDER OF TWO EVENTS (A AND B).")
-        {
+            get { return _eventB; }
+            set { _eventB = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -65,8 +63,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionEventAOccuredAfterB cond = (ConditionEventAOccuredAfterB)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            cond._eventA = _eventA;
+            cond._eventB = _eventB;
         }
     }
 }

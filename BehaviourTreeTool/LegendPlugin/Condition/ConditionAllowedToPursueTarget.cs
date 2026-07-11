@@ -34,13 +34,17 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionAllowedToPursueTarget : ConditionConnectors
-	{
+    public class ConditionAllowedToPursueTarget : ConditionConnectors
+    {
         public ConditionAllowedToPursueTarget()
-            : base("AllowedToPursueTarget", "ARE WE ALLOWED TO PURSUE OUR TARGET?")
- 
+            : base("AllowedToPursueTarget", "Do we have squad permission to pursue our target?")
+        { }
+
+        protected override void CloneProperties(Node newnode)
         {
-            //All parameters added
+            base.CloneProperties(newnode);
+
+            ConditionAllowedToPursueTarget cond = (ConditionAllowedToPursueTarget)newnode;
         }
     }
 }

@@ -34,13 +34,10 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionHasAmbushPoint : ConditionConnectors
-	{
+    public class ConditionHasAmbushPoint : ConditionConnectors
+    {
         public ConditionHasAmbushPoint()
-            : base("HasAmbushPoint", "CHECKS TO SEE IF THERE IS A VALID AMBUSH POINT.")
- 
-        {
-            //All parameters added
-        }
+            : base("HasAmbushPoint", "Has a point where we could ambush the player.")
+        { }
     }
 }

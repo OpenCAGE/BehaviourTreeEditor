@@ -25,7 +25,6 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
 using System.Collections.Generic;
 using System.Text;
 using Brainiac.Design.Nodes;
@@ -34,30 +33,11 @@ using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionMoveToCover : Action
-	{
-        //All parameters added
-
-        protected RequestShutDownSpeed _type;
-
-        [DesignerEnum("Request shutdown speed", "RequestShutDownSpeed", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public RequestShutDownSpeed RequestShutDownSpeed
+    public class ActionMoveToCover : Normal_Atomic
+    {
+        public ActionMoveToCover()
+            : base("MoveToCover", "Move to cover position.")
         {
-            get { return _type; }
-            set { _type = value; }
-        }
-
-        public ActionMoveToCover() : base("MoveToCover", "MOVE TO OUR SELECTED COVER POINT.")
- 
-        {
-        }
-
-        protected override void CloneProperties(Node newnode)
-        {
-            base.CloneProperties(newnode);
-
-            ActionMoveToCover cond = (ActionMoveToCover)newnode;
-            cond._type = _type;
         }
     }
 }

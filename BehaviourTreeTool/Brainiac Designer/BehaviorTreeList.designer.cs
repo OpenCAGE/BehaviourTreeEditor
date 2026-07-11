@@ -182,6 +182,7 @@ namespace Brainiac.Design
             this.nodeTreeView.Location = new System.Drawing.Point(0, 0);
             this.nodeTreeView.Name = "nodeTreeView";
             this.nodeTreeView.SelectedImageIndex = 0;
+            this.nodeTreeView.ShowNodeToolTips = true;
             this.nodeTreeView.Size = new System.Drawing.Size(401, 259);
             this.nodeTreeView.TabIndex = 0;
             this.nodeTreeView.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView_BeforeLabelEdit);

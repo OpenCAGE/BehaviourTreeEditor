@@ -31,34 +31,30 @@ using System.Text;
 using Brainiac.Design.Nodes;
 using Brainiac.Design.Attributes;
 using LegendPlugin.Properties;
+using CATHODE.Enums;
 
 namespace LegendPlugin.Nodes
 {
-	public class ConditionIsCharacterClass : ConditionConnectors
-	{
-        //All parameters added
+    public class ConditionIsCharacterClass : ConditionConnectors
+    {
+        public ConditionIsCharacterClass()
+            : base("IsCharacterClass", "Is the character of the given class?")
+        { }
 
-        protected CHARACTER_CLASS _cond;
-        protected CharacterType _cond2;
+        protected CHARACTER_TYPE _characterType;
+        [DesignerEnum("CharacterType", "Character to check - is it the owner of the tree or the target?", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        public CHARACTER_TYPE CharacterType
+        {
+            get { return _characterType; }
+            set { _characterType = value; }
+        }
 
-        [DesignerEnum("Character class", "CharacterClass", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
+        protected CHARACTER_CLASS _characterClass;
+        [DesignerEnum("CharacterClass", "The character class we are checking for.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
         public CHARACTER_CLASS CharacterClass
         {
-            get { return _cond; }
-            set { _cond = value; }
-        }
-
-        [DesignerEnum("Character type", "CharacterType", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags, null)]
-        public CharacterType CharacterType
-        {
-            get { return _cond2; }
-            set { _cond2 = value; }
-        }
-
-        public ConditionIsCharacterClass()
-            : base("IsCharacterClass", "CHECK TO SEE IF OWNER AND/OR TARGET ARE A SPECIFIED CHARACTER CLASS.")
- 
-        {
+            get { return _characterClass; }
+            set { _characterClass = value; }
         }
 
         protected override void CloneProperties(Node newnode)
@@ -66,8 +62,8 @@ namespace LegendPlugin.Nodes
             base.CloneProperties(newnode);
 
             ConditionIsCharacterClass cond = (ConditionIsCharacterClass)newnode;
-            cond._cond = _cond;
-            cond._cond2 = _cond2;
+            cond._characterType = _characterType;
+            cond._characterClass = _characterClass;
         }
     }
 }

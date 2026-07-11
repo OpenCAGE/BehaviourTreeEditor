@@ -76,6 +76,9 @@ namespace Brainiac.Design.Attributes
 				throw new Exception( string.Format(Resources.ExceptionDesignerAttributeExpectedEnum, property.Property.Name) );
 
 			Array list= Enum.GetValues(enumtype);
+
+			string unknownName= "UNKNOWN_" + enumtype.Name;
+
 			foreach(object enumVal in list)
 			{
 				bool excluded= false;
@@ -91,6 +94,10 @@ namespace Brainiac.Design.Attributes
 						}
 					}
 				}
+
+				string valName= Enum.GetName(enumtype, enumVal);
+				if((int)enumVal ==-1 && valName ==unknownName && valName !=enumName)
+					excluded= true;
 
 				if(!excluded)
 				{

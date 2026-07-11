@@ -316,7 +316,9 @@ namespace Brainiac.Design
 					parent.RemoveChild(conn, node);
 					parent.AddChild(conn, newnode, k);
 
-					Node.Connector newconn= newnode.GetConnector(conn.Identifier);
+                    //Node.Connector newconn= newnode.GetConnector(conn.Identifier);
+                    Node.Connector newconn = newnode.DefaultConnector;
+
 					Debug.Check(newconn !=null);
 					newnode.AddChild(newconn, node);
 

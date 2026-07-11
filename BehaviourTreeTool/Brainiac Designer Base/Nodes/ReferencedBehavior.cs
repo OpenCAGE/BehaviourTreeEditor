@@ -48,8 +48,11 @@ namespace Brainiac.Design.Nodes
 	/// </summary>
 	public class ReferencedBehavior : StyledNode, ReferencedBehaviorNode
 	{
-		private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(119,147,60) );
-		private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(99,122,50) );
+		//private static Brush _theBackgroundBrush= new SolidBrush( Color.FromArgb(119,147,60) );
+		//private static Brush _theDraggedBackgroundBrush= new SolidBrush( Color.FromArgb(99,122,50) );
+        private static Brush _theBackgroundBrush = new SolidBrush(Color.FromArgb(139, 136, 120));
+        private static Brush _theDraggedBackgroundBrush = new SolidBrush(Color.FromArgb(255, 255, 240));
+        protected static Brush _defaultBrushCollapsed = new SolidBrush(Color.FromArgb(135, 132, 115));
 
 		protected Connector _genericChildren;
 		public Connector GenericChildren
@@ -172,7 +175,8 @@ namespace Brainiac.Design.Nodes
 			base.PreSave(behavior);
 
 			// make the path of the reference relative
-			_referenceFilename= behavior.MakeRelative(_referenceFilename);
+			//_referenceFilename= behavior.MakeRelative(_referenceFilename);
+            _referenceFilename = Path.GetFileName(_referenceFilename);
 		}
 
 		protected override void CopyEventHandlers(Node from)
@@ -506,8 +510,6 @@ namespace Brainiac.Design.Nodes
 
 			((Node)_referencedBehavior).RemoveChild(connector, node);
 		}
-
-		protected static Brush _defaultBrushCollapsed= new SolidBrush( Color.FromArgb(158, 190, 94) );
 
 		public override void Draw(Graphics graphics, NodeViewData nvd, bool isCurrent, bool isSelected, bool isDragged, PointF graphMousePos)
 		{

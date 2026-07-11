@@ -25,39 +25,36 @@
 // WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//using System;
+using Brainiac.Design.Attributes;
+using Brainiac.Design.Nodes;
+using LegendPlugin.Properties;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Brainiac.Design.Nodes;
-using Brainiac.Design.Attributes;
-using LegendPlugin.Properties;
 
 namespace LegendPlugin.Nodes
 {
-    public class ActionAssert : Action
+    public class ActionAssert : Search_Atomic
     {
-        //All parameters added
-
-        private string _AssertInfo = "";
-        
-        [DesignerString("Assert info", "AssertInfo", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
-        public string AssertInfo
+        public ActionAssert()
+            : base("Assert", "Causes an in-game assert (not functional in retail).")
         {
-            get { return _AssertInfo; }
-            set { _AssertInfo = value; }
         }
 
-        public ActionAssert() : base("Assert", "ASSERT AN ERROR - USED FOR DEBUGGING.")
- 
+        protected String _string;
+        [DesignerString("AssertInfo", "Assert information.", "CategoryBasic", DesignerProperty.DisplayMode.Parameter, 0, DesignerProperty.DesignerFlags.NoFlags)]
+        public String AssertInfo
         {
+            get { return _string; }
+            set { _string = value; }
         }
 
         protected override void CloneProperties(Node newnode)
         {
             base.CloneProperties(newnode);
 
-            ActionAssert cond = (ActionAssert)newnode;
-            cond._AssertInfo = _AssertInfo;
+            ActionAssert action = (ActionAssert)newnode;
+            action._string = _string;
         }
     }
 }
