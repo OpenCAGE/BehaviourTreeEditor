@@ -52,6 +52,14 @@ namespace Brainiac.Design
 
 			BehaviorManager.Instance= this;
 			AIType.SetProvider(this);
+
+			// right-clicking a tree offers what the toolbar does, and selects it first so the menu acts on what was clicked
+			ContextMenuStrip menu= new ContextMenuStrip();
+			menu.Items.Add("New Behaviour Tree...", newBehaviorButton.Image, newBehaviorButton_Click);
+			menu.Items.Add("Rename", null, (s, e) => { if(behaviourTreeView.SelectedNode !=null) behaviourTreeView.SelectedNode.BeginEdit(); });
+			menu.Items.Add("Delete", deleteButton.Image, deleteButton_Click);
+			behaviourTreeView.ContextMenuStrip= menu;
+			behaviourTreeView.NodeMouseClick+= (s, e) => { if(e.Button ==MouseButtons.Right) behaviourTreeView.SelectedNode= e.Node; };
 		}
 
 		/// <summary>
@@ -561,34 +569,170 @@ namespace Brainiac.Design
 		}
 
 		/// <summary>
-		/// The number of the last newly created behaviour.
-		/// </summary>
-		private int _lastNewBehavior= 1;
-
-		/// <summary>
-		/// Handles when the new behaviour button is clicked.
+		/// Handles when the new behaviour button is clicked. The tree is made on disk straight away, under the name asked
+		/// for, and compiled into the game's trees so OpenCAGE's character attributes editor can offer it.
 		/// </summary>
 		private void newBehaviorButton_Click(object sender, EventArgs e)
 		{
-			// create a new behaviour node with a unique label
-			Nodes.Behavior node= new Nodes.Behavior( GetUniqueLabel("New Behavior", _lastNewBehavior, out _lastNewBehavior) );
+			// a rename still being typed would otherwise finish inside the dialog, under a list of trees taken before it
+			EndLabelEdit();
+			if(!CanCompile("create a tree"))
+				return;
 
-			// get updated when the behaviour changes
-			node.WasSaved+= new Behavior.WasSavedEventDelegate(behavior_WasSaved);
-			node.WasModified+= new Node.WasModifiedEventDelegate(behavior_WasModified);
+			List<string> trees= new List<string>();
+			foreach(string file in BehaviorTreeFiles.TreeFiles(_behaviorFolder))
+				trees.Add(Path.GetFileNameWithoutExtension(file));
 
-			// mark node as being modified
-			node.FileManager= null;
+			// start from the tree selected in the list, if there is one, else the minimal main tree
+			string startFrom= "NoBehaviour";
+			NodeTag selected= behaviourTreeView.SelectedNode ==null ? null : behaviourTreeView.SelectedNode.Tag as NodeTag;
+			if(selected !=null && selected.Type ==NodeTagType.Behavior && selected.Filename !=string.Empty)
+				startFrom= Path.GetFileNameWithoutExtension(selected.Filename);
 
-			// add the behaviour to the list
-			_newBehaviors.Add(node);
+			string name, source;
+			using(NewBehaviorTreeDialog dialog= new NewBehaviorTreeDialog(_behaviorFolder, trees, startFrom))
+			{
+				if(dialog.ShowDialog(this) !=DialogResult.OK)
+					return;
+				name= dialog.TreeName;
+				source= dialog.SourceTree;
+			}
 
-			// update behaviours shown in the node explorer
+			string filename= Path.Combine(_behaviorFolder, name + ".xml");
+			try
+			{
+				if(source !=null)
+				{
+					// a copy of the tree as last saved
+					File.Copy(Path.Combine(_behaviorFolder, source + ".xml"), filename);
+				}
+				else
+				{
+					// an empty tree, written by the same file manager as every other
+					Nodes.Behavior node= new Nodes.Behavior(name);
+					FileManagerInfo xml= _fileManagers.Find(o => o.FileExtension ==".xml");
+					node.FileManager= xml.Create(filename, node);
+					node.FileManager.Save();
+				}
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Could not create the tree", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			// the folder and the game's trees stay in step: a tree the game didn't get isn't kept either
+			if(!CompileBehaviors())
+			{
+				File.Delete(filename);
+				CompileBehaviors(false);
+				return;
+			}
 			RebuildBehaviorList();
 
-			// trigger the ShowBehavior event
-			if(ShowBehavior !=null)
-				ShowBehavior(node);
+			// open it the way double-clicking does, without a reference to the last tree opened looking circular
+			FileManagers.FileManager.ResetLoadedBehavior();
+			BehaviorNode behavior= LoadBehavior(filename);
+			if(behavior !=null && ShowBehavior !=null)
+				ShowBehavior(behavior);
+		}
+
+		/// <summary>
+		/// Written into the behaviour folder while trees there couldn't be compiled into the game's, so the next start
+		/// doesn't replace them with the game's copy without asking. Not a tree: compiling ignores it.
+		/// </summary>
+		internal static string NotWrittenMarker
+		{
+			get { return Path.Combine(SharedData.pathToXMLs, "NOT_WRITTEN_TO_GAME.txt"); }
+		}
+
+		/// <summary>
+		/// Compiles every tree into the game's _DIRECTORY_CONTENTS.BML, which is what the game and OpenCAGE read. If a tree
+		/// is broken nothing is written, and (unless told not to) the user is told which.
+		/// </summary>
+		internal bool CompileBehaviors(bool report= true)
+		{
+			List<string> problems= BehaviorTreeFiles.Compile(SharedData.pathToXMLs, SharedData.pathToBML);
+			try
+			{
+				if(problems.Count ==0)
+					File.Delete(NotWrittenMarker);
+				else
+					File.WriteAllText(NotWrittenMarker, "These behaviour trees could not be written to the game's DATA/BINARY_BEHAVIOR/_DIRECTORY_CONTENTS.BML:\r\n\r\n" + string.Join("\r\n", problems.ToArray()) + "\r\n");
+			}
+			catch(Exception)
+			{
+				// the marker only protects unsaved work on the next start
+			}
+			if(problems.Count ==0)
+				return true;
+
+			if(report)
+			{
+				MessageBox.Show("The behaviour trees were not written to the game:\n\n" + string.Join("\n", problems.ToArray()) +
+					"\n\nFix or remove " + (problems.Count ==1 ? "that file" : "those files") + " in " + Path.GetFullPath(SharedData.pathToXMLs) + ", then save again.",
+					"Behaviour trees not written", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Whether the trees compile now, before creating, renaming or deleting one: if they don't, nothing reaches the game,
+		/// so the change isn't made and the user is told why.
+		/// </summary>
+		private bool CanCompile(string action)
+		{
+			List<string> problems= BehaviorTreeFiles.Check(SharedData.pathToXMLs);
+			if(problems.Count ==0)
+				return true;
+
+			MessageBox.Show("Can't " + action + " until the behaviour trees can be written to the game:\n\n" + string.Join("\n", problems.ToArray()) +
+				"\n\nFix or remove " + (problems.Count ==1 ? "that file" : "those files") + " in " + Path.GetFullPath(SharedData.pathToXMLs) + ".",
+				"Behaviour trees not written", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			return false;
+		}
+
+		/// <summary>
+		/// Finishes a rename being typed in the tree list, so it happens before (not inside) whatever runs next.
+		/// </summary>
+		private void EndLabelEdit()
+		{
+			if(behaviourTreeView.SelectedNode !=null && behaviourTreeView.SelectedNode.IsEditing)
+				behaviourTreeView.SelectedNode.EndEdit(false);
+		}
+
+		/// <summary>
+		/// Open trees with unsaved changes that reference the tree called <paramref name="name"/> - which the files on disk
+		/// don't show yet.
+		/// </summary>
+		private List<string> UnsavedReferencesTo(string name)
+		{
+			List<string> users= new List<string>();
+			foreach(BehaviorNode behavior in _loadedBehaviors)
+			{
+				if(behavior.IsModified && References((Node)behavior, name))
+					users.Add("the unsaved tree " + ((Node)behavior).Label);
+			}
+			return users;
+		}
+
+		private static bool References(Node node, string name)
+		{
+			foreach(Node child in node.Children)
+			{
+				ReferencedBehavior reference= child as ReferencedBehavior;
+				if(reference !=null)
+				{
+					if(string.Equals(Path.GetFileNameWithoutExtension(reference.ReferenceFilename ?? string.Empty), name, StringComparison.OrdinalIgnoreCase))
+						return true;
+
+					// what it shows beneath it is the referenced tree's own
+					continue;
+				}
+				if(References(child, name))
+					return true;
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -708,6 +852,12 @@ namespace Brainiac.Design
 						targetNode= targetNode.Parent;
 						targetNodeTag= (NodeTag) targetNode.Tag;
 					}
+
+					// only trees directly in the behaviour folder are compiled into the game's: moving one into (or out of) a
+					// subfolder would silently add it to or drop it from the game, whatever uses it
+					if(!string.Equals(Path.GetFullPath(targetNodeTag.Filename).TrimEnd('\\'), Path.GetFullPath(_behaviorFolder).TrimEnd('\\'), StringComparison.OrdinalIgnoreCase) ||
+						!string.Equals(Path.GetFullPath(Path.GetDirectoryName(sourceNodeTag.Filename)).TrimEnd('\\'), Path.GetFullPath(_behaviorFolder).TrimEnd('\\'), StringComparison.OrdinalIgnoreCase))
+						return;
 
 					try
 					{
@@ -903,26 +1053,10 @@ namespace Brainiac.Design
 			if(currNode !=null)
 				ShowBehavior(currNode);
 
-			//Now the XML has been saved, compile them all into one
-            DirectoryInfo XMLFiles = new DirectoryInfo(SharedData.pathToXMLs);
-            string XMLContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><DIR>";
-            foreach (FileInfo currentFile in XMLFiles.GetFiles())
-            {
-				string fileContents = File.ReadAllText(currentFile.FullName);
-                string fileName = currentFile.Name;
-				string customFileHeader = "<File name=\"" + fileName.Substring(0, fileName.Length - 3) + "bml\">";
-                string customFileFooter = "</File>"; 
-
-                XMLContent += customFileHeader + fileContents.Substring(38) + customFileFooter; 
-            }
-            XMLContent += "</DIR>";
-
-            //Convert to BML and write
-            BML bml = new BML(SharedData.pathToBML);
-			XmlDocument xml = new XmlDocument();
-			xml.LoadXml(XMLContent);
-			bml.Content = xml;
-			bml.Save();
+			//Now the XML has been saved, compile them all into one. If that couldn't be done the save hasn't reached the game:
+			//say so to callers (closing the editor stops, rather than leaving work the next start would replace)
+			if(!CompileBehaviors())
+				return string.Empty;
 
             return node.FileManager.Filename;
 		}
@@ -1006,7 +1140,30 @@ namespace Brainiac.Design
 				// check if we are renaming a behaviour or a folder
 				if(nodetag.Type ==NodeTagType.Behavior)
 				{
+					// the name is what other trees, character classes and the game find the tree by: it must be a valid one,
+					// and one in use can't change (the game finds a tree's file ignoring case, so only changing case is fine)
+					string oldName= Path.GetFileNameWithoutExtension(nodetag.Filename);
+					string problem= BehaviorTreeFiles.ValidateName(label, _behaviorFolder, nodetag.Filename);
+					if(problem ==null && !string.Equals(oldName, label, StringComparison.OrdinalIgnoreCase))
+					{
+						List<string> users= BehaviorTreeFiles.Users(oldName, _behaviorFolder, SharedData.pathToAI);
+						if(users.Count !=0)
+							problem= oldName + " can't be renamed while it is used by " + string.Join(", ", users) + ".";
+					}
+					if(problem !=null)
+					{
+						e.CancelEdit= true;
+						MessageBox.Show(problem, "Rename Behaviour Tree", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return;
+					}
+					if(!CanCompile("rename a tree"))
+					{
+						e.CancelEdit= true;
+						return;
+					}
+
 					// mode the file
+					string sourcefile= nodetag.Filename;
 					File.Move(nodetag.Filename, targetfile);
 
 					BehaviorNode node= GetBehavior(nodetag.Filename);
@@ -1023,6 +1180,25 @@ namespace Brainiac.Design
 						// triggered the behaviour renamed event
 						if(BehaviorRenamed !=null)
 							BehaviorRenamed(node);
+					}
+
+					// the game's trees are compiled from the files, so it has the new name at once - or, if that can't be
+					// written, the tree keeps its old name in both
+					nodetag.Filename= targetfile;
+					if(!CompileBehaviors())
+					{
+						File.Move(targetfile, sourcefile);
+						nodetag.Filename= sourcefile;
+						if(node !=null)
+						{
+							((Node)node).Label= Path.GetFileNameWithoutExtension(sourcefile);
+							node.FileManager.Filename= sourcefile;
+							if(BehaviorRenamed !=null)
+								BehaviorRenamed(node);
+						}
+						CompileBehaviors(false);
+						e.CancelEdit= true;
+						return;
 					}
 				}
 				else
@@ -1113,6 +1289,10 @@ namespace Brainiac.Design
 		/// </summary>
 		private void treeView_KeyDown(object sender, KeyEventArgs e)
 		{
+			// the node palette shares this handler, but these keys act on the selected tree: only take them from the tree list
+			if(sender !=behaviourTreeView)
+				return;
+
 			// if the F2 key is pressed and a node is selected which is not currently edited, edit the nodes label
 			if(e.KeyCode ==Keys.F2 && behaviourTreeView.SelectedNode !=null && !behaviourTreeView.SelectedNode.IsEditing)
 			{
@@ -1133,14 +1313,35 @@ namespace Brainiac.Design
 			if(ClearBehaviors ==null)
 				throw new Exception("Missing event handler ClearBehaviors");
 
+			// a rename still being typed would otherwise finish inside the confirmation below
+			EndLabelEdit();
+
 			// if no tree node is selected we have nothing to delete
 			if(behaviourTreeView.SelectedNode ==null)
 				return;
 
-			// we may only delete behaviours and folders.
+			// we may only delete behaviours: the folder is the game's
 			NodeTag nodetag= (NodeTag) behaviourTreeView.SelectedNode.Tag;
-			if(nodetag.Type !=NodeTagType.Behavior && nodetag.Type !=NodeTagType.BehaviorFolder)
+			if(nodetag.Type !=NodeTagType.Behavior)
 				return;
+
+			// a tree in use can't go: the trees, character classes and levels using it would break, and so would the game
+			if(nodetag.Filename !=string.Empty)
+			{
+				string name= Path.GetFileNameWithoutExtension(nodetag.Filename);
+				List<string> users= BehaviorTreeFiles.Users(name, _behaviorFolder, SharedData.pathToAI);
+				users.AddRange(UnsavedReferencesTo(name));
+				if(users.Count ==0 && !CanCompile("delete a tree"))
+					return;
+				if(users.Count !=0)
+				{
+					MessageBox.Show(name + " can't be deleted while it is used by " + string.Join(", ", users) + ".", "Delete Behaviour Tree", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					return;
+				}
+				if(MessageBox.Show("Delete the behaviour tree " + name + "?\n\nIt is removed from the game's trees. Revert Configs in OpenCAGE puts back the trees the game shipped with.",
+					"Delete Behaviour Tree", MessageBoxButtons.YesNo, MessageBoxIcon.Question) !=DialogResult.Yes)
+					return;
+			}
 
 			// the list of the behaviours deleted
 			List<BehaviorNode> behaviors= new List<BehaviorNode>();
@@ -1193,7 +1394,12 @@ namespace Brainiac.Design
 					behaviourTreeView.SelectedNode.Remove();
 
 					if(nodetag.Filename !=string.Empty)
-						Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(nodetag.Filename, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+					{
+						Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(nodetag.Filename, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+
+						// the game's trees are compiled from the files, so it loses the tree at once
+						CompileBehaviors();
+					}
 				}
 			}
 			catch(Exception ex)

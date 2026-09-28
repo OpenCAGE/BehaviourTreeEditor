@@ -112,6 +112,10 @@
     <Compile Include="MainWindowCloseDialog.Designer.cs">
       <DependentUpon>MainWindowCloseDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="BehaviorTreeFiles.cs" />
+    <Compile Include="NewBehaviorTreeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="NodeLayoutManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PropertiesDock.cs">

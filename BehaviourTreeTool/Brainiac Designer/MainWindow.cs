@@ -254,6 +254,17 @@ namespace Brainiac.Design
 
 			try
 			{
+				//Trees edited last time that couldn't be written to the game are still only in the behaviour folder: replacing
+				//them with the game's copy would lose them, so ask first
+				bool keepFolder= File.Exists(BehaviorTreeList.NotWrittenMarker) &&
+					MessageBox.Show("Behaviour trees changed last time could not be written to the game (" + BehaviorTreeList.NotWrittenMarker + " says why).\n\n" +
+						"Yes keeps them, to fix and save. No discards them and loads the game's trees.",
+						"Behaviour trees not written", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==DialogResult.Yes;
+
+				if(!keepFolder)
+				{
+				File.Delete(BehaviorTreeList.NotWrittenMarker);
+
 				//Clear out the existing XMLs in the behaviour folder
 				Directory.CreateDirectory(SharedData.pathToXMLs);
 				foreach (string originalXML in Directory.GetFiles(SharedData.pathToXMLs, "*.xml"))
@@ -262,7 +273,7 @@ namespace Brainiac.Design
 				}
 
 				//Extract out the XMLs from the game's DB for us to use
-                BML bml = new BML(SharedData.pathToBML); 
+                BML bml = new BML(SharedData.pathToBML);
 				XmlWriterSettings settings = new XmlWriterSettings
                 {
                     Indent = true,
@@ -276,6 +287,7 @@ namespace Brainiac.Design
                         file.FirstChild.WriteTo(xmlTextWriter);
                         xmlTextWriter.Flush();
                     }
+				}
 				}
 
                 // set the default behaviour folder
