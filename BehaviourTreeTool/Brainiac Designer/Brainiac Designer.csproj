@@ -117,6 +117,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NodeLayoutManager.cs" />
+    <Compile Include="DarkChrome.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PropertiesDock.cs">
       <SubType>Form</SubType>

@@ -77,6 +77,12 @@ namespace Brainiac.Design
             AcceptButton = _ok;
             CancelButton = cancel;
 
+            if (Theme.Dark)
+            {
+                DarkChrome.ApplyWindow(this);
+                _error.ForeColor = Color.FromArgb(244, 120, 110);
+            }
+
             UpdateValidation();
         }
 

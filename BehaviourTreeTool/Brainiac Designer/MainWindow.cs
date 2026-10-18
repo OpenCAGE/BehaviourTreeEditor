@@ -78,6 +78,12 @@ namespace Brainiac.Design
 
 			InitializeComponent();
 
+			if(Theme.Dark)
+			{
+				DarkChrome.SkinDockPanel(dockPanel);
+				DarkChrome.ApplyWindow(this);
+			}
+
 			// create docking panels
 			__dockPanel= dockPanel;
 
@@ -91,7 +97,7 @@ namespace Brainiac.Design
 				new PropertiesDock().Show(dockPanel, WeifenLuo.WinFormsUI.Docking.DockState.DockRight);
 			}
 
-			_edgePenReadOnly= new Pen(Brushes.LightGray, 3.0f);
+			_edgePenReadOnly= new Pen(Theme.EdgeReadOnly, 3.0f);
 			//_edgePenReadOnly.DashCap= System.Drawing.Drawing2D.DashCap.Round;
 			//_edgePenReadOnly.DashStyle= System.Drawing.Drawing2D.DashStyle.Dash;
 			//_edgePenReadOnly.DashPattern= new float[] { 4.0f, 3.0f };
@@ -103,7 +109,7 @@ namespace Brainiac.Design
 		/// <summary>
 		/// The pen used to draw the edges connecting the nodes.
 		/// </summary>
-		private Pen _edgePen= new Pen(Brushes.Black, 3.0f);
+		private Pen _edgePen= new Pen(Theme.Edge, 3.0f);
 
 		/// <summary>
 		/// The pen used to draw the edges connecting sub-referenced nodes.

@@ -80,9 +80,14 @@ namespace Brainiac.Design
             if (!File.Exists(SharedData.pathToBML))
                 throw new Exception("This tool was launched incorrectly, or was not placed within the Alien: Isolation directory.");
 
+            //Dark theme when OpenCAGE is in dark mode (it passes -darkMode=true)
+            Theme.Dark = string.Equals(GetArgument("darkMode"), "true", StringComparison.OrdinalIgnoreCase);
+
             //Run app
             Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+            if (Theme.Dark)
+                DarkChrome.EnableForApp();
 			Application.Run(new MainWindow());
         }
 
