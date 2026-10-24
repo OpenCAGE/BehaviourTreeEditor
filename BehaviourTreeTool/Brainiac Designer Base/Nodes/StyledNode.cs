@@ -37,8 +37,8 @@ namespace Brainiac.Design.Nodes
 	/// </summary>
 	public abstract class StyledNode : Node
 	{
-		private static Pen _theCurrentBorderPen= new Pen(Brushes.Black, 2.0f);
-		private static Pen _theSelectedBorderPen= new Pen(Brushes.Black, 2.0f);
+		private static Pen _theCurrentBorderPen= new Pen(Theme.NodeOutline, 2.0f);
+		private static Pen _theSelectedBorderPen= new Pen(Theme.NodeOutline, 2.0f);
 		private static Font _theLabelFont= new Font("Calibri,Arial", 8.0f, FontStyle.Regular);
 
 		public StyledNode(Pen borderPen, Brush backgroundBrush, Brush draggedBackgroundBrush, string label, bool acceptsEvents, string description) :

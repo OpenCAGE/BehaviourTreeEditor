@@ -78,6 +78,12 @@ namespace Brainiac.Design
 
 			InitializeComponent();
 
+			if(Theme.Dark)
+			{
+				DarkChrome.SkinDockPanel(dockPanel);
+				DarkChrome.ApplyWindow(this);
+			}
+
 			// create docking panels
 			__dockPanel= dockPanel;
 
@@ -91,7 +97,7 @@ namespace Brainiac.Design
 				new PropertiesDock().Show(dockPanel, WeifenLuo.WinFormsUI.Docking.DockState.DockRight);
 			}
 
-			_edgePenReadOnly= new Pen(Brushes.LightGray, 3.0f);
+			_edgePenReadOnly= new Pen(Theme.EdgeReadOnly, 3.0f);
 			//_edgePenReadOnly.DashCap= System.Drawing.Drawing2D.DashCap.Round;
 			//_edgePenReadOnly.DashStyle= System.Drawing.Drawing2D.DashStyle.Dash;
 			//_edgePenReadOnly.DashPattern= new float[] { 4.0f, 3.0f };
@@ -103,7 +109,7 @@ namespace Brainiac.Design
 		/// <summary>
 		/// The pen used to draw the edges connecting the nodes.
 		/// </summary>
-		private Pen _edgePen= new Pen(Brushes.Black, 3.0f);
+		private Pen _edgePen= new Pen(Theme.Edge, 3.0f);
 
 		/// <summary>
 		/// The pen used to draw the edges connecting sub-referenced nodes.
@@ -254,6 +260,17 @@ namespace Brainiac.Design
 
 			try
 			{
+				//Trees edited last time that couldn't be written to the game are still only in the behaviour folder: replacing
+				//them with the game's copy would lose them, so ask first
+				bool keepFolder= File.Exists(BehaviorTreeList.NotWrittenMarker) &&
+					MessageBox.Show("Behaviour trees changed last time could not be written to the game (" + BehaviorTreeList.NotWrittenMarker + " says why).\n\n" +
+						"Yes keeps them, to fix and save. No discards them and loads the game's trees.",
+						"Behaviour trees not written", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==DialogResult.Yes;
+
+				if(!keepFolder)
+				{
+				File.Delete(BehaviorTreeList.NotWrittenMarker);
+
 				//Clear out the existing XMLs in the behaviour folder
 				Directory.CreateDirectory(SharedData.pathToXMLs);
 				foreach (string originalXML in Directory.GetFiles(SharedData.pathToXMLs, "*.xml"))
@@ -262,7 +279,7 @@ namespace Brainiac.Design
 				}
 
 				//Extract out the XMLs from the game's DB for us to use
-                BML bml = new BML(SharedData.pathToBML); 
+                BML bml = new BML(SharedData.pathToBML);
 				XmlWriterSettings settings = new XmlWriterSettings
                 {
                     Indent = true,
@@ -276,6 +293,7 @@ namespace Brainiac.Design
                         file.FirstChild.WriteTo(xmlTextWriter);
                         xmlTextWriter.Flush();
                     }
+				}
 				}
 
                 // set the default behaviour folder

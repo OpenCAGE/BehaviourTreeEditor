@@ -62,36 +62,38 @@ namespace Brainiac.Design.Nodes
 				{
 					_backgroundColor= value;
 
+					// in the dark theme the comment panels are deep tints of their colour, with the text lighter than the panel
+					bool dark= Theme.Dark;
 					switch(_backgroundColor)
 					{
 						case(CommentColor.NoColor):
 							_backgroundBrush= null;
-							_labelBrush= Brushes.Black;
+							_labelBrush= dark ? new SolidBrush(Theme.TextDim) : Brushes.Black;
 						break;
 
 						case(CommentColor.Blue):
-							_backgroundBrush= new SolidBrush( Color.FromArgb(184, 204, 228) );
-							_labelBrush= new SolidBrush( Color.FromArgb(54, 96, 146) );
+							_backgroundBrush= new SolidBrush( dark ? Color.FromArgb(36, 48, 64) : Color.FromArgb(184, 204, 228) );
+							_labelBrush= new SolidBrush( dark ? Color.FromArgb(128, 168, 216) : Color.FromArgb(54, 96, 146) );
 						break;
 
 						case(CommentColor.Red):
-							_backgroundBrush= new SolidBrush( Color.FromArgb(229, 185, 183) );
-							_labelBrush= new SolidBrush( Color.FromArgb(149, 55, 52) );
+							_backgroundBrush= new SolidBrush( dark ? Color.FromArgb(64, 38, 38) : Color.FromArgb(229, 185, 183) );
+							_labelBrush= new SolidBrush( dark ? Color.FromArgb(222, 132, 128) : Color.FromArgb(149, 55, 52) );
 						break;
 
 						case(CommentColor.Green):
-							_backgroundBrush= new SolidBrush( Color.FromArgb(215, 227, 188) );
-							_labelBrush= new SolidBrush( Color.FromArgb(118, 146, 60) );
+							_backgroundBrush= new SolidBrush( dark ? Color.FromArgb(44, 54, 34) : Color.FromArgb(215, 227, 188) );
+							_labelBrush= new SolidBrush( dark ? Color.FromArgb(164, 196, 104) : Color.FromArgb(118, 146, 60) );
 						break;
 
 						case(CommentColor.Violet):
-							_backgroundBrush= new SolidBrush( Color.FromArgb(204, 193, 217) );
-							_labelBrush= new SolidBrush( Color.FromArgb(95, 73, 122) );
+							_backgroundBrush= new SolidBrush( dark ? Color.FromArgb(52, 44, 64) : Color.FromArgb(204, 193, 217) );
+							_labelBrush= new SolidBrush( dark ? Color.FromArgb(178, 156, 208) : Color.FromArgb(95, 73, 122) );
 						break;
 
 						case(CommentColor.Orange):
-							_backgroundBrush= new SolidBrush( Color.FromArgb(251, 213, 181) );
-							_labelBrush= new SolidBrush( Color.FromArgb(227, 108, 9) );
+							_backgroundBrush= new SolidBrush( dark ? Color.FromArgb(68, 48, 30) : Color.FromArgb(251, 213, 181) );
+							_labelBrush= new SolidBrush( dark ? Color.FromArgb(240, 156, 84) : Color.FromArgb(227, 108, 9) );
 						break;
 
 						default: throw new Exception(Resources.ExceptionUnhandledCommentColor);

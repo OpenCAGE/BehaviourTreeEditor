@@ -70,6 +70,7 @@
     <Compile Include="Events\Event.cs" />
     <Compile Include="Exporters\Exporter.cs" />
     <Compile Include="ExtendedGraphics.cs" />
+    <Compile Include="Theme.cs" />
     <Compile Include="FileManagers\FileManager.cs" />
     <Compile Include="FileManagers\FileManagerXML.cs" />
     <Compile Include="Nodes\Action.cs" />

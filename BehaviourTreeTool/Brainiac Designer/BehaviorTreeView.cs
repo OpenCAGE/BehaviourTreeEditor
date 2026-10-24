@@ -46,6 +46,8 @@ namespace Brainiac.Design
 		public BehaviorTreeView()
 		{
 			InitializeComponent();
+			if(Theme.Dark)
+				BackColor= Theme.Canvas;
 		}
 
 		/// <summary>

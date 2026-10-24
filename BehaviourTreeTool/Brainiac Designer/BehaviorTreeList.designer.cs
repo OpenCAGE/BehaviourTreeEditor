@@ -125,26 +125,27 @@ namespace Brainiac.Design
             this.toolStrip.Size = new System.Drawing.Size(401, 25);
             this.toolStrip.TabIndex = 0;
             this.toolStrip.Text = "toolStrip1";
-            this.toolStrip.Visible = false;
             // 
             // newBehaviorButton
             // 
-            this.newBehaviorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newBehaviorButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
             this.newBehaviorButton.Image = ((System.Drawing.Image)(resources.GetObject("newBehaviorButton.Image")));
             this.newBehaviorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newBehaviorButton.Name = "newBehaviorButton";
-            this.newBehaviorButton.Size = new System.Drawing.Size(23, 22);
-            this.newBehaviorButton.Text = "New Behavior";
+            this.newBehaviorButton.Size = new System.Drawing.Size(80, 22);
+            this.newBehaviorButton.Text = "New Tree...";
+            this.newBehaviorButton.ToolTipText = "New Behaviour Tree";
             this.newBehaviorButton.Click += new System.EventHandler(this.newBehaviorButton_Click);
             // 
             // deleteButton
             // 
-            this.deleteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deleteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.ImageAndText;
             this.deleteButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteButton.Image")));
             this.deleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(23, 22);
-            this.deleteButton.Text = "Delete Behavior/Group";
+            this.deleteButton.Size = new System.Drawing.Size(60, 22);
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.ToolTipText = "Delete Behaviour Tree";
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // saveFileDialog

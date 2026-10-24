@@ -40,6 +40,8 @@ namespace Brainiac.Design
 		internal MainWindowCloseDialog()
 		{
 			InitializeComponent();
+			if(Theme.Dark)
+				DarkChrome.ApplyWindow(this);
 		}
 
 		/// <summary>
